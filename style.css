@@ -1,0 +1,165 @@
+a {
+    text-decoration: none;
+}
+
+ul {
+    padding: 0;
+}
+
+body {
+    color: #242222;
+    background-color: #EEEEEE;
+    width: 95%;
+    height: 95%;
+}
+
+header {
+    text-align: center;
+}
+
+.works {
+    display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  height: 100vw; /* ビューポート(幅)を基準に表示高を指定 */
+}
+
+.box {
+    margin: 20px;
+    padding: 10px;
+    width: 450px;
+    outline: 1px dashed #6AA099;
+}
+
+
+.artist {
+    padding: 3px 0;
+    font-size: 0.9em;
+}
+
+.name {
+    margin-top: 10px;
+    margin: 10px 10px;
+    padding-left: 10px;
+    border-style: solid;
+    border-width: 0 0 0 7px;
+    border-color: #6AA099;
+    line-height: 1.2;
+}
+
+.profCard {
+    margin: 50px;
+}
+
+h1 {
+    margin: 30px 0 10px 0;
+    padding-left: 10px;
+    border-style: solid;
+    border-width: 0 0 0 7px;
+    border-color: #6AA099;
+    font-size: 1.4em;
+}
+
+h2 {
+    margin: 10px 0;
+    margin-left: 7px;
+    padding-left: 10px;
+    border-style: dashed;
+    border-width: 0 0 0 2px;
+    border-color: #6AA099;
+    font-size: 1.1em;
+}
+
+.texts {
+    width: 650px;
+    padding-left: 17px;
+    letter-spacing: 1px;
+    line-height: 2;
+}
+
+h5 {
+    margin: 5px 0;
+    font-size: 2em;
+    letter-spacing: 3px;
+}
+
+.tags {
+    margin: 0 0 0 10px;
+    color: #6AA099;
+    font-size: 0.8em;
+}
+
+.box img {
+    display: block;
+    width: 70%;
+    margin: 20px 0px 20px auto;
+}
+
+.youtube {
+    padding-top: 55%;
+    width: 100%;
+    position: relative;
+}
+
+.youtube iframe {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+table, th, td {
+    border: none;
+    vertical-align: top;
+  }
+
+.history {
+    font-size: 0.8em;
+}
+
+/* ボタン */
+
+.botan {
+    color: black;
+    background-color: black;
+    display: inline;
+    padding: 0px 20px;
+    margin: 0 ;
+    border-style: solid;
+    background-color: #DFDFDF;
+    border-color: #ffffff #808080 #808080 #ffffff;
+    text-align: center;
+    font-family: serif;
+    font-style: italic;
+    font-weight: bold;
+    color: black;
+}
+
+.botan:hover {
+    cursor: pointer
+}
+
+.botan:active {
+    border-color: #808080 #ffffff #ffffff #808080;
+}
+
+.dead {
+    color: gray;
+    text-shadow: 1px 1px 0 #fff;
+    background-color: #DFDFDF;
+}
+
+/* スマホ用 */
+@media screen and (max-width:900px) {
+    .works {
+        display: block;
+    }
+
+    .box {
+        width: 300px;
+    }
+}
