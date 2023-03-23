@@ -11,6 +11,7 @@
     <meta name="twitter:description" content="映像作家 木葉はづくの作品紹介やご依頼窓口です🎞" />
     <meta name="twitter:image" content="https://ideoaves.cf/icon.png" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
     <script src="minimasonry.min.js"></script>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
@@ -81,12 +82,14 @@
 
     </div>
     <script>
-        var masonry = new MiniMasonry({
-            container: '.works',
-            baseWidth: 300,
-            gutter: 50,
+        imagesLoaded('.works', function () {
+            var masonry = new MiniMasonry({
+                container: '.works',
+                baseWidth: 300,
+                gutter: 50,
+            });
         });
-        </script>
+    </script>
 </body>
 
 </html>
