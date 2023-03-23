@@ -136,8 +136,8 @@ table, th, td {
     color: black;
     background-color: black;
     display: inline;
-    padding: 0px 20px;
-    margin: 0 ;
+    padding: 2px 20px;
+    margin: 0;
     border-style: solid;
     background-color: #DFDFDF;
     border-color: #ffffff #808080 #808080 #ffffff;
