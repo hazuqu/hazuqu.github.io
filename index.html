@@ -11,17 +11,8 @@
     <meta name="twitter:description" content="映像作家 木葉はづくの作品紹介やご依頼窓口です🎞" />
     <meta name="twitter:image" content="https://ideoaves.cf/icon.png" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-    <script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js?ver=1.11.3'></script>
+    <script src="minimasonry.min.js"></script>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <script>
-        $('.works').masonry({
-            // options
-            itemSelector: '.box',
-            columnWidth: '.box',
-            horizontalOrder: true
-        });
-    </script>
 </head>
 
 <body>
@@ -42,7 +33,7 @@
     <div class="works">
         <!--作品たち -->
 
-        <div class="box">
+        <div class="item">
             <div class="youtube">
                 <iframe width="100%" src="https://www.youtube.com/embed/EqWLVy08zFY?modestbranding=1"
                     title="YouTube video player" frameborder="0"
@@ -57,7 +48,7 @@
             <img width="100%" src="typo/WIN-WIN HALLOWEEN.png">
         </div>
 
-        <div class="box">
+        <div class="item">
             <div class="youtube">
                 <iframe width="100%" src="https://www.youtube.com/embed/D7xjC200qxo?modestbranding=1"
                     title="YouTube video player" frameborder="0"
@@ -72,21 +63,7 @@
             <img width="100%" src="typo/xoxo.png">
         </div>
 
-        <div class="box">
-            <div class="youtube">
-                <iframe width="100%" src="https://www.youtube.com/embed/9xQKU2ardbQ?modestbranding=1"
-                    title="YouTube video player" frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen></iframe>
-            </div>
-            <div class="name">
-                <span class="artist">ナナヲアカリ</span>
-                <h5>陽傘</h5>
-            </div>
-            <p class="tags">MV</p>
-        </div>
-
-        <div class="box">
+        <div class="item">
             <div class="youtube">
                 <iframe width="100%" src="https://www.youtube.com/embed/9xQKU2ardbQ?modestbranding=1"
                     title="YouTube video player" frameborder="0"
@@ -103,6 +80,13 @@
         <!--作品たち、ここまで -->
 
     </div>
+    <script>
+        var masonry = new MiniMasonry({
+            container: '.works',
+            baseWidth: 300,
+            gutter: 50,
+        });
+        </script>
 </body>
 
 </html>

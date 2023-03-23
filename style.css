@@ -18,8 +18,22 @@ header {
 }
 
 .works {
-    max-height: 800px;
-    
+    position: relative;
+    margin: 0 auto;
+}
+
+.item {
+    position: absolute;
+    margin: 20px;
+    padding: 10px;
+    width: 450px;
+    outline: 1px dashed #6AA099;
+}
+
+.page {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;    
 }
 
 .box {
@@ -87,7 +101,7 @@ h5 {
     font-size: 0.8em;
 }
 
-.box img {
+.item img {
     display: block;
     width: 70%;
     margin: 20px 0px 20px auto;
@@ -154,7 +168,8 @@ table, th, td {
         display: block;
     }
 
-    .box {
+    .item {
         width: 300px;
+        margin: 0 10px 0 10px;
     }
 }
