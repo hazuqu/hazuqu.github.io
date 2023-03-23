@@ -18,13 +18,8 @@ header {
 }
 
 .works {
-    display: -webkit-flex;
-  display: flex;
-  -webkit-flex-direction: column;
-  flex-direction: column;
-  -webkit-flex-wrap: wrap;
-  flex-wrap: wrap;
-  height: 100vw; /* ビューポート(幅)を基準に表示高を指定 */
+    max-height: 800px;
+    
 }
 
 .box {

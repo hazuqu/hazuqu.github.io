@@ -4,15 +4,24 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
-    <meta name="description" content="視覚表現を中心に創作を続けています。このサイトは古き良きインターネットの質感を、自らの手で残しておきたいという理由から手打ちのhtml、CSSで遊んでいます。">
+    <meta name="description" content="映像作家 木葉はづくの作品紹介やご依頼窓口です🎞">
     <title>木葉はづく 🦉 HAZUQU</title>
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="木葉はづく Webサイト" />
     <meta name="twitter:description" content="映像作家 木葉はづくの作品紹介やご依頼窓口です🎞" />
     <meta name="twitter:image" content="https://ideoaves.cf/icon.png" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <script src="masonry.pkgd.min.js"></script>
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+    <script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js?ver=1.11.3'></script>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <script>
+        $('.works').masonry({
+            // options
+            itemSelector: '.box',
+            columnWidth: '.box',
+            horizontalOrder: true
+        });
+    </script>
 </head>
 
 <body>
