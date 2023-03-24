@@ -53,10 +53,12 @@
             letter-spacing: 2px;
             font-size: 2em;
         }
+
         #site {
             letter-spacing: 5px;
             font-size: 0.6em;
         }
+
         #loading {
             line-height: 500px;
             letter-spacing: 12px;
@@ -77,11 +79,9 @@
     </div>
     <script>
         const loading = document.querySelector('.loading');
-        window.addEventListener('load', () => {
-            setTimeout(function () {
-                loading.classList.add('hide');
-            }, 100);
-        });
+        setTimeout(function () {
+            loading.classList.add('hide');
+        }, 2000);
     </script>
     <header>
         <a href="index.html"><img src="logo.png" width="70px" style="margin: 20px;"></a>
