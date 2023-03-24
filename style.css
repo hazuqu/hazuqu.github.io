@@ -17,6 +17,11 @@ header {
     text-align: center;
 }
 
+main {
+    margin: 0 auto;
+    max-width: 1400px;
+}
+
 .works {
     position: relative;
     margin: 0 auto;
@@ -28,6 +33,7 @@ header {
     padding: 10px;
     width: 450px;
     outline: 1px dashed #6AA099;
+    line-height: 2;
 }
 
 .page {
@@ -51,7 +57,7 @@ header {
 
 .name {
     margin-top: 10px;
-    margin: 10px 10px;
+    margin: 10px 10px 10px 0;
     padding-left: 10px;
     border-style: solid;
     border-width: 0 0 0 7px;
@@ -82,6 +88,15 @@ h2 {
     font-size: 1.1em;
 }
 
+h3 {
+    margin: 30px 0 20px 0;
+    padding-left: 10px;
+    border-style: solid;
+    border-width: 0 0 0 10px;
+    border-color: #6AA099;
+    font-size: 1.6em;
+}
+
 .texts {
     width: 650px;
     padding-left: 17px;
@@ -95,16 +110,27 @@ h5 {
     letter-spacing: 3px;
 }
 
+.cover {
+    padding-left: 5px;
+    font-size: 0.6em;
+    letter-spacing: 1px;
+    color: #6e6e6e;
+}
+
 .tags {
-    margin: 0 0 0 10px;
+    margin: 0 0 5px 0;
     color: #6AA099;
     font-size: 0.8em;
 }
 
 .item img {
     display: block;
-    width: 70%;
     margin: 20px 0px 20px auto;
+}
+
+.thum img {
+    display: inline;
+    margin: 0;
 }
 
 .youtube {
@@ -137,7 +163,7 @@ table, th, td {
     background-color: black;
     display: inline;
     padding: 2px 20px;
-    margin: 0;
+    margin: 0 ;
     border-style: solid;
     background-color: #DFDFDF;
     border-color: #ffffff #808080 #808080 #ffffff;
@@ -160,6 +186,21 @@ table, th, td {
     color: gray;
     text-shadow: 1px 1px 0 #fff;
     background-color: #DFDFDF;
+}
+
+main a[href]:link:not(.botan) {
+    color: #FFFFFF;
+    background-color: #6AA099;
+}
+
+main a[href]:visited:not(.botan) {
+    color: #FFFFFF;
+    background-color: #6AA099;
+}
+
+main a[href]:hover:not(.botan) {
+    color: #FFFFFF;
+    background-color: gray;
 }
 
 /* スマホ用 */
