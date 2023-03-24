@@ -9,7 +9,7 @@
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="木葉はづく Webサイト" />
     <meta name="twitter:description" content="映像作家 木葉はづくの作品紹介やご依頼窓口です🎞" />
-    <meta name="twitter:image" content="https://ideoaves.cf/icon.png" />
+    <meta name="twitter:image" content="https://hazuqu.github.io/icon.jpg" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
     <script src="minimasonry.min.js"></script>
@@ -22,9 +22,67 @@
             font-family: 'Sawarabi Gothic', sans-serif;
         }
     </style>
+    <style>
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            width: 100%;
+            height: 100%;
+            background-color: #6AA099;
+        }
+
+        .loading.hide {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 500ms;
+        }
+
+        #loadPage {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 100%;
+            color: white;
+        }
+
+        #hazuqu {
+            margin-top: 10px;
+            letter-spacing: 2px;
+            font-size: 2em;
+        }
+        #site {
+            letter-spacing: 5px;
+            font-size: 0.6em;
+        }
+        #loading {
+            line-height: 500px;
+            letter-spacing: 12px;
+            font-size: 1em;
+        }
+    </style>
 </head>
 
 <body>
+    <div class="loading">
+        <div id="loadPage">
+            <div>
+                <img src="logo.png" width="100px" style="filter: brightness(1000%)">
+                <div id="hazuqu">木葉はづく</div>
+                <div id="site">Hazuqu Website</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const loading = document.querySelector('.loading');
+        window.addEventListener('load', () => {
+            setTimeout(function () {
+                loading.classList.add('hide');
+            }, 100);
+        });
+    </script>
     <header>
         <a href="index.html"><img src="logo.png" width="70px" style="margin: 20px;"></a>
         <ul>
@@ -181,8 +239,7 @@
 
             <div class="item">
                 <div class="thum">
-                    <img width="100%" src="thum/2_3.png">
-                    <img width="50%" src="thum/2_1.png"><img width="50%" src="thum/2_2.png">
+                    <img width="100%" src="thum/5.png">
                 </div>
                 <div class="name">
                     <span class="artist">ちゃんげろソニック 2021</span>
@@ -387,8 +444,8 @@
                         allowfullscreen></iframe>
                 </div>
                 <div class="name">
-                    <span class="artist">ココツキ</span>
-                    <h5>極楽浄土<span class="cover">Cover</span></h5>
+                    <span class="artist">Unwork</span>
+                    <h5>極楽浄土</h5>
                 </div>
                 <p class="tags">MV</p>
             </div>
