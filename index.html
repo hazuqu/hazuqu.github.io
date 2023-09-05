@@ -13,7 +13,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
     <script src="minimasonry.min.js"></script>
-    <link rel="icon"　href="favicon.ico">
+    <script src="jquery-3.3.1.min.js"></script>
+    <link rel="icon" 　href="favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sawarabi+Gothic&display=swap" rel="stylesheet">
@@ -30,7 +31,7 @@
             z-index: 1000;
             width: 100%;
             height: 100%;
-            background-color: #6AA099;
+            background-color: #373737;
         }
 
         .loading.hide {
@@ -51,7 +52,7 @@
         #hazuqu {
             margin-top: 10px;
             letter-spacing: 2px;
-            font-size: 2em;
+            font-size: 1.4em;
         }
 
         #site {
@@ -64,6 +65,18 @@
             letter-spacing: 12px;
             font-size: 1em;
         }
+
+        .text {
+            opacity: 0;
+            -webkit-transition: opacity 2s ease;
+            transition: opacity 2s ease;
+        }
+
+        .text.is-active {
+            opacity: 1;
+            -webkit-transition: opacity 2s ease;
+            transition: opacity 2s ease;
+        }
     </style>
 </head>
 
@@ -71,9 +84,31 @@
     <div class="loading">
         <div id="loadPage">
             <div>
-                <img src="logo.png" width="100px" style="filter: brightness(1000%)">
+                <img src="logo.png" width="70px" style="filter: brightness(1000%)">
                 <div id="hazuqu">木葉はづく</div>
                 <div id="site">Hazuqu Website</div>
+                <p id="message-1">\</p>
+                <script>
+                    const message1 = document.getElementById('message-1');
+            
+                    const messages = [
+                        '\|',
+                        '\/',
+                        '\-',
+                        '\\'
+                    ];
+                    let i = 0;
+            
+                    function showMessage_1() {
+                        if (i == 4) {
+                            i = 0;
+                        }
+                        message1.textContent = messages[i];
+                        i++;
+                    }
+            
+                    setInterval(showMessage_1, 200);
+                </script>
             </div>
         </div>
     </div>
@@ -113,7 +148,7 @@
                 </div>
                 <p class="tags">MV<br>
             </div>
-            
+
             <div class="item">
                 <div class="youtube">
                     <iframe width="100%" src="https://www.youtube.com/embed/0oaZV2vNAak?modestbranding=1"
@@ -126,7 +161,7 @@
                     <h5>水浴</h5>
                 </div>
                 <p class="tags">MV, Thumbnail, Title typography<br>
-                a9ualiaとして参加</p>
+                    a9ualiaとして参加</p>
                 <img width="70%" src="typo/suiyoku.png">
             </div>
 
@@ -142,10 +177,11 @@
                     <h5>アイドル<span class="cover">Cover</span></h5>
                 </div>
                 <p class="tags">Lyric video<br>
-                <a href="https://www.youtube.com/watch?v=mijT-oEgWZ8">神はサイコロを振らない - 初恋 (伊月知世 & 白河しらせCover)</a><br>
-                <a href="https://youtu.be/LS4lDsryiSk?si=jUY1WjEoGYeDt_Nl">ロス - Bitter (伊月知世Cover)</a><br>
-                <a href="https://www.youtube.com/watch?v=e40KecAu2c4">riya - 小さなてのひら (皇 美緒奈Cover)</a><br>
-                ︙</p>
+                    <a href="https://www.youtube.com/watch?v=mijT-oEgWZ8">神はサイコロを振らない - 初恋 (伊月知世 & 白河しらせCover)</a><br>
+                    <a href="https://youtu.be/LS4lDsryiSk?si=jUY1WjEoGYeDt_Nl">ロス - Bitter (伊月知世Cover)</a><br>
+                    <a href="https://www.youtube.com/watch?v=e40KecAu2c4">riya - 小さなてのひら (皇 美緒奈Cover)</a><br>
+                    ︙
+                </p>
             </div>
 
             <div class="item">
@@ -172,11 +208,12 @@
                     <h5>カバーMV<span class="cover">Cover</span></h5>
                 </div>
                 <p class="tags">Lyric video<br>
-                <a href="https://www.youtube.com/watch?v=1ZBDI1-hNsk">レクイエム /cover</a><br>
-                <a href="https://www.youtube.com/watch?v=uLmAr9xIY1g">ド屑 /cover</a><br>
-                <a href="https://www.youtube.com/watch?v=yADk8JAJn2Q">三日月ステップ/cover</a><p>
+                    <a href="https://www.youtube.com/watch?v=1ZBDI1-hNsk">レクイエム /cover</a><br>
+                    <a href="https://www.youtube.com/watch?v=uLmAr9xIY1g">ド屑 /cover</a><br>
+                    <a href="https://www.youtube.com/watch?v=yADk8JAJn2Q">三日月ステップ/cover</a>
+                <p>
             </div>
-            
+
             <div class="item">
                 <div class="thum">
                     <img width="100%" src="thum/6.png">
@@ -187,9 +224,10 @@
                     <h5>1st Live『暁光』　背景LV</h5>
                 </div>
                 <p class="tags">Live<br>
-                <a href="https://youtube.com/shorts/OZ8JIlJFAmE?si=hPeQWmJ0Lr1oyykq">Arika「蝙蝠」#Shorts</a></p>
+                    <a href="https://youtube.com/shorts/OZ8JIlJFAmE?si=hPeQWmJ0Lr1oyykq">Arika「蝙蝠」#Shorts</a>
+                </p>
             </div>
-            
+
             <div class="item">
                 <div class="youtube">
                     <iframe width="100%" src="https://www.youtube.com/embed/c3OWV7hxmtQ?modestbranding=1"
@@ -202,7 +240,7 @@
                     <h5>奈落<span class="cover">Cover</span></h5>
                 </div>
                 <p class="tags">MV, Thumbnail, Title typography<br>
-                ©kowaneiro</p>
+                    ©kowaneiro</p>
                 <img width="70%" src="typo/naraku.png">
             </div>
 
@@ -363,7 +401,8 @@
                     <h5>ナナヲアカリ official website 背景GIF</h5>
                 </div>
                 <p class="tags">Animation<br>
-                <a href="https://www.nanawoakari.com/">nanawoakari.com</a></p>
+                    <a href="https://www.nanawoakari.com/">nanawoakari.com</a>
+                </p>
             </div>
 
             <div class="item">
@@ -406,10 +445,12 @@
                     <h5>明けない夜のリリィ<span class="cover">Cover</span></h5>
                 </div>
                 <p class="tags">Lyric video<br>
-                <a href="https://www.youtube.com/watch?v=1dEL9WBL1Tg">回生 covered by CIEL</a><br>
-                <a href="https://www.youtube.com/watch?v=7FSdvKMhPn8">翡翠のまち covered by CIEL</a><br>
-                <a href="https://www.youtube.com/watch?v=EyRbt9TB8aE">東京は夜 covered by CIEL feat.春猿火 (from Strawberry Live)</a><br>
-                ︙</p>
+                    <a href="https://www.youtube.com/watch?v=1dEL9WBL1Tg">回生 covered by CIEL</a><br>
+                    <a href="https://www.youtube.com/watch?v=7FSdvKMhPn8">翡翠のまち covered by CIEL</a><br>
+                    <a href="https://www.youtube.com/watch?v=EyRbt9TB8aE">東京は夜 covered by CIEL feat.春猿火 (from Strawberry
+                        Live)</a><br>
+                    ︙
+                </p>
             </div>
 
             <div class="item">
@@ -422,7 +463,8 @@
                     <h5>きっと二人で一つ、貴方と一つ</h5>
                 </div>
                 <p class="tags">MV<br>
-                <a href="https://youtu.be/kveKqbxduW0">Youtube</a></p>
+                    <a href="https://youtu.be/kveKqbxduW0">Youtube</a>
+                </p>
             </div>
 
             <div class="item">
@@ -465,9 +507,10 @@
                     <h5>コラボ楽曲 リリックMV</h5>
                 </div>
                 <p class="tags">Lyric video, Exhibit<br>
-                <a href="https://youtu.be/lsThiIWT2s0">3D - Three Dimension / KMNZ & 春猿火</a><br>
-                <a href="https://youtu.be/SIsd9ON3H4c">透明な呼吸 / somunia & ヰ世界情緒</a><br>
-                <a href="https://youtu.be/_U2-SRW-wiw">ファジータウン / KMNZ & ORESAMA</a></p>
+                    <a href="https://youtu.be/lsThiIWT2s0">3D - Three Dimension / KMNZ & 春猿火</a><br>
+                    <a href="https://youtu.be/SIsd9ON3H4c">透明な呼吸 / somunia & ヰ世界情緒</a><br>
+                    <a href="https://youtu.be/_U2-SRW-wiw">ファジータウン / KMNZ & ORESAMA</a>
+                </p>
             </div>
 
             <div class="item">
@@ -573,9 +616,10 @@
                     <h5>The Lights, The Nights</h5>
                 </div>
                 <p class="tags">MV<br>
-                <a href="https://youtu.be/l9a_RvuSMgw">Unwork ”The Lights, The Nights"</a><br>
-                <a href="https://youtu.be/yzPVYEQpZrs">Unwork ”Can I Have This Dance"</a><br>
-                <a href="https://youtu.be/IQhHjJp5HaA">Unwork ”In the rain"</a></p>
+                    <a href="https://youtu.be/l9a_RvuSMgw">Unwork ”The Lights, The Nights"</a><br>
+                    <a href="https://youtu.be/yzPVYEQpZrs">Unwork ”Can I Have This Dance"</a><br>
+                    <a href="https://youtu.be/IQhHjJp5HaA">Unwork ”In the rain"</a>
+                </p>
             </div>
 
             <!--作品たち、ここまで -->
