@@ -33,7 +33,7 @@ main {
     margin: 20px;
     padding: 10px;
     width: 450px;
-    outline: 1px solid #6AA099;
+    outline: 1px solid #070707;
     line-height: 2;
 }
 
@@ -48,7 +48,7 @@ main {
     margin: 30px;
     padding: 30px;
     width: 450px;
-    outline: 1px solid #6AA099;
+    outline: 1px solid #070707;
 }
 
 
@@ -63,7 +63,7 @@ main {
     padding-left: 10px;
     border-style: solid;
     border-width: 0 0 0 7px;
-    border-color: #6AA099;
+    border-color: #070707;
     line-height: 1.2;
 }
 
@@ -76,7 +76,7 @@ h1 {
     padding-left: 10px;
     border-style: solid;
     border-width: 0 0 0 3px;
-    border-color: #6AA099;
+    border-color: #070707;
     font-size: 1.4em;
 }
 
@@ -86,7 +86,7 @@ h2 {
     padding-left: 10px;
     border-style: dashed;
     border-width: 0 0 0 2px;
-    border-color: #6AA099;
+    border-color: #070707;
     font-size: 1.1em;
 }
 
@@ -95,7 +95,7 @@ h3 {
     padding-left: 10px;
     border-style: solid;
     border-width: 0 0 0 10px;
-    border-color: #6AA099;
+    border-color: #070707;
     font-size: 1.6em;
 }
 
@@ -121,7 +121,7 @@ h5 {
 
 .tags {
     margin: 0 0 5px 0;
-    color: #6AA099;
+    color: #070707;
     font-size: 0.8em;
 }
 
@@ -173,11 +173,10 @@ table, th, td {
     font-family: serif;
     font-style: italic;
     font-weight: bold;
-    color: black;
 }
 
 .botan:hover {
-    cursor: pointer
+    cursor: pointer;
 }
 
 .botan:active {
@@ -189,20 +188,23 @@ table, th, td {
     text-shadow: 1px 1px 0 #fff;
     background-color: #DFDFDF;
 }
-
+main a[href]:not(.botan) {
+    padding: 0 3px;
+}
 main a[href]:link:not(.botan) {
     color: #FFFFFF;
-    background-color: #6AA099;
+    background-color: #070707;
 }
 
 main a[href]:visited:not(.botan) {
     color: #FFFFFF;
-    background-color: #6AA099;
+    background-color: #070707;
 }
 
 main a[href]:hover:not(.botan) {
-    color: #FFFFFF;
-    background-color: gray;
+    color: black;
+    background-color: #fff;
+    border: solid 1px #070707;
 }
 
 /* スマホ用 */
