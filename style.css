@@ -7,8 +7,8 @@ ul {
 }
 
 body {
-    color: #303035;
-    background-color: #f4f4f4;
+    color: #000000;
+    background-color: #e0e0e0;
     width: 95%;
     height: 95%;
 }
@@ -160,27 +160,27 @@ table, th, td {
 
 /* ボタン */
 
+.botan::before{
+    content:"[";
+}
+.botan::after{
+    content:"]";
+}
 .botan {
-    color: black;
+    font-family: "unifont";
+    color: white;
     background-color: black;
     display: inline;
-    padding: 2px 20px;
+    padding: 2px 5px;
     margin: 0 ;
-    border-style: solid;
-    background-color: #DFDFDF;
-    border-color: #ffffff #808080 #808080 #ffffff;
-    text-align: center;
-    font-family: serif;
-    font-style: italic;
-    font-weight: bold;
 }
 
 .botan:hover {
-    cursor: pointer;
+    background-color: gray;
 }
 
 .botan:active {
-    border-color: #808080 #ffffff #ffffff #808080;
+    background-color: gray;
 }
 
 .dead {
