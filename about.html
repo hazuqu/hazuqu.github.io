@@ -24,7 +24,43 @@
 
 <body>
     <header>
-        <a href="index.html"><img src="logo.png" width="70px" style="margin: 20px;"></a>
+        <div style="margin:40px 0;">
+            <div style="font-family: 'Unifont'; width:fit-content; margin: 0 auto; text-align: left; line-height: 1.0em; letter-spacing:-0.1em">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'___'<br>
+                &nbsp;hazuqu&nbsp;&nbsp;&nbsp;(<p style="display:inline;" id="eye">୭</p>v<p style="display:inline;" id="eye">୭</p>)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(;;&nbsp;;&nbsp;&nbsp;\<br>
+                .⸙&nbsp;.&nbsp;෴.,&nbsp;&nbsp;&nbsp;n m&nbsp;&nbsp;&nbsp;,&nbsp;෴.⚵..&nbsp;⸲.
+                <script>
+                    const message2 = document.getElementById('eye');
+                    let m = "୭"
+                    const t2 = [
+                        m,
+                        m,
+                        m,
+                        m,
+                        m,
+                        m,
+                        m,
+                        m,
+                        m,
+                        '＿',
+                        m,
+                        '＿'
+                    ];
+                    let j = 0;
+
+                    function m1() {
+                        if (j == 12) {
+                            j = 0;
+                        }
+                        message2.textContent = t2[j];
+                        j++;
+                    }
+
+                    setInterval(m1, 200);
+                </script>
+            </div>
+        </div>
         <ul>
             <a href="index.html">
                 <li class="botan bold">作品</li>
