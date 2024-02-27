@@ -230,4 +230,7 @@ main a[href]:hover:not(.botan) {
         width: 300px;
         margin: 0 10px 0 -10px;
     }
+ .box {
+    margin: 0px;
+}
 }
