@@ -38,6 +38,7 @@ main {
     position: absolute;
     margin: 20px;
     padding: 10px;
+    padding-bottom: 30px;
     width: 450px;
     outline: 1px solid #070707;
     line-height: 2;
