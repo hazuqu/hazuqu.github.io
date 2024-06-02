@@ -34,3 +34,227 @@
                 </div>
                 <p class="tags">Logo, animation</p>
             </div>
+
+            <div class="item">
+                <div class="thum">
+                    <img width="100%" src="thum/ascii.png">
+                </div>
+                <div class="name">
+                    <span class="artist">hazuqu</span>
+                    <h5>ASCII_GIF<span class="cover"></span></h5>
+                </div>
+                <p class="tags">GIF</p>
+                    <a href="gif.html">ASCII_GIF</a>
+            </div>
+
+            <div class="item">
+                <div class="thum">
+                    <img width="100%" src="thum/7.png">
+                    <img width="50%" src="thum/7_1.png"><img width="50%" src="thum/7_2.png">
+                </div>
+                <div class="name">
+                    <span class="artist">BΣretta Crossrain</span>
+                    <h5>3rd Anniversary LIVE 「#透澄オプスキュリテ」 背景LV</h5>
+                </div>
+                <p class="tags">Live</p>
+            </div>
+
+            <div class="item">
+                <div class="youtube">
+                    <iframe width="100%" src="https://www.youtube.com/embed/yADk8JAJn2Q?modestbranding=1"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+                </div>
+                <div class="name">
+                    <span class="artist">絶望のある</span>
+                    <h5>カバーMV<span class="cover">Cover</span></h5>
+                </div>
+                <p class="tags">Lyric video<br>
+                    <a href="https://www.youtube.com/watch?v=1ZBDI1-hNsk">レクイエム /cover</a><br>
+                    <a href="https://www.youtube.com/watch?v=uLmAr9xIY1g">ド屑 /cover</a><br>
+                    <a href="https://www.youtube.com/watch?v=yADk8JAJn2Q">三日月ステップ/cover</a>
+                <p>
+            </div>
+
+            <div class="item">
+                <div class="thum">
+                    <img width="100%" src="thum/2_3.png">
+                    <img width="50%" src="thum/2_1.png"><img width="50%" src="thum/2_2.png">
+                </div>
+                <div class="name">
+                    <span class="artist">ちゃんげろソニック 2022</span>
+                    <h5>マトリョシカ<span class="cover">Cover</span></h5>
+                </div>
+                <p class="tags">Live</p>
+            </div>
+
+            <div class="item">
+                <div class="youtube">
+                    <iframe width="100%" src="https://www.youtube.com/embed/dSfGMUZUq6c?modestbranding=1"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+                </div>
+                <div class="name">
+                    <span class="artist">伶</span>
+                    <h5>エンカウント feat. 笹川真生</h5>
+                </div>
+                <p class="tags">MV, Artwork</p>
+            </div>
+
+            <div class="item">
+                <div class="thum">
+                    <img width="100%" src="thum/5.png">
+                </div>
+                <div class="name">
+                    <span class="artist">ちゃんげろソニック 2021</span>
+                    <h5>ローリンガール<span class="cover">Cover</span></h5>
+                </div>
+                <p class="tags">Live</p>
+            </div>
+
+            <div class="item">
+                <div class="youtube">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/N-dF9OMQsBM"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+                </div>
+                <div class="name">
+                    <span class="artist">Mics!!</span>
+                    <h5>BRUTUS</h5>
+                </div>
+                <p class="tags">MV</p>
+            </div>
+
+            <div class="item">
+                <div class="youtube">
+                    <iframe width="100%" src="https://www.youtube.com/embed/4YBjrpWUQSs?modestbranding=1"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+                </div>
+                <div class="name">
+                    <span class="artist">CIEL</span>
+                    <h5>明けない夜のリリィ<span class="cover">Cover</span></h5>
+                </div>
+                <p class="tags">Lyric video<br>
+                    <a href="https://www.youtube.com/watch?v=1dEL9WBL1Tg">回生 covered by CIEL</a><br>
+                    <a href="https://www.youtube.com/watch?v=7FSdvKMhPn8">翡翠のまち covered by CIEL</a><br>
+                    <a href="https://www.youtube.com/watch?v=EyRbt9TB8aE">東京は夜 covered by CIEL feat.春猿火 (from Strawberry
+                        Live)</a><br>
+                    ︙
+                </p>
+            </div>
+
+            <div class="item">
+                <div class="thum">
+                    <img width="100%" src="thum/1_3.png">
+                    <img width="50%" src="thum/1_1.png"><img width="50%" src="thum/1_2.png">
+                </div>
+                <div class="name">
+                    <span class="artist">久保あおい</span>
+                    <h5>きっと二人で一つ、貴方と一つ</h5>
+                </div>
+                <p class="tags">MV<br>
+                    <a href="https://youtu.be/kveKqbxduW0">Youtube</a>
+                </p>
+            </div>
+
+            <div class="item">
+                <div class="youtube">
+                    <iframe width="100%" src="https://www.youtube.com/embed/7jBb6iutTdc?modestbranding=1"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+                </div>
+                <div class="name">
+                    <span class="artist">ぽちまる</span>
+                    <h5>ジャンキーナイトタウンオーケストラ<span class="cover">Cover</span></h5>
+                </div>
+                <p class="tags">MV, 3DCamera</p>
+            </div>
+
+            <div class="item">
+                <div class="youtube">
+                    <iframe width="100%" src="https://www.youtube.com/embed/J74fzBbd6rE?modestbranding=1"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+                </div>
+                <div class="name">
+                    <span class="artist">春猿火</span>
+                    <h5>告げ口</h5>
+                </div>
+                <p class="tags">MV, Live</p>
+            </div>
+
+            <div class="item">
+                <div class="youtube">
+                    <iframe width="100%" src="https://www.youtube.com/embed/WANlBis_cgY?modestbranding=1"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+                </div>
+                <div class="name">
+                    <span class="artist">星乃めあ×鈴代ここね</span>
+                    <h5>Rising Hope<span class="cover">Cover</span></h5>
+                </div>
+                <p class="tags">MV</p>
+            </div>
+
+            <div class="item">
+                <div class="thum">
+                    <img width="100%" src="thum/a_1.png">
+                </div>
+                <div class="name">
+                    <span class="artist">SEVEN’s CODE</span>
+                    <h5>Sanctify 2.0<span class="cover">Jacket</span></h5>
+                </div>
+                <p class="tags">Artwork</p>
+            </div>
+
+            <div class="item">
+                <div class="youtube">
+                    <iframe width="100%" src="https://www.youtube.com/embed/i_tyFCG-fEk?modestbranding=1"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+                </div>
+                <div class="name">
+                    <span class="artist">ナナヲアカリ</span>
+                    <h5>イエスマンイズデッド</h5>
+                </div>
+                <p class="tags">MV</p>
+            </div>
+
+            <div class="item">
+                <div class="youtube">
+                    <iframe width="100%" src="https://www.youtube.com/embed/qYtSAgxr7YI?modestbranding=1"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+                </div>
+                <div class="name">
+                    <span class="artist">Unwork</span>
+                    <h5>極楽浄土</h5>
+                </div>
+                <p class="tags">MV</p>
+            </div>
+
+            <div class="item">
+                <div class="thum">
+                    <img width="100%" src="thum/3_2.png">
+                    <img width="50%" src="thum/3_1.png"><img width="50%" src="thum/3_3.png">
+                </div>
+                <div class="name">
+                    <span class="artist">Unwork</span>
+                    <h5>The Lights, The Nights</h5>
+                </div>
+                <p class="tags">MV<br>
+                    <a href="https://youtu.be/l9a_RvuSMgw">Unwork ”The Lights, The Nights"</a><br>
+                    <a href="https://youtu.be/yzPVYEQpZrs">Unwork ”Can I Have This Dance"</a><br>
+                    <a href="https://youtu.be/IQhHjJp5HaA">Unwork ”In the rain"</a>
+                </p>
+            </div>
