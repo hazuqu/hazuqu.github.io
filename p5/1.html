@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/addons/p5.sound.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="utf-8" />
+  <style>
+    main {
+      width: 480px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .in {
+      padding: 10px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="in">
+    <input type="text" id="texInput" value="abcdedcba">
+    <input type="checkbox" id="rotCheckbox" checked>
+    </div>
+    <script>
+      function setup() {
+        createCanvas(480, 480);
+        let texInput = select('#texInput');
+        let rotCheckbox = select('#rotCheckbox');
+        texInput.input(updateText);
+        rotCheckbox.changed(updateRotation);
+      }
+      
+      function updateText() {
+        tex = this.value();
+        hs = tex.length;
+      }
+      
+      function updateRotation() {
+        rot = this.checked() ? 1 : 0;
+      }
+      
+      let tex = document.getElementById("texInput").value;
+      let hs = tex.length;
+      let rot = document.getElementById("rotCheckbox").checked ? 1 : 0;
+
+      function draw() {
+        background(255);
+        fill(0);
+        stroke(0);
+        strokeWeight(0.3);
+        s = width / tex.length;
+        s2 = height / hs;
+        for (let h = 0; h < hs; h++) {
+          if (rot == 1) {
+            let rotatedTex = tex.slice(1) + tex.charAt(0);
+            tex = rotatedTex;
+          }
+
+          for (let w = 0; w < tex.length; w++) {
+            if (tex.charAt(w) == "a") {
+              rect(w * s, h * s2, s, s2);
+            }
+            if (tex.charAt(w) == "b") {
+              rect(w * s, h * s2, s / 2, s2 / 2);
+              rect(s / 2 + w * s, s / 2 + h * s2, s / 2, s2 / 2);
+            }
+            if (tex.charAt(w) == "c") {
+              rect(w * s, h * s2, s / 2, s2 / 4);
+              rect(s / 2 + w * s, s / 4 + h * s2, s / 2, s2 / 4);
+              rect(w * s, s2 / 2 + h * s2, s / 2, s2 / 4);
+              rect(s / 2 + w * s, s2 / 2 + s / 4 + h * s2, s / 2, s2 / 4);
+            }
+            if (tex.charAt(w) == "d") {
+              rect(w * s, h * s2, s / 4, s2 / 2);
+              rect(s / 4 + w * s, s / 2 + h * s2, s / 4, s2 / 2);
+              rect(s / 2 + w * s, h * s2, s / 4, s2 / 2);
+              rect(s / 2 + s / 4 + w * s, s / 2 + h * s2, s / 4, s2 / 2);
+            }
+            if (tex.charAt(w) == "e") {
+              rect(w * s, h * s2, s / 4, s2 / 4);
+              rect(s / 4 + w * s, s / 4 + h * s2, s / 4, s2 / 4);
+              rect(s / 2 + w * s, h * s2, s / 4, s2 / 4);
+              rect(s / 2 + s / 4 + w * s, s / 4 + h * s2, s / 4, s2 / 4);
+              rect(w * s, s / 2 + h * s2, s / 4, s2 / 4);
+              rect(s / 4 + w * s, s / 2 + s / 4 + h * s2, s / 4, s2 / 4);
+              rect(s / 2 + w * s, s / 2 + h * s2, s / 4, s2 / 4);
+              rect(s / 2 + s / 4 + w * s, s / 2 + s / 4 + h * s2, s / 4, s2 / 4);
+            }
+            if (tex.charAt(w) == "f") {
+              circle(w * s + s / 2, h * s2 + s2 / 2, s)
+            }
+          }
+        }
+      }
+
+    </script>
+    
+  </main>
+</body>
+
+</html>
