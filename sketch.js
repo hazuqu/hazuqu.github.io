@@ -8,7 +8,7 @@ function setup() {
 }
 
 function draw() {
-    background(255);
+    background("#e0e0e0");
 
     for (let i = 0; i < characters.length; i++) {
         let charInfo = characters[i];
