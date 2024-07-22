@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="映像をしています🎞">
+    <title>木葉はづく 🦉 HAZUQU</title>
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="木葉はづく Portfolio" />
+    <meta name="twitter:description" content="映像をしています🎞" />
+    <meta name="twitter:image" content="https://hazuqu.github.io/icon.jpg" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+    <script src="minimasonry.min.js"></script>
+    <link rel="icon" 　href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sawarabi+Gothic&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/addons/p5.sound.min.js"></script>
+    <script src="sketch.js"></script>
+    <style>
+        header {
+            margin-top: 10%;
+        }
+
+        main {
+            line-height: 2em;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        td {
+            width: 50%;
+        }
+
+        .center {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div style="margin:40px 0;">
+            <div
+                style="font-family: 'Unifont'; width:fit-content; margin: 0 auto; text-align: left; line-height: 1.0em; letter-spacing:-0.1em">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'___'<br>
+                &nbsp;hazuqu&nbsp;&nbsp;&nbsp;(<p style="display:inline;" id="eye">୭v୭</p>)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(;;&nbsp;;&nbsp;&nbsp;\<br>
+                .⸙&nbsp;.&nbsp;෴.,&nbsp;&nbsp;&nbsp;n m&nbsp;&nbsp;&nbsp;,&nbsp;෴.⚵..&nbsp;⸲.
+                <script>
+                    const message2 = document.getElementById('eye');
+                    let m = "୭v୭"
+                    const t2 = [
+                        m,
+                        m,
+                        m,
+                        m,
+                        m,
+                        m,
+                        m,
+                        m,
+                        m,
+                        '＿v＿',
+                        m,
+                        '＿v＿'
+                    ];
+                    let j = 0;
+
+                    function m1() {
+                        if (j == 12) {
+                            j = 0;
+                        }
+                        message2.textContent = t2[j];
+                        j++;
+                    }
+
+                    setInterval(m1, 200);
+                </script>
+
+            </div>
+            <ul>
+                <a href="works.html">
+                    <li class="botan bold">works</li>
+                </a>
+                <a href="request.html">
+                    <li class="botan">request</li>
+                </a>
+                <a href="about.html">
+                    <li class="botan">about</li>
+                </a>
+            </ul>
+    </header>
+    <main>
+        <div class="center">
+            プログラムでピクセルを浮遊させたり、バーチャルの方たちに動画を送ったりして暮らしています。<br>
+            デザインやWebサイトもしています。<br>
+            <br>
+            <p>₊*。･ ﾟ.*✦ links ✦*.ﾟ ･。*₊</p>
+            <table>
+                <tr>
+                    <td align="right"><a class="botan" href="https://x.com/HAZUQU">Twitter</a></td>
+                    <td  align="left">つぶやいています。</td>
+                </tr>
+                <tr>
+                    <td align="right"><a class="botan"
+                            href="https://youtube.com/playlist?list=PLxZ7R-HAwPeOob8qWX81nsFZ2a5HxjX51&si=pIqZ4GWW0LZYFuO8">プレイリスト</a>
+                    </td>
+                    <td  align="left">作ったらここに現れるかもしれません。</td>
+                </tr>
+                <tr>
+                    <td align="right"><a class="botan" href="https://min.togetter.com/HZZGAGv">クリエイティブコーディング</a></td>
+                    <td  align="left">ジェネの作品たちです。</td>
+                </tr>
+                <tr>
+                    <td align="right"><a class="botan" href="https://discord.gg/bAbN4vF27p">Discord</a></td>
+                    <td align="left">個人サーバーです。</td>
+                </tr>
+                <tr>
+                    <td align="right"><a class="botan"
+                            href="https://vrchat.com/home/user/usr_a24ea979-9b74-49a7-bb56-c60e3c790202">VRC</a></td>
+                    <td  align="left">私もバーチャルです。</td>
+                </tr>
+                <tr>
+                    <td align="right"><a class="botan"
+                            href="https://www.youtube.com/@HAZUQU">Youtube</a></td>
+                    <td  align="left">時々動画があがっています。</td>
+                </tr>
+            </table>
+            <br>
+            <p>₊*。･ ﾟ.*✦ other ✦*.ﾟ ･。*₊</p>
+            <table>
+                <tr>
+                    <td align="right"><a class="botan" href="https://ideoaves.github.io/">ideoaves</a>
+                    </td>
+                    <td  align="left">わたしもいる集まりです。</td>
+                </tr>
+                <tr>
+                    <td align="right"><a class="botan" href="https://twitter.com/olime_sian">olime_sian</a></td>
+                    <td  align="left">お絵かきをしている📡です。</td>
+                </tr>
+                <tr>
+                    <td align="right"><a class="botan" href="https://discord.com/invite/dQX3PfcCPf">💿️</a></td>
+                    <td  align="left">💿️です。</td>
+                </tr>
+            </table>
+        </div>
+    </main>
+</body>
+
+</html>
