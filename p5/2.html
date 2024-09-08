@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/addons/p5.sound.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="utf-8" />
+  <style>
+    main {
+      width: 480px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .in {
+      padding: 10px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="in">
+      スライダー1：ウィンドウサイズ, スライダー2：文字サイズ, Delキー:画面リセット
+    </div>
+    <script>
+      let marlett;
+let w1
+let w2
+let w3
+function preload() {
+  marlett = loadFont("marlett.ttf");
+}
+
+let slider;
+let slider2;
+//窓の大きさ
+let windowSize;
+//文字の大きさ（文字サイズと正方形サイズに互換性がないので、小さくすると少し崩れます）
+let fontSize = 20;
+
+//色合い（titleColorは色を追加すればランダムに選ばれます）
+let titleColor = ["#030F74", "#808080"];
+let windowColor = "#C3C8C8";
+let borderColor = "#222222";
+
+//タイトルの有無と文字列
+
+
+function setup() {
+  
+  slider = createSlider(0, 255, 100);
+  
+  slider2 = createSlider(15, 50, 20);
+  w1 = createInput("Internet");
+w2 = createInput("Win96 V01.95");
+w3 = createInput();
+  
+  //画像サイズ
+  createCanvas(1920, 1080);
+  //背景色
+  background("#387B7F");
+  
+  //（1クリックで出る窓が多すぎるときに値を10とかに小さくするといいです）
+  frameRate(30);
+}
+
+function draw() {
+  let title = true;
+let words = [w1.value(), w2.value(), w3.value()];
+  windowSize =  slider.value();
+  noSmooth();
+  let x = mouseX;
+  let y = mouseY;
+  let w = random(20, windowSize * 3);
+  let h = random(20, windowSize * 2);
+  let t = slider2.value();
+  if (mouseIsPressed) {
+    if (mouseButton == LEFT) {
+      noStroke();
+      fill(borderColor);
+      rect(x, y, w, h);
+      fill(windowColor);
+      rect(x + 1, y + 1, w - 2, h - 2);
+      fill("#FFF");
+      rect(x, y, 2, h);
+      rect(x, y, w, 2);
+      fill(random(titleColor));
+      rect(x + 4, y + 6, w - 6, t);
+      if (random(0, 1) < 0.4 && w > t * 2 && h > t * 2) {
+        fill("#FFF");
+        rect(x + 6, y + 6 + t + 2, w - 10, h - 10 - t * 2);
+        fill(borderColor);
+        rect(x + 6, y + 6 + t + 2, 2, h - 10 - t * 2);
+        rect(x + 6, y + 6 + t + 2, w - 10, 2);
+      }
+
+      //X
+      fill(borderColor);
+      rect(x + w - t - 2, y + 9, t, t - 5);
+      fill("#c0c0c0");
+      rect(x + w - t + 1 - 2, y + 8 + 1, t - 4, t - 7);
+      fill("#FFF");
+      rect(x + w - t - 2, y + 9, 2, t - 7);
+      rect(x + w - t - 2, y + 9, t - 4, 2);
+      fill(borderColor);
+      textFont("marlett", t - 6);
+      text("r", x + w - t, y + t + 3);
+      if (w > 70 && random(0, 1) > 0.5) {
+        //[]
+        fill(borderColor);
+        rect(x + w - t - 2 - t, y + 9, t, t - 5);
+        fill("#c0c0c0");
+        rect(x + w - t + 1 - 2 - t, y + 8 + 1, t - 4, t - 7);
+        fill("#FFF");
+        rect(x + w - t - 2 - t, y + 9, 2, t - 7);
+        rect(x + w - t - 2 - t, y + 9, t - 4, 2);
+        fill(borderColor);
+        textFont("marlett", t - 6);
+        text("1", x + w - t - t, y + t + 3);
+        //_
+        fill(borderColor);
+        rect(x + w - t - 2 - t * 2, y + 9, t, t - 5);
+        fill("#c0c0c0");
+        rect(x + w - t + 1 - 2 - t * 2, y + 8 + 1, t - 4, t - 7);
+        fill("#FFF");
+        rect(x + w - t - 2 - t * 2, y + 9, 2, t - 7);
+        rect(x + w - t - 2 - t * 2, y + 9, t - 4, 2);
+        fill(borderColor);
+        textFont("marlett", t - 6);
+        text("0", x + w - t - t * 2 + 2, y + t + 3);
+      }
+
+      /////
+      if (h > t * 2) {
+        fill(borderColor);
+        textFont("marlett", t - 8);
+        text("o", x + w - t + 4, y + h - 4);
+      }
+
+      //title
+      fill("white");
+      textFont('DotGothic16', t - 6);
+      if (w > 150 && title == true) {
+        let w = random(words);
+        text(w, x + 6, y + 6 + t - 5);
+        text(w, x + 6 + 1, y + 6 + t - 5);
+      }
+    }
+  }
+  if(keyIsPressed == true){
+  if (key == 'Delete'){
+    background("#387B7F");
+  }
+  }
+  if (keyIsPressed) {
+  print(key);
+}
+}
+
+    </script>
+    
+  </main>
+</body>
+
+</html>
