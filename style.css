@@ -154,9 +154,40 @@ top: 0px;
 left: 0px;
 }
 
-table, th, td {
-border: none;
-vertical-align: top;
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 10px;
+    font-size: 0.7em;
+}
+
+th,
+td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+.credit-tag {
+    display: inline-block;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 2px 6px;
+    margin: 2px 4px 2px 0;
+    background-color: #f9f9f9;
+    font-size: 0.9em;
+}
+
+#search {
+    padding: 6px;
+    width: 300px;
+    font-size: 16px;
+    margin-bottom: 10px;
 }
 
 .history {
