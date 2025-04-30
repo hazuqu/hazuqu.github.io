@@ -64,65 +64,98 @@
             </ul>
             VTuber、Vsinger中心にミュージックビデオを作っています。最近はボカロにも映像を付けています。<br>
             プログラミングや実写をやったり、友人に絵を描いてもらったり、いろいろとやります。
-            <h1>主な制作</h1>
-            <table class="history">
-                <tr>
-                    <td>いれいす - 人マニア (cover)</td>
-                    <td>MV</td>
-                </tr>
-                <tr>
-                    <td>FIRST STAGE PRODUCTION Rosco Graves</td>
-                    <td>プロモーションビデオ</td>
-                </tr>
-                <tr>
-                    <td>樋口楓 - WIN-WIN HALLOWEEN</td>
-                    <td>MV</td>
-                </tr>
-                <tr>
-                    <td>SINSEKAI SPECIAL COVER LIVE</td>
-                    <td>プロモーションビデオ</td>
-                </tr>
-                <tr>
-                    <td>▽▲TRiNITY▲▽ - XOXO</td>
-                    <td>MV、タイトルタイポグラフィ</td>
-                </tr>
-                <tr>
-                    <td>VALIS 1st ONE-MAN LIVE「拡張メタモルフォーゼ」Blu-ray</td>
-                    <td>PV</td>
-                </tr>
-                <tr>
-                    <td>星街すいせい - ロウワー (cover)</td>
-                    <td>MV</td>
-                </tr>
-                <tr>
-                    <td>本間ひまわり×不破湊×森中花咲 - Ready Steady (cover)</td>
-                    <td>MV</td>
-                </tr>
-                <tr>
-                    <td>CIEL</td>
-                    <td>カバー用リリックビデオ</td>
-                </tr>
-                <tr>
-                    <td>ナナヲアカリ ワンマンライブツアー「NNNN」『ヒステリーショッパー』</td>
-                    <td>ライブ背景映像</td>
-                </tr>
-                <tr>
-                    <td>ちゃんげろソニック2021『ローリンガール』</td>
-                    <td>ライブ背景映像</td>
-                </tr>
-                <tr>
-                    <td>ヰ世界情緒 - ハイドレンジア</td>
-                    <td>MV、ライブ/背景映像・前景タイポグラフィ</td>
-                </tr>
-                <tr>
-                    <td>ChroNoiR - ヘテロスタシス</td>
-                    <td>MV</td>
-                </tr>
-                <tr>
-                    <td>︙</td>
-                    <td>︙</td>
-                </tr>
+            <h1>制作リスト</h1>
+            <input type="text" id="search" placeholder="キーワードで検索...">
+
+            <table id="json-table">
+                <thead>
+                    <tr>
+                        <th data-key="date">Date</th>
+                        <th data-key="user">User</th>
+                        <th data-key="credit">Credit</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
             </table>
+
+            <script>
+                const tbody = document.querySelector("#json-table tbody");
+                const searchInput = document.getElementById("search");
+                let data = [];
+                let sortState = {};
+
+                function renderTable(filteredData) {
+                    tbody.innerHTML = "";
+                    filteredData
+                        .filter(item => !item.status || item.status.trim() === "") // statusが空のみ表示
+                        .forEach(item => {
+                            const tr = document.createElement("tr");
+                            const date = item.date ? item.date.split("T")[0].slice(0, 7) : "";
+                            const creditHTML = (item.credit || []).map(c => `<span class="credit-tag">${c}</span>`).join("");
+                            const titleLink = item.link
+                                ? `<a href="${item.link}" target="_blank" rel="noopener noreferrer"> - ${item.title}</a>`
+                                : item.title || "";
+
+                            tr.innerHTML = `
+        <td>${date}</td>
+        <td>${item.user || ""}${titleLink} ${item.Cover || ""}</td>
+        <td>${creditHTML}</td>
+      `;
+                            tbody.appendChild(tr);
+                        });
+                }
+
+                function sortByKey(key) {
+                    const direction = sortState[key] === "asc" ? "desc" : "asc";
+                    sortState = { [key]: direction };
+
+                    const sorted = [...data].sort((a, b) => {
+                        const valA = (key === "date") ? new Date(a[key]) : (a[key] || "").toString().toLowerCase();
+                        const valB = (key === "date") ? new Date(b[key]) : (b[key] || "").toString().toLowerCase();
+
+                        if (valA < valB) return direction === "asc" ? -1 : 1;
+                        if (valA > valB) return direction === "asc" ? 1 : -1;
+                        return 0;
+                    });
+
+                    renderTable(applySearch(sorted));
+                }
+
+                function applySearch(dataArray) {
+                    const keyword = searchInput.value.trim().toLowerCase();
+                    if (keyword === "") return dataArray;
+
+                    return dataArray.filter(item => {
+                        return Object.values(item).some(val => {
+                            if (Array.isArray(val)) {
+                                return val.some(v => v.toLowerCase().includes(keyword));
+                            }
+                            return (val || "").toString().toLowerCase().includes(keyword);
+                        });
+                    });
+                }
+
+                // イベント設定
+                document.querySelectorAll("th[data-key]").forEach(th => {
+                    th.addEventListener("click", () => sortByKey(th.getAttribute("data-key")));
+                });
+
+                searchInput.addEventListener("input", () => {
+                    renderTable(applySearch(data));
+                });
+
+                // 外部JSONを読み込み
+                fetch("Hazuqu_works.json")
+                    .then(response => response.json())
+                    .then(json => {
+                        data = json;
+                        renderTable(data);
+                    })
+                    .catch(error => {
+                        console.error("JSONの読み込みに失敗しました:", error);
+                        tbody.innerHTML = "<tr><td colspan='7'>データの読み込みに失敗しました</td></tr>";
+                    });
+            </script>
         </div>
     </div>
 </body>
