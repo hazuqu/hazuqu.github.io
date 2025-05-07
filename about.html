@@ -85,25 +85,31 @@
                 let sortState = {};
 
                 function renderTable(filteredData) {
-                    tbody.innerHTML = "";
-                    filteredData
-                        .filter(item => !item.status || item.status.trim() === "") // statusが空のみ表示
-                        .forEach(item => {
-                            const tr = document.createElement("tr");
-                            const date = item.date ? item.date.split("T")[0].slice(0, 7) : "";
-                            const creditHTML = (item.credit || []).map(c => `<span class="credit-tag">${c}</span>`).join("");
-                            const titleLink = item.link
-                                ? `<a href="${item.link}" target="_blank" rel="noopener noreferrer"> - ${item.title}</a>`
-                                : item.title || "";
+    tbody.innerHTML = "";
+    filteredData
+        .filter(item => !item.status || item.status.trim() === "")
+        .forEach(item => {
+            const tr = document.createElement("tr");
+            const date = item.date ? item.date.split("T")[0].slice(0, 7) : "";
+            const creditHTML = (item.credit || []).map(c => `<span class="credit-tag">${c}</span>`).join("");
 
-                            tr.innerHTML = `
-        <td>${date}</td>
-        <td>${item.user || ""}${titleLink} ${item.Cover || ""}</td>
-        <td>${creditHTML}</td>
-      `;
-                            tbody.appendChild(tr);
-                        });
-                }
+            const userTitle = `${item.user || ""}${item.user && item.title ? " - " : ""}${item.title || ""}`;
+
+            const userTitleHTML = item.link
+                ? `<a href="${item.link}" target="_blank" rel="noopener noreferrer">${userTitle}</a>`
+                : userTitle;
+
+            const cover = item.Cover || "";
+
+            tr.innerHTML = `
+                <td>${date}</td>
+                <td>${userTitleHTML} ${cover}</td>
+                <td>${creditHTML}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+}
+
 
                 function sortByKey(key) {
                     const direction = sortState[key] === "asc" ? "desc" : "asc";
