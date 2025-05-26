@@ -90,7 +90,7 @@
         .filter(item => !item.status || item.status.trim() === "")
         .forEach(item => {
             const tr = document.createElement("tr");
-            const date = item.date ? item.date.split("T")[0].slice(0, 7) : "";
+            const date = item.date?.split("/").slice(0,2).map((s,i)=>i?s.padStart(2,"0"):s).join("/") || "";
             const creditHTML = (item.credit || []).map(c => `<span class="credit-tag">${c}</span>`).join("");
 
             const userTitle = `${item.user || ""}${item.user && item.title ? " - " : ""}${item.title || ""}`;
