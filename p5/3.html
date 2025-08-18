@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.8/lib/p5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.8/lib/addons/p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
+    <style>
+    main {
+      width: 480px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .in {
+      padding: 10px 0;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  </head>
+  <body>
+    <main>
+    </main>
+    <script>
+      let cols = 192 / 4;
+let rows = 108 / 4;
+let w = 25;
+
+let grid = [];
+let cam;
+let video;
+let camGraphics;
+let camReady = false;
+let threshold = 80;
+
+let videoMode = false;
+let videoFileInput;
+
+function setup() {
+  createCanvas(cols * w, rows * w);
+  pixelDensity(1);
+  textFont('Press Start 2P');
+  textSize(16);
+  textAlign(CENTER, CENTER);
+
+  // 動画ファイル入力UI
+  videoFileInput = createFileInput(handleFile);
+  videoFileInput.position(10, height + 10);
+
+  
+
+  if (!videoMode) {
+    setupCamera();
+  }
+
+  camGraphics = createGraphics(cols, rows);
+  camGraphics.pixelDensity(1);
+
+  for (let x = 0; x < cols; x++) {
+    grid[x] = [];
+    for (let y = 0; y < rows; y++) {
+      grid[x][y] = new Cell(x, y, w);
+    }
+  }
+}
+
+function setupCamera() {
+  cam = createCapture(VIDEO, () => {
+    camReady = true;
+    redraw();
+  });
+  cam.size(cols, rows);
+  cam.hide();
+}
+
+function handleFile(file) {
+  if (file.type === 'video') {
+    if (cam) {
+      cam.remove();
+      cam = null;
+    }
+    if (video) {
+      video.remove();
+      video = null;
+    }
+    video = createVideo(file.data, () => {
+      video.loop();
+      video.volume(0);
+      video.size(cols, rows);
+      video.hide();
+      camReady = true;
+    });
+    videoMode = true;
+  }
+}
+
+function draw() {
+  if (!camReady) return;
+
+  if (videoMode && video) {
+    camGraphics.image(video, 0, 0, cols, rows);
+  } else if (cam) {
+    camGraphics.image(cam, 0, 0, cols, rows);
+  }
+
+  camGraphics.loadPixels();
+
+  for (let x = 0; x < cols; x++) {
+    for (let y = 0; y < rows; y++) {
+      grid[x][y].bomb = false;
+      grid[x][y].revealed = false;
+      grid[x][y].neighborCount = 0;
+    }
+  }
+
+  for (let x = 0; x < cols; x++) {
+    for (let y = 0; y < rows; y++) {
+      let i = (x + y * cols) * 4;
+      let r = camGraphics.pixels[i];
+      let g = camGraphics.pixels[i + 1];
+      let b = camGraphics.pixels[i + 2];
+      let brightness = (r + g + b) / 3;
+
+      if (brightness < threshold) {
+        grid[x][y].bomb = true;
+      }
+    }
+  }
+
+  for (let x = 0; x < cols; x++) {
+    for (let y = 0; y < rows; y++) {
+      if (!grid[x][y].bomb) {
+        grid[x][y].neighborCount = countNeighborsBomb(x, y);
+        grid[x][y].revealed = true;
+      }
+    }
+  }
+
+  background(255);
+  for (let x = 0; x < cols; x++) {
+    for (let y = 0; y < rows; y++) {
+      grid[x][y].show();
+    }
+  }
+}
+
+function countNeighborsBomb(x, y) {
+  let total = 0;
+  for (let i = -1; i <= 1; i++) {
+    for (let j = -1; j <= 1; j++) {
+      if (i === 0 && j === 0) continue;
+      let nx = x + i;
+      let ny = y + j;
+      if (nx >= 0 && nx < cols && ny >= 0 && ny < rows) {
+        if (grid[nx][ny].bomb) total++;
+      }
+    }
+  }
+  return total;
+}
+
+class Cell {
+  constructor(x, y, w) {
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.bomb = false;
+    this.revealed = false;
+    this.neighborCount = 0;
+  }
+
+  show() {
+    fill("#909090");
+    rect(this.x * this.w, this.y * this.w, this.w, this.w);
+    fill("#C0C0C0");
+    let ol = 2;
+    rect(this.x * this.w + ol, this.y * this.w + ol, this.w - ol * 2, this.w - ol * 2);
+
+    if (this.revealed) {
+      if (this.neighborCount > 0) {
+        let colors = ['#000000', 'blue', 'green', 'red', 'navy', 'brown', 'darkcyan', 'black', 'gray'];
+        fill(colors[this.neighborCount] || '#909090');
+        textSize(this.w * 0.6);
+        textAlign(CENTER, CENTER);
+        noStroke();
+        text(this.neighborCount, this.x * this.w + this.w / 2, this.y * this.w + this.w / 2);
+      }
+    } else if (this.bomb) {
+      fill("#646464");
+      rect(this.x * this.w, this.y * this.w, this.w, this.w);
+      fill("#FFF");
+      triangle(this.x * this.w, this.y * this.w, this.x * this.w + this.w, this.y * this.w, this.x * this.w, this.y * this.w + this.w);
+      fill("#BFBCBD");
+      let ol = 4;
+      rect(this.x * this.w + ol, this.y * this.w + ol, this.w - ol * 2, this.w - ol * 2);
+    }
+  }
+}
+
+    </script>
+  </body>
+</html>
