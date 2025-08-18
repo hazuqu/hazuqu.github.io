@@ -119,7 +119,7 @@ function draw() {
       let b = camGraphics.pixels[i + 2];
       let brightness = (r + g + b) / 3;
 
-      if (brightness < threshold) {
+      if (brightness > threshold) {
         grid[x][y].bomb = true;
       }
     }
