@@ -1,5 +1,39 @@
 [
   {
+    "date": "2025/8/16",
+    "user": "GOLD DISC",
+    "title": "CDs crew",
+    "Cover": "",
+    "link": "",
+    "status": "",
+    "credit": [
+      "動画",
+      "出演"
+    ]
+  },
+  {
+    "date": "2025/7/18",
+    "user": "あらき",
+    "title": "例話",
+    "Cover": "",
+    "link": "https://www.youtube.com/watch?v=qi7Ld6hpoXw",
+    "status": "",
+    "credit": [
+      "動画"
+    ]
+  },
+  {
+    "date": "2025/7/8",
+    "user": "qualia.net",
+    "title": "▷",
+    "Cover": "",
+    "link": "https://www.youtube.com/watch?v=y4-xMA5fihE",
+    "status": "",
+    "credit": [
+      "リリックビデオ"
+    ]
+  },
+  {
     "date": "2025/6/29",
     "user": "電音部",
     "title": "ウルトラリズム",
@@ -365,6 +399,7 @@
     "link": "https://www.dospara.co.jp/gamepc/cts-tgs2024.html",
     "status": "",
     "credit": [
+      "動画",
       "出演"
     ]
   },
@@ -1081,7 +1116,7 @@
     "user": "ナナヲアカリ",
     "title": "nanawoakari.com サイト背景アニメーション",
     "Cover": "",
-    "link": "https://web.archive.org/web/20220103172622/http://www.nanawoakari.com/",
+    "link": "http://nanawoakari.com",
     "status": "",
     "credit": [
       "モーション"
