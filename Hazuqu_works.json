@@ -1,5 +1,85 @@
 [
   {
+    "date": "2025/9/24",
+    "user": "トゲナシトゲアリ LIVE in 日本武道館「奏檄の叫」",
+    "title": "",
+    "Cover": "",
+    "link": "",
+    "status": "",
+    "credit": [
+      "ライブ用BG動画"
+    ]
+  },
+  {
+    "date": "2025/9/13",
+    "user": "羊羊",
+    "title": "NullPointerException",
+    "Cover": "",
+    "link": "https://www.youtube.com/watch?v=ynsLjv1AyEg",
+    "status": "",
+    "credit": [
+      "AA"
+    ]
+  },
+  {
+    "date": "2025/9/08",
+    "user": "獅白ぼたん生誕祭2025",
+    "title": "Hikari (Remix ver.)",
+    "Cover": "",
+    "link": "https://www.youtube.com/watch?v=jeORSq6QLWs",
+    "status": "メンバー限定",
+    "credit": [
+      "ライブ用BG動画",
+      "ライブ用リリックビデオ"
+    ]
+  },
+  {
+    "date": "2025/8/31",
+    "user": "YouTube Music Weekend 10.0",
+    "title": "CDs 2025",
+    "Cover": "",
+    "link": "https://youtu.be/ci4NOQnobyc?si=6mlfIH_bPoWLODx_",
+    "status": "",
+    "credit": [
+      "コンポジット",
+      "出演"
+    ]
+  },
+  {
+    "date": "2025/8/31",
+    "user": "somunia",
+    "title": "Special Mini Live \"reverie\"",
+    "Cover": "",
+    "link": "https://www.youtube.com/watch?v=llUc6VZyHLw",
+    "status": "",
+    "credit": [
+      "ディレクション",
+      "動画"
+    ]
+  },
+  {
+    "date": "2025/8/31",
+    "user": "PVSF2025S",
+    "title": "Mitchie Mメドレー合作",
+    "Cover": "",
+    "link": "https://www.youtube.com/watch?v=kFn5rs0zdsk",
+    "status": "",
+    "credit": [
+      "動画"
+    ]
+  },
+  {
+    "date": "2025/8/23",
+    "user": "MIDy",
+    "title": "散歩論",
+    "Cover": "",
+    "link": "https://www.youtube.com/watch?v=Xwkk6xvB6Bw",
+    "status": "",
+    "credit": [
+      "アシスタント"
+    ]
+  },
+  {
     "date": "2025/8/16",
     "user": "GOLD DISC",
     "title": "CDs crew",
@@ -9,6 +89,29 @@
     "credit": [
       "動画",
       "出演"
+    ]
+  },
+  {
+    "date": "2025/07/25",
+    "user": "ubique",
+    "title": "選り好み",
+    "Cover": "",
+    "link": "https://www.youtube.com/watch?v=bJ8mc8Y7QE8",
+    "status": "",
+    "credit": [
+      "リリックビデオ"
+    ]
+  },
+  {
+    "date": "2025/7/19",
+    "user": "吉田楓",
+    "title": "「泡沫二进』ジャケットデザイン",
+    "Cover": "",
+    "link": "https://yukuerecords.booth.pm/items/7224343",
+    "status": "",
+    "credit": [
+      "ディレクション",
+      "デザイン"
     ]
   },
   {
@@ -223,8 +326,8 @@
   },
   {
     "date": "2025/1/27",
-    "user": "CDs, KizunaAI",
-    "title": "Hello, Morning ",
+    "user": "KizunaAI",
+    "title": "Hello, Morning (CDs Rework)",
     "Cover": "Cover",
     "link": "https://www.youtube.com/watch?v=Y_MLRgQZRig",
     "status": "",
