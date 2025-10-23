@@ -2,168 +2,149 @@
 <html lang="ja">
 
 <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>木葉はづく 🦉 HAZUQU</title>
     <meta name="description" content="映像をしています🎞">
-    <title>木葉はづく 🦉 私について</title>
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="木葉はづく Portfolio" />
-    <meta name="twitter:description" content="映像をしています🎞" />
-    <meta name="twitter:image" content="https://hazuqu.github.io/icon.jpg" />
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sawarabi+Gothic&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="木葉はづく Portfolio">
+    <meta name="twitter:description" content="映像をしています🎞">
+    <meta name="twitter:image" content="https://hazuqu.github.io/icon.jpg">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.js"></script>
 </head>
 
 <body>
     <header>
-        <div style="margin:40px 0;">
-            <div style="font-family: 'Unifont'; width:fit-content; margin: 0 auto; text-align: left; line-height: 1.0em; letter-spacing:-0.1em">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'___'<br>
-                &nbsp;hazuqu&nbsp;&nbsp;&nbsp;(୭v＜)<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(;;&nbsp;;&nbsp;&nbsp;\<br>
-                .⸙&nbsp;.&nbsp;෴.,&nbsp;&nbsp;&nbsp;n m&nbsp;&nbsp;&nbsp;,&nbsp;෴.⚵..&nbsp;⸲.
-            </div>
-        <ul>
-            <a href="works.html">
-                <li class="botan bold">works</li>
-            </a>
-            <a href="request.html">
-                <li class="botan">request</li>
-            </a>
-            <a href="about.html">
-                <li class="botan">about</li>
-            </a>
-        </ul>
-    </div>
+        <div id="ヘッダー"></div>
     </header>
-    <div class="page">
-        <div class="box texts">
+    <main>
+        <div class="おおきな分類">
             <div class="youtube">
-                <iframe src="https://www.youtube.com/embed/NctffbWZ23w?loop=1&controls=1"
-                    title="YouTube video player" frameborder="0" allow="autoplay; encrypted-media"
-                    allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/NctffbWZ23w?loop=1&controls=1" title="YouTube video player"
+                    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             </div>
-            <div class="profCard">
-                <div class="name">
+            <div class="ちゅうくらいの分類">
+                <div class="名前">
                     HAZUQU<br>
                     <h5>木葉はづく<h5>
                 </div>
 
                 <p class="tags">MV, PV, Live Back</p>
+
+                <div class="小さな分類">
+                    <a href="https://twitter.com/HAZUQU">Twitter</a>
+                    <a href="https://youtube.com/playlist?list=PLxZ7R-HAwPeOob8qWX81nsFZ2a5HxjX51">Youtube</a>
+                </div>
             </div>
-            <ul style="padding-left: 17px;">
-                <a href="https://twitter.com/HAZUQU">
-                    <li class="botan">Twitter</li>
-                </a>
-                <a href="https://youtube.com/playlist?list=PLxZ7R-HAwPeOob8qWX81nsFZ2a5HxjX51">
-                    <li class="botan">Youtube</li>
-                </a>
-            </ul>
-            VTuber、Vsinger中心にミュージックビデオを作っています。最近はボカロにも映像を付けています。<br>
-            プログラミングや実写をやったり、友人に絵を描いてもらったり、いろいろとやります。
+            <div class="ちゅうくらいの分類">
+                VTuber、Vsinger中心にミュージックビデオを作っています。最近はボカロにも映像を付けています。<br>
+                プログラミングや実写をやったり、友人に絵を描いてもらったり、いろいろとやります。
+            </div>
+        </div>
+        <div class="おおきな分類">
             <h1>制作リスト</h1>
             <input type="text" id="search" placeholder="キーワードで検索...">
 
             <table id="json-table">
                 <thead>
                     <tr>
-                        <th data-key="date">Date</th>
-                        <th data-key="user">User</th>
-                        <th data-key="credit">Credit</th>
+                        <th data-key="date">いつ</th>
+                        <th data-key="user">どんなものを</th>
+                        <th data-key="credit">どうやって</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
             </table>
+        </div>
+    </main>
+    <script>
+        const tbody = document.querySelector("#json-table tbody");
+        const searchInput = document.getElementById("search");
+        let data = [];
+        let sortState = {};
 
-            <script>
-                const tbody = document.querySelector("#json-table tbody");
-                const searchInput = document.getElementById("search");
-                let data = [];
-                let sortState = {};
+        function renderTable(filteredData) {
+            tbody.innerHTML = "";
+            filteredData
+                .filter(item => !item.status || item.status.trim() === "")
+                .forEach(item => {
+                    const tr = document.createElement("tr");
+                    const date = item.date?.split("/").slice(0, 2).map((s, i) => i ? s.padStart(2, "0") : s).join("/") || "";
+                    const creditHTML = (item.credit || []).map(c => `<span class="credit-tag">${c}</span>`).join("");
 
-                function renderTable(filteredData) {
-    tbody.innerHTML = "";
-    filteredData
-        .filter(item => !item.status || item.status.trim() === "")
-        .forEach(item => {
-            const tr = document.createElement("tr");
-            const date = item.date?.split("/").slice(0,2).map((s,i)=>i?s.padStart(2,"0"):s).join("/") || "";
-            const creditHTML = (item.credit || []).map(c => `<span class="credit-tag">${c}</span>`).join("");
+                    const userTitle = `${item.user || ""}${item.user && item.title ? " - " : ""}${item.title || ""}`;
 
-            const userTitle = `${item.user || ""}${item.user && item.title ? " - " : ""}${item.title || ""}`;
+                    const userTitleHTML = item.link
+                        ? `<a href="${item.link}" target="_blank" rel="noopener noreferrer">${userTitle}</a>`
+                        : userTitle;
 
-            const userTitleHTML = item.link
-                ? `<a href="${item.link}" target="_blank" rel="noopener noreferrer">${userTitle}</a>`
-                : userTitle;
+                    const cover = item.Cover || "";
 
-            const cover = item.Cover || "";
-
-            tr.innerHTML = `
+                    tr.innerHTML = `
                 <td>${date}</td>
                 <td>${userTitleHTML} ${cover}</td>
                 <td>${creditHTML}</td>
             `;
-            tbody.appendChild(tr);
+                    tbody.appendChild(tr);
+                });
+        }
+
+
+        function sortByKey(key) {
+            const direction = sortState[key] === "asc" ? "desc" : "asc";
+            sortState = { [key]: direction };
+
+            const sorted = [...data].sort((a, b) => {
+                const valA = (key === "date") ? new Date(a[key]) : (a[key] || "").toString().toLowerCase();
+                const valB = (key === "date") ? new Date(b[key]) : (b[key] || "").toString().toLowerCase();
+
+                if (valA < valB) return direction === "asc" ? -1 : 1;
+                if (valA > valB) return direction === "asc" ? 1 : -1;
+                return 0;
+            });
+
+            renderTable(applySearch(sorted));
+        }
+
+        function applySearch(dataArray) {
+            const keyword = searchInput.value.trim().toLowerCase();
+            if (keyword === "") return dataArray;
+
+            return dataArray.filter(item => {
+                return Object.values(item).some(val => {
+                    if (Array.isArray(val)) {
+                        return val.some(v => v.toLowerCase().includes(keyword));
+                    }
+                    return (val || "").toString().toLowerCase().includes(keyword);
+                });
+            });
+        }
+
+        // イベント設定
+        document.querySelectorAll("th[data-key]").forEach(th => {
+            th.addEventListener("click", () => sortByKey(th.getAttribute("data-key")));
         });
-}
 
+        searchInput.addEventListener("input", () => {
+            renderTable(applySearch(data));
+        });
 
-                function sortByKey(key) {
-                    const direction = sortState[key] === "asc" ? "desc" : "asc";
-                    sortState = { [key]: direction };
-
-                    const sorted = [...data].sort((a, b) => {
-                        const valA = (key === "date") ? new Date(a[key]) : (a[key] || "").toString().toLowerCase();
-                        const valB = (key === "date") ? new Date(b[key]) : (b[key] || "").toString().toLowerCase();
-
-                        if (valA < valB) return direction === "asc" ? -1 : 1;
-                        if (valA > valB) return direction === "asc" ? 1 : -1;
-                        return 0;
-                    });
-
-                    renderTable(applySearch(sorted));
-                }
-
-                function applySearch(dataArray) {
-                    const keyword = searchInput.value.trim().toLowerCase();
-                    if (keyword === "") return dataArray;
-
-                    return dataArray.filter(item => {
-                        return Object.values(item).some(val => {
-                            if (Array.isArray(val)) {
-                                return val.some(v => v.toLowerCase().includes(keyword));
-                            }
-                            return (val || "").toString().toLowerCase().includes(keyword);
-                        });
-                    });
-                }
-
-                // イベント設定
-                document.querySelectorAll("th[data-key]").forEach(th => {
-                    th.addEventListener("click", () => sortByKey(th.getAttribute("data-key")));
-                });
-
-                searchInput.addEventListener("input", () => {
-                    renderTable(applySearch(data));
-                });
-
-                // 外部JSONを読み込み
-                fetch("Hazuqu_works.json")
-                    .then(response => response.json())
-                    .then(json => {
-                        data = json;
-                        renderTable(data);
-                    })
-                    .catch(error => {
-                        console.error("JSONの読み込みに失敗しました:", error);
-                        tbody.innerHTML = "<tr><td colspan='7'>データの読み込みに失敗しました</td></tr>";
-                    });
-            </script>
-        </div>
-    </div>
+        // 外部JSONを読み込み
+        fetch("Hazuqu_works.json")
+            .then(response => response.json())
+            .then(json => {
+                data = json;
+                renderTable(data);
+            })
+            .catch(error => {
+                console.error("JSONの読み込みに失敗しました:", error);
+                tbody.innerHTML = "<tr><td colspan='7'>データの読み込みに失敗しました</td></tr>";
+            });
+    </script>
+    <script src="JS.js"></script>
 </body>
 
 </html>

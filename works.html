@@ -2,618 +2,561 @@
 <html lang="ja">
 
 <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="style.css">
-    <meta name="description" content="映像をしています🎞">
+    <meta charset="UTF-8">
     <title>木葉はづく 🦉 HAZUQU</title>
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="木葉はづく Portfolio" />
-    <meta name="twitter:description" content="映像をしています🎞" />
-    <meta name="twitter:image" content="https://hazuqu.github.io/icon.jpg" />
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
-    <script src="minimasonry.min.js"></script>
-    <link rel="icon" 　href="favicon.ico">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sawarabi+Gothic&display=swap" rel="stylesheet">
+    <meta name="description" content="映像をしています🎞">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="木葉はづく Portfolio">
+    <meta name="twitter:description" content="映像をしています🎞">
+    <meta name="twitter:image" content="https://hazuqu.github.io/icon.jpg">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/addons/p5.sound.min.js"></script>
-    <script src="sketch.js"></script>
-    <style>
-        .loading {
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-            width: 100%;
-            height: 100%;
-            background-color: #373737;
-        }
-
-        .loading.hide {
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 500ms;
-        }
-
-        #loadPage {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            height: 100%;
-            color: white;
-        }
-
-        #hazuqu {
-            margin-top: 10px;
-            letter-spacing: 2px;
-            font-size: 1.4em;
-        }
-
-        #site {
-            letter-spacing: 5px;
-            font-size: 0.6em;
-        }
-
-        #loading {
-            line-height: 500px;
-            letter-spacing: 12px;
-            font-size: 1em;
-        }
-
-        .text {
-            opacity: 0;
-            -webkit-transition: opacity 2s ease;
-            transition: opacity 2s ease;
-        }
-
-        .text.is-active {
-            opacity: 1;
-            -webkit-transition: opacity 2s ease;
-            transition: opacity 2s ease;
-        }
-    </style>
 </head>
 
 <body>
     <header>
-        <div style="margin:40px 0;">
-            <div
-                style="font-family: 'Unifont'; width:fit-content; margin: 0 auto; text-align: left; line-height: 1.0em; letter-spacing:-0.1em">
-                <a href="index.html">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'___'<br>
-                    &nbsp;hazuqu&nbsp;&nbsp;&nbsp;(<p style="display:inline;" id="eye">୭v୭</p>)<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(;;&nbsp;;&nbsp;&nbsp;\<br>
-                    .⸙&nbsp;.&nbsp;෴.,&nbsp;&nbsp;&nbsp;n m&nbsp;&nbsp;&nbsp;,&nbsp;෴.⚵..&nbsp;⸲.</a>
-                <script>
-                    const message2 = document.getElementById('eye');
-                    let m = "୭v୭"
-                    const t2 = [
-                        m,
-                        m,
-                        m,
-                        m,
-                        m,
-                        m,
-                        m,
-                        m,
-                        m,
-                        '＿v＿',
-                        m,
-                        '＿v＿'
-                    ];
-                    let j = 0;
-
-                    function m1() {
-                        if (j == 12) {
-                            j = 0;
-                        }
-                        message2.textContent = t2[j];
-                        j++;
-                    }
-
-                    setInterval(m1, 200);
-                </script>
-
-            </div>
-            <ul>
-                <a href="works.html">
-                    <li class="botan bold">works</li>
-                </a>
-                <a href="request.html">
-                    <li class="botan">request</li>
-                </a>
-                <a href="about.html">
-                    <li class="botan">about</li>
-                </a>
-            </ul>
+        <div id="ヘッダー"></div>
     </header>
     <main>
-        <div style="text-align: center; margin: 1em;">
+        <div class="中央に揃う文字">
             ～　すべての作品は <a href="about.html">about</a> の制作リストへ　～
         </div>
-        <div class="works">
+        <div class="横に狭い分類 作品の一覧">
             <!--作品たち -->
-            <div class="item">
-                <div class="youtube">
-                    <a class="im" href="https://www.youtube.com/watch?v=-6P17fTp8FQ" target="_blank"><img src="https://i.ytimg.com/vi/-6P17fTp8FQ/mqdefault.jpg"></a>
+            <div class="作品">
+                <div class="作品のサムネイル">
+                    <a href="https://www.youtube.com/watch?v=-6P17fTp8FQ" target="_blank"><img
+                            src="https://i.ytimg.com/vi/-6P17fTp8FQ/maxresdefault.jpg"></a>
                 </div>
-                <div class="name">
-                    <span class="artist">花鋏キョウ</span>
-                    <h5>星綴り</h5>
+                <div class="作品の名前">
+                    <h3>花鋏キョウ</h3>
+                    <h2>星綴り</h2>
                 </div>
-                <p class="tags">MV<br></p>
+                <span class="作品のタグ">MV</span>
             </div>
-            
-            <div class="item">
-                <div class="youtube">
-                    <a class="im" href="https://www.youtube.com/watch?v=llUc6VZyHLw" target="_blank"><img src="https://i.ytimg.com/vi/llUc6VZyHLw/mqdefault.jpg"></a>
+
+            <div class="作品">
+                <div class="作品のサムネイル">
+                    <a href="https://www.youtube.com/watch?v=llUc6VZyHLw" target="_blank"><img
+                            src="https://i.ytimg.com/vi/llUc6VZyHLw/maxresdefault.jpg"></a>
                 </div>
-                <div class="name">
-                    <span class="artist">somunia</span>
-                    <h5>Special Mini Live "reverie"</h5>
+                <div class="作品の名前">
+                    <h3>somunia</h3>
+                    <h2>Special Mini Live "reverie"</h2>
                 </div>
-                <p class="tags">MV<br></p>
+                <span class="作品のタグ">MV</span>
             </div>
-            
-            <div class="item">
-                <div class="youtube">
-                    <a class="im" href="https://www.youtube.com/watch?v=ud27TX0XBZM" target="_blank"><img src="https://i.ytimg.com/vi/ud27TX0XBZM/mqdefault.jpg"></a>
+
+            <div class="作品">
+                <div class="作品のサムネイル">
+                    <a href="https://www.youtube.com/watch?v=ud27TX0XBZM" target="_blank"><img
+                            src="https://i.ytimg.com/vi/ud27TX0XBZM/maxresdefault.jpg"></a>
                 </div>
-                <div class="name">
-                    <span class="artist">電音部</span>
-                    <h5>ウルトラリズム</h5>
+                <div class="作品の名前">
+                    <h3>電音部</h3>
+                    <h2>ウルトラリズム</h2>
                 </div>
-                <p class="tags">MV<br></p>
+                <span class="作品のタグ">MV</span>
             </div>
-            
-            <div class="item">
-                <div class="youtube">
-                    <a class="im" href="https://www.youtube.com/watch?v=DY66cyRWQW8" target="_blank"><img src="https://i.ytimg.com/vi/DY66cyRWQW8/mqdefault.jpg"></a>
+
+            <div class="作品">
+                <div class="作品のサムネイル">
+                    <a href="https://www.youtube.com/watch?v=DY66cyRWQW8" target="_blank"><img
+                            src="https://i.ytimg.com/vi/DY66cyRWQW8/maxresdefault.jpg"></a>
                 </div>
-                <div class="name">
-                    <span class="artist">memex</span>
-                    <h5>ミームデフレーション</h5>
+                <div class="作品の名前">
+                    <h3>memex</h3>
+                    <h2>ミームデフレーション</h2>
                 </div>
-                <p class="tags">MV<br></p>
+                <span class="作品のタグ">MV</span>
             </div>
-            
-            <div class="item">
-                <div class="youtube">
-                    <a class="im" href="https://www.youtube.com/watch?v=_6_lMz9PuJU" target="_blank"><img src="https://i.ytimg.com/vi/_6_lMz9PuJU/mqdefault.jpg"></a>
+
+            <div class="作品">
+                <div class="作品のサムネイル">
+                    <a href="https://www.youtube.com/watch?v=_6_lMz9PuJU" target="_blank"><img
+                            src="https://i.ytimg.com/vi/_6_lMz9PuJU/maxresdefault.jpg"></a>
                 </div>
-                <div class="name">
-                    <span class="artist">d.j.ァネイロ</span>
-                    <h5>【MV】FOOT-AGE HERO／d.j.ァネイロ【#ボカコレ】</h5>
+                <div class="作品の名前">
+                    <h3>d.j.ァネイロ</h3>
+                    <h2>【MV】FOOT-AGE HERO／d.j.ァネイロ【#ボカコレ】</h2>
                 </div>
-                <p class="tags">MV<br>
+                <span class="作品のタグ">MV</span>
+                <span class="作品の説明">
                     後半のみ。<br>
-                    メイキング： <a href="https://note.com/ideoaves2/n/n535959cc5eb9">https://note.com/ideoaves2/n/n535959cc5eb9</a></p>
-            </div>
-            
-            <div class="item">
-                <div class="youtube">
-                    <a class="im" href="https://www.youtube.com/watch?v=Y_MLRgQZRig" target="_blank"><img src="https://i.ytimg.com/vi/Y_MLRgQZRig/mqdefault.jpg"></a>
-                </div>
-                <div class="name">
-                    <span class="artist">KizunaAI</span>
-                    <h5>Hello, Morning <span class="cover">(rework by CDs)</span></h5>
-                </div>
-                <p class="tags">MV<br>
-                    CDsとして参加</p>
-            </div>
-            
-            <div class="item">
-                <div class="thum">
-                    <img width="100%" src="https://pbs.twimg.com/media/Glql6WfbkAAl9eV?format=jpg&name=large">
-                </div>
-                <div class="name">
-                    <span class="artist">Hololive</span>
-                    <h5>Live</h5>
-                </div>
-                <p class="tags">Live<br>
-                    Real Live<br>
-                    <a href="https://hololivesuperexpo2025.hololivepro.com/">hololive 6th fes. Color Rise Harmony STAGE3</a>
-                    Youtube Live<br>
-                    <a href="https://www.youtube.com/live/pKc5qSSWJQs">#夏色FullBloom - Fire◎Flower</a><br>
-                    <a href="https://www.youtube.com/live/E1Qy0OttVcs">猫又おかゆ生誕祭2025 - ワタシノテンシ （ゲスト：白上フブキ）</a>
-                    <a href="https://www.youtube.com/watch?v=jeORSq6QLWs">獅白ぼたん生誕祭2025 - Hikari (Remix ver.)</a>
-                </p>
-            </div>
-            
-            <div class="item">
-                <div class="youtube">
-                    <a class="im" href="https://www.youtube.com/watch?v=lqnKJFo32lE" target="_blank"><img src="https://i.ytimg.com/vi/lqnKJFo32lE/mqdefault.jpg"></a>
-                </div>
-                <div class="name">
-                    <span class="artist">白迦</span>
-                    <h5>Beautiful Shapes (feat. パソコン音楽クラブ)</h5>
-                </div>
-                <p class="tags">MV<br>
-            </div>
-            
-            <div class="item">
-                <div class="youtube">
-                    <a class="im" href="https://www.youtube.com/watch?v=vrSvPzPBx2A" target="_blank"><img src="https://i.ytimg.com/vi/vrSvPzPBx2A/mqdefault.jpg"></a>
-                </div>
-                <div class="name">
-                    <span class="artist">カゼヒキコンピ準備室</span>
-                    <h5>カゼヒキコンピレーションアルバム《咳》　XFD</h5>
-                </div>
-                <p class="tags">PV<br>
-            </div>
-            
-            <div class="item">
-                <div class="youtube">
-                    <a class="im" href="https://www.youtube.com/watch?v=JaixTHkQ2JI" target="_blank"><img src="https://i.ytimg.com/vi/JaixTHkQ2JI/mqdefault.jpg"></a>
-                </div>
-                <div class="name">
-                    <span class="artist">長瀬有花 & WaMi</span>
-                    <h5>Sweet Chat (feat. yuigot)</h5>
-                </div>
-                <p class="tags">MV<br>
-            </div>
-            
-            <div class="item">
-                <div class="name">
-                    <span class="artist">をとは&somunia</span>
-                    <h5>ひえひえ somuniaパート背景映像</h5>
-                </div>
-                <p class="tags">Live<br>
-            </div>
-            
-            <div class="item">
-                <div class="youtube">
-                    <a class="im" href="https://www.youtube.com/watch?v=O_kA7kM3Sos" target="_blank"><img src="https://i.ytimg.com/vi/O_kA7kM3Sos/mqdefault.jpg"></a>
-                </div>
-                <div class="name">
-                    <span class="artist">原口沙輔</span>
-                    <h5>しんかしんかしんか</h5>
-                </div>
-                <p class="tags">MV<br>
-            </div>
-            
-            <div class="item">
-                <div class="youtube">
-                    <a class="im" href="https://www.youtube.com/watch?v=XxdV3wlzhdc" target="_blank"><img src="https://i.ytimg.com/vi/XxdV3wlzhdc/mqdefault.jpg"></a>
-                </div>
-                <div class="name">
-                    <span class="artist">Uki Violeta × Rosemi Lovelock</span>
-                    <h5>WE BE UNION</h5>
-                </div>
-                <p class="tags">MV<br>
+                    メイキング： <a
+                        href="https://note.com/ideoaves2/n/n535959cc5eb9">https://note.com/ideoaves2/n/n535959cc5eb9</a>
+                </span>
             </div>
 
-            <div class="item">
-                <div class="thum">
-                    <img width="100%" src="https://pbs.twimg.com/media/GaZbdpQaYAAJUTI?format=jpg&name=small">
+            <div class="作品">
+                <div class="作品のサムネイル">
+                    <a href="https://www.youtube.com/watch?v=Y_MLRgQZRig" target="_blank"><img
+                            src="https://i.ytimg.com/vi/Y_MLRgQZRig/maxresdefault.jpg"></a>
                 </div>
-                <div class="name">
-                    <span class="artist">private</span>
-                    <h5>名刺デザイン</h5>
+                <div class="作品の名前">
+                    <h3>KizunaAI</h3>
+                    <h2>Hello, Morning <span class="cover">(rework by CDs)</span></h2>
                 </div>
-                <p class="tags">Design<br>
-                </p>
+                <span class="作品のタグ">MV</span>
+                <span class="作品の説明">
+                    CDsとして参加
+                </span>
             </div>
 
-            <div class="item">
-                <div class="youtube">
-                    <a class="im" href="https://www.youtube.com/watch?v=qEg_uMXWzMs" target="_blank"><img src="https://i.ytimg.com/vi/qEg_uMXWzMs/mqdefault.jpg"></a>
+            <div class="作品">
+                <div class="作品のサムネイル">
+                    <img src="https://pbs.twimg.com/media/Glql6WfbkAAl9eV?format=jpg&name=large">
                 </div>
-                <div class="name">
-                    <span class="artist">夜丹れにや</span>
-                    <h5>lie somnia</h5>
+                <div class="作品の名前">
+                    <h3>Hololive</h3>
+                    <h2>Live</h2>
                 </div>
-                <p class="tags">MV<br>
+                <span class="作品のタグ">Live</span>
+                <span class="作品の説明">
+                <h4>Real Live</h4>
+                    <a href="https://hololivesuperexpo2025.hololivepro.com/">hololive 6th fes. Color Rise Harmony
+                        STAGE3</a>
+                <h4>Youtube Live</h4>
+                <a href="https://www.youtube.com/live/pKc5qSSWJQs">#夏色FullBloom - Fire◎Flower</a><br>
+                <a href="https://www.youtube.com/live/E1Qy0OttVcs">猫又おかゆ生誕祭2025 - ワタシノテンシ （ゲスト：白上フブキ）</a><br>
+                <a href="https://www.youtube.com/watch?v=jeORSq6QLWs">獅白ぼたん生誕祭2025 - Hikari (Remix ver.)</a>
+                </span>
             </div>
 
-            <div class="item">
-                <div class="name">
-                    <span class="artist">GALLERIA TOKYO GAME SHOW 2024</span>
-                    <h5>CDs＋いよわ　『きゅうくらりん』即興リミックス</h5>
+            <div class="作品">
+                <div class="作品のサムネイル">
+                    <a href="https://www.youtube.com/watch?v=lqnKJFo32lE" target="_blank"><img
+                            src="https://i.ytimg.com/vi/lqnKJFo32lE/maxresdefault.jpg"></a>
                 </div>
-                <p class="tags">MV, 出演<br>
-                    <a href="https://www.dospara.co.jp/gamepc/cts-tgs2024.html">https://www.dospara.co.jp/gamepc/cts-tgs2024.html</a></p>
+                <div class="作品の名前">
+                    <h3>白迦</h3>
+                    <h2>Beautiful Shapes (feat. パソコン音楽クラブ)</h2>
+                </div>
+                <span class="作品のタグ">MV</span>
             </div>
 
-            <div class="item">
-                <div class="youtube">
-                    <a class="im" href="https://www.youtube.com/watch?v=_T-1Vvm1fPA" target="_blank"><img src="https://i.ytimg.com/vi/_T-1Vvm1fPA/mqdefault.jpg"></a>
+            <div class="作品">
+                <div class="作品のサムネイル">
+                    <a href="https://www.youtube.com/watch?v=vrSvPzPBx2A" target="_blank"><img
+                            src="https://i.ytimg.com/vi/vrSvPzPBx2A/maxresdefault.jpg"></a>
                 </div>
-                <div class="name">
-                    <span class="artist">Startend</span>
-                    <h5>快晴<span class="cover">Cover</span></h5>
+                <div class="作品の名前">
+                    <h3>カゼヒキコンピ準備室</h3>
+                    <h2>カゼヒキコンピレーションアルバム《咳》　XFD</h2>
                 </div>
-                <p class="tags">MV<br>
+                <span class="作品のタグ">PV</span>
             </div>
 
-            <div class="item">
-                <div class="youtube">
-                    <a class="im" href="https://www.youtube.com/watch?v=86LKuj-DK04" target="_blank"><img src="https://i.ytimg.com/vi/86LKuj-DK04/mqdefault.jpg"></a>
+            <div class="作品">
+                <div class="作品のサムネイル">
+                    <a href="https://www.youtube.com/watch?v=JaixTHkQ2JI" target="_blank"><img
+                            src="https://i.ytimg.com/vi/JaixTHkQ2JI/maxresdefault.jpg"></a>
                 </div>
-                <div class="name">
-                    <span class="artist">higma</span>
-                    <h5>echo</h5>
+                <div class="作品の名前">
+                    <h3>長瀬有花 & WaMi</h3>
+                    <h2>Sweet Chat (feat. yuigot)</h2>
                 </div>
-                <p class="tags">In monitor video<br>
+                <span class="作品のタグ">MV</span>
             </div>
 
-            <div class="item">
-                <div class="thum">
-                    <img width="100%" src="thum/9.png">
+            <div class="作品">
+                <div class="作品の名前">
+                    <h3>をとは&somunia</h3>
+                    <h2>ひえひえ somuniaパート背景映像</h2>
                 </div>
-                <div class="name">
-                    <span class="artist">ASOBIZA × ARMY SONIC 2024</span>
-                    <h5>原口沙輔 VJフッテージ</h5>
-                </div>
-                <p class="tags">VJ, Programing<br>
-                    p5.jsを使ったジェネラティブ制作</p>
+                <span class="作品のタグ">Live</span>
             </div>
 
-            <div class="item">
-                <div class="youtube">
-                    <a class="im" href="https://www.youtube.com/watch?v=t8I5A9z9odo" target="_blank"><img src="https://i.ytimg.com/vi/t8I5A9z9odo/mqdefault.jpg"></a>
+            <div class="作品">
+                <div class="作品のサムネイル">
+                    <a href="https://www.youtube.com/watch?v=O_kA7kM3Sos" target="_blank"><img
+                            src="https://i.ytimg.com/vi/O_kA7kM3Sos/maxresdefault.jpg"></a>
                 </div>
-                <div class="name">
-                    <span class="artist">Amable</span>
-                    <h5>トロイの花</h5>
+                <div class="作品の名前">
+                    <h3>原口沙輔</h3>
+                    <h2>しんかしんかしんか</h2>
                 </div>
-                <p class="tags">MV<br>
-                    ボカデュオ2024にAmable（原口沙輔, 天ノ譜ステラ, VACON, 星野悠, そゐち, Binn）として参加</p>
+                <span class="作品のタグ">MV</span>
             </div>
 
-            <div class="item">
-                <div class="youtube">
-                    <a class="im" href="https://www.youtube.com/watch?v=eWUcveNObrA" target="_blank"><img src="https://i.ytimg.com/vi/eWUcveNObrA/mqdefault.jpg"></a>
+            <div class="作品">
+                <div class="作品のサムネイル">
+                    <a href="https://www.youtube.com/watch?v=XxdV3wlzhdc" target="_blank"><img
+                            src="https://i.ytimg.com/vi/XxdV3wlzhdc/maxresdefault.jpg"></a>
                 </div>
-                <div class="name">
-                    <span class="artist">ChumuNote</span>
-                    <h5>Another World</h5>
+                <div class="作品の名前">
+                    <h3>Uki Violeta × Rosemi Lovelock</h3>
+                    <h2>WE BE UNION</h2>
                 </div>
-                <p class="tags">MV<br>
+                <span class="作品のタグ">MV</span>
             </div>
 
-            <div class="item">
-                <div class="youtube">
-                    <a class="im" href="https://www.youtube.com/watch?v=Y6QQk9Yukpg" target="_blank"><img src="https://i.ytimg.com/vi/Y6QQk9Yukpg/mqdefault.jpg"></a>
+            <div class="作品">
+                <div class="作品のサムネイル">
+                    <img src="https://pbs.twimg.com/media/GaZbdpQaYAAJUTI?format=jpg&name=small">
                 </div>
-                <div class="name">
-                    <span class="artist">叶</span>
-                    <h5>浴槽とネオンテトラ<span class="cover">Cover</span></h5>
+                <div class="作品の名前">
+                    <h3>private</h3>
+                    <h2>名刺デザイン</h2>
                 </div>
-                <p class="tags">MV<br>
+                <span class="作品のタグ">Design</span>
             </div>
 
-            <div class="item">
-                <div class="youtube">
-                    <a class="im" href="https://www.youtube.com/watch?v=q5iupGl7MPI" target="_blank"><img src="https://i.ytimg.com/vi/q5iupGl7MPI/mqdefault.jpg"></a>
+            <div class="作品">
+                <div class="作品のサムネイル">
+                    <a href="https://www.youtube.com/watch?v=qEg_uMXWzMs" target="_blank"><img
+                            src="https://i.ytimg.com/vi/qEg_uMXWzMs/maxresdefault.jpg"></a>
                 </div>
-                <div class="name">
-                    <span class="artist">samayuzame</span>
-                    <h5>シンデレラ・コンプレックス</h5>
+                <div class="作品の名前">
+                    <h3>夜丹れにや</h3>
+                    <h2>lie somnia</h2>
                 </div>
-                <p class="tags">MV<br>
+                <span class="作品のタグ">MV</span>
+            </div>
+
+            <div class="作品">
+                <div class="作品の名前">
+                    <h3>GALLERIA TOKYO GAME SHOW 2024</h3>
+                    <h2>CDs＋いよわ　『きゅうくらりん』即興リミックス</h2>
+                </div>
+                <span class="作品のタグ">MV, 出演</span>
+                <span class="作品の説明">
+                    <a
+                        href="https://www.dospara.co.jp/gamepc/cts-tgs2024.html">https://www.dospara.co.jp/gamepc/cts-tgs2024.html</a>
+                </span>
+            </div>
+
+            <div class="作品">
+                <div class="作品のサムネイル">
+                    <a href="https://www.youtube.com/watch?v=_T-1Vvm1fPA" target="_blank"><img
+                            src="https://i.ytimg.com/vi/_T-1Vvm1fPA/maxresdefault.jpg"></a>
+                </div>
+                <div class="作品の名前">
+                    <h3>Startend</h3>
+                    <h2>快晴<span class="cover">Cover</span></h2>
+                </div>
+                <span class="作品のタグ">MV</span>
+            </div>
+
+            <div class="作品">
+                <div class="作品のサムネイル">
+                    <a href="https://www.youtube.com/watch?v=86LKuj-DK04" target="_blank"><img
+                            src="https://i.ytimg.com/vi/86LKuj-DK04/maxresdefault.jpg"></a>
+                </div>
+                <div class="作品の名前">
+                    <h3>higma</h3>
+                    <h2>echo</h2>
+                </div>
+                <span class="作品のタグ">In monitor video</span>
+            </div>
+
+            <div class="作品">
+                <div class="作品のサムネイル">
+                    <img src="thum/9.png">
+                </div>
+                <div class="作品の名前">
+                    <h3>ASOBIZA × ARMY SONIC 2024</h3>
+                    <h2>原口沙輔 VJフッテージ</h2>
+                </div>
+                <span class="作品のタグ">VJ, Programing</span>
+                <span class="作品の説明">
+                    p5.jsを使ったジェネラティブ制作
+                </span>
+            </div>
+
+            <div class="作品">
+                <div class="作品のサムネイル">
+                    <a href="https://www.youtube.com/watch?v=t8I5A9z9odo" target="_blank"><img
+                            src="https://i.ytimg.com/vi/t8I5A9z9odo/maxresdefault.jpg"></a>
+                </div>
+                <div class="作品の名前">
+                    <h3>Amable</h3>
+                    <h2>トロイの花</h2>
+                </div>
+                <span class="作品のタグ">MV</span>
+                <span class="作品の説明">
+                    ボカデュオ2024にAmable（原口沙輔, 天ノ譜ステラ, VACON, 星野悠, そゐち, Binn）として参加
+                </span>
+            </div>
+
+            <div class="作品">
+                <div class="作品のサムネイル">
+                    <a href="https://www.youtube.com/watch?v=eWUcveNObrA" target="_blank"><img
+                            src="https://i.ytimg.com/vi/eWUcveNObrA/maxresdefault.jpg"></a>
+                </div>
+                <div class="作品の名前">
+                    <h3>ChumuNote</h3>
+                    <h2>Another World</h2>
+                </div>
+                <span class="作品のタグ">MV</span>
+            </div>
+
+            <div class="作品">
+                <div class="作品のサムネイル">
+                    <a href="https://www.youtube.com/watch?v=Y6QQk9Yukpg" target="_blank"><img
+                            src="https://i.ytimg.com/vi/Y6QQk9Yukpg/maxresdefault.jpg"></a>
+                </div>
+                <div class="作品の名前">
+                    <h3>叶</h3>
+                    <h2>浴槽とネオンテトラ<span class="cover">Cover</span></h2>
+                </div>
+                <span class="作品のタグ">MV</span>
+            </div>
+
+            <div class="作品">
+                <div class="作品のサムネイル">
+                    <a href="https://www.youtube.com/watch?v=q5iupGl7MPI" target="_blank"><img
+                            src="https://i.ytimg.com/vi/q5iupGl7MPI/maxresdefault.jpg"></a>
+                </div>
+                <div class="作品の名前">
+                    <h3>samayuzame</h3>
+                    <h2>シンデレラ・コンプレックス</h2>
+                </div>
+                <span class="作品のタグ">MV</span>
+                <span class="作品の説明">
                     samayuzame　Lyric video<br>
-                    <a class="im" href="https://www.youtube.com/watch?v=22VXkn5LdJM">samayuzame - metaphor</a><br>
+                    <a href="https://www.youtube.com/watch?v=22VXkn5LdJM">samayuzame - metaphor</a>
+                </span>
             </div>
 
-            <div class="item">
-                <div class="youtube">
-                    <a class="im" href="https://www.youtube.com/watch?v=5ubr_KTrgKk" target="_blank"><img src="https://i.ytimg.com/vi/5ubr_KTrgKk/mqdefault.jpg"></a>
+            <div class="作品">
+                <div class="作品のサムネイル">
+                    <a href="https://www.youtube.com/watch?v=5ubr_KTrgKk" target="_blank"><img
+                            src="https://i.ytimg.com/vi/5ubr_KTrgKk/maxresdefault.jpg"></a>
                 </div>
-                <div class="name">
-                    <span class="artist">吉田楓</span>
-                    <h5>みえる、きこえる (feat .夢ノ結晶 POPY)</h5>
+                <div class="作品の名前">
+                    <h3>吉田楓</h3>
+                    <h2>みえる、きこえる (feat .夢ノ結晶 POPY)</h2>
                 </div>
-                <p class="tags">MV, Programing<br>
-                    <a class="im" href="https://www.youtube.com/watch?v=MDXMDAOg-fs">Kantaloop - いろどる</a></p>
+                <span class="作品のタグ">MV, Programing</span>
+                <span class="作品の説明">
+                    <a href="https://www.youtube.com/watch?v=MDXMDAOg-fs">Kantaloop - いろどる</a>
+                </span>
             </div>
 
-            <div class="item">
-                <div class="thum">
-                    <img width="50%" src="thum/8.jpg"><img width="50%" src="thum/8_1.jpg">
-                    <img width="50%" src="thum/8_2.jpg"><img width="50%" src="thum/8_3.jpg">
+            <div class="作品">
+                <div class="作品の画像紹介">
+                    <img src="thum/8.jpg"><img src="thum/8_1.jpg">
+                    <img src="thum/8_2.jpg"><img src="thum/8_3.jpg">
                 </div>
-                <div class="name">
-                    <span class="artist">DTM鯖</span>
-                    <h5>おくすり飲んで寝よう / ロウワー<span class="cover">Remix</span></h5>
+                <div class="作品の名前">
+                    <h3>DTM鯖</h3>
+                    <h2>おくすり飲んで寝よう / ロウワー<span class="cover">Remix</span></h2>
                 </div>
-                <p class="tags">MV<br>
+                <span class="作品のタグ">MV</span>
             </div>
 
-            <div class="item">
-                <div class="youtube">
-                    <a class="im" href="https://www.youtube.com/watch?v=2tNtPuTkyqQ" target="_blank"><img src="https://i.ytimg.com/vi/2tNtPuTkyqQ/mqdefault.jpg"></a>
+            <div class="作品">
+                <div class="作品のサムネイル">
+                    <a href="https://www.youtube.com/watch?v=2tNtPuTkyqQ" target="_blank"><img
+                            src="https://i.ytimg.com/vi/2tNtPuTkyqQ/maxresdefault.jpg"></a>
                 </div>
-                <div class="name">
-                    <span class="artist">橘しとら</span>
-                    <h5>蠅と梨</h5>
+                <div class="作品の名前">
+                    <h3>橘しとら</h3>
+                    <h2>蠅と梨</h2>
                 </div>
-                <p class="tags">MV<br>
+                <span class="作品のタグ">MV</span>
             </div>
 
-            <div class="item">
-                <div class="youtube">
-                    <a class="im" href="https://www.youtube.com/watch?v=L8u_DVYz2sE" target="_blank"><img src="https://i.ytimg.com/vi/L8u_DVYz2sE/mqdefault.jpg"></a>
+            <div class="作品">
+                <div class="作品のサムネイル">
+                    <a href="https://www.youtube.com/watch?v=L8u_DVYz2sE" target="_blank"><img
+                            src="https://i.ytimg.com/vi/L8u_DVYz2sE/maxresdefault.jpg"></a>
                 </div>
-                <div class="name">
-                    <span class="artist">DAZBEE</span>
-                    <h5>hikari</h5>
+                <div class="作品の名前">
+                    <h3>DAZBEE</h3>
+                    <h2>hikari</h2>
                 </div>
-                <p class="tags">MV<br>
+                <span class="作品のタグ">MV</span>
             </div>
 
-            <div class="item">
-                <div class="youtube">
-                    <a class="im" href="https://www.youtube.com/watch?v=P9yWhOrclh0" target="_blank"><img src="https://i.ytimg.com/vi/P9yWhOrclh0/mqdefault.jpg"></a>
+            <div class="作品">
+                <div class="作品のサムネイル">
+                    <a href="https://www.youtube.com/watch?v=P9yWhOrclh0" target="_blank"><img
+                            src="https://i.ytimg.com/vi/P9yWhOrclh0/maxresdefault.jpg"></a>
                 </div>
-                <div class="name">
-                    <span class="artist">a1857</span>
-                    <h5>神っぽいな<span class="cover">Cover</span></h5>
+                <div class="作品の名前">
+                    <h3>a1857</h3>
+                    <h2>神っぽいな<span class="cover">Cover</span></h2>
                 </div>
-                <p class="tags">MV<br>
+                <span class="作品のタグ">MV</span>
             </div>
 
-            <div class="item">
-                <div class="youtube">
-                    <a class="im" href="https://www.youtube.com/watch?v=0oaZV2vNAak" target="_blank"><img src="https://i.ytimg.com/vi/0oaZV2vNAak/mqdefault.jpg"></a>
+            <div class="作品">
+                <div class="作品のサムネイル">
+                    <a href="https://www.youtube.com/watch?v=0oaZV2vNAak" target="_blank"><img
+                            src="https://i.ytimg.com/vi/0oaZV2vNAak/maxresdefault.jpg"></a>
                 </div>
-                <div class="name">
-                    <span class="artist">Queue</span>
-                    <h5>水浴</h5>
+                <div class="作品の名前">
+                    <h3>Queue</h3>
+                    <h2>水浴</h2>
                 </div>
-                <p class="tags">MV, Thumbnail, Title typography<br>
-                    a9ualiaとして参加</p>
-                <img width="70%" src="typo/suiyoku.png">
+                <span class="作品のタグ">MV, Thumbnail, Title typography</span>
+                <span class="作品の説明">
+                    a9ualiaとして参加
+                </span>
             </div>
 
-            <div class="item">
-                <div class="youtube">
-                    <a class="im" href="https://www.youtube.com/watch?v=9G5gqImvuCk" target="_blank"><img src="https://i.ytimg.com/vi/9G5gqImvuCk/mqdefault.jpg"></a>
+            <div class="作品">
+                <div class="作品のサムネイル">
+                    <a href="https://www.youtube.com/watch?v=9G5gqImvuCk" target="_blank"><img
+                            src="https://i.ytimg.com/vi/9G5gqImvuCk/maxresdefault.jpg"></a>
                 </div>
-                <div class="name">
-                    <span class="artist">白河しらせ</span>
-                    <h5>ゴールデンレイ<span class="cover">Cover</span></h5>
+                <div class="作品の名前">
+                    <h3>白河しらせ</h3>
+                    <h2>ゴールデンレイ<span class="cover">Cover</span></h2>
                 </div>
-                <p class="tags">Lyric video<br>
+                <span class="作品のタグ">Lyric video</span>
+                <span class="作品の説明">
                     RIOT MUSIC / Blitz Wing　カバーMV<br>
-                    <a class="im" href="https://www.youtube.com/watch?v=mijT-oEgWZ8">神はサイコロを振らない - 初恋 (伊月知世 & 白河しらせCover)</a><br>
+                    <a href="https://www.youtube.com/watch?v=mijT-oEgWZ8">神はサイコロを振らない - 初恋 (伊月知世 &
+                        白河しらせCover)</a><br>
                     <a href="https://youtu.be/LS4lDsryiSk?si=jUY1WjEoGYeDt_Nl">ロス - Bitter (伊月知世Cover)</a><br>
-                    <a class="im" href="https://www.youtube.com/watch?v=e40KecAu2c4">riya - 小さなてのひら (皇 美緒奈Cover)</a><br>
+                    <a href="https://www.youtube.com/watch?v=e40KecAu2c4">riya - 小さなてのひら (皇 美緒奈Cover)</a><br>
                     ︙
-                </p>
+                </span>
             </div>
 
-            <div class="item">
-                <div class="thum">
-                    <img width="100%" src="thum/6.png">
-                    <img width="50%" src="thum/6_1.png"><img width="50%" src="thum/6_2.png">
+            <div class="作品">
+                <div class="作品の画像紹介">
+                    <img src="thum/6.png">
+                    <img src="thum/6_1.png"><img src="thum/6_2.png">
                 </div>
-                <div class="name">
-                    <span class="artist">Arika</span>
-                    <h5>1st Live『暁光』　背景LV</h5>
+                <div class="作品の名前">
+                    <h3>Arika</h3>
+                    <h2>1st Live『暁光』　背景LV</h2>
                 </div>
-                <p class="tags">Live<br>
+                <span class="作品のタグ">Live</span>
+                <span class="作品の説明">
                     <a href="https://youtube.com/shorts/OZ8JIlJFAmE?si=hPeQWmJ0Lr1oyykq">Arika「蝙蝠」#Shorts</a>
-                </p>
+                </span>
             </div>
 
-            <div class="item">
-                <div class="youtube">
-                    <a class="im" href="https://www.youtube.com/watch?v=EqWLVy08zFY" target="_blank"><img src="https://i.ytimg.com/vi/EqWLVy08zFY/mqdefault.jpg"></a>
+            <div class="作品">
+                <div class="作品のサムネイル">
+                    <a href="https://www.youtube.com/watch?v=EqWLVy08zFY" target="_blank"><img
+                            src="https://i.ytimg.com/vi/EqWLVy08zFY/maxresdefault.jpg"></a>
                 </div>
-                <div class="name">
-                    <span class="artist">樋口楓</span>
-                    <h5>WIN-WIN HALLOWEEN</h5>
+                <div class="作品の名前">
+                    <h3>樋口楓</h3>
+                    <h2>WIN-WIN HALLOWEEN</h2>
                 </div>
-                <p class="tags">MV, Thumbnail, Title typography</p>
-                <img width="70%" src="typo/WIN-WIN HALLOWEEN.png">
+                <span class="作品のタグ">MV, Thumbnail, Title typography</span>
             </div>
 
-            <div class="item">
-                <div class="youtube">
-                    <a class="im" href="https://www.youtube.com/watch?v=D7xjC200qxo" target="_blank"><img src="https://i.ytimg.com/vi/D7xjC200qxo/mqdefault.jpg"></a>
+            <div class="作品">
+                <div class="作品のサムネイル">
+                    <a href="https://www.youtube.com/watch?v=D7xjC200qxo" target="_blank"><img
+                            src="https://i.ytimg.com/vi/D7xjC200qxo/maxresdefault.jpg"></a>
                 </div>
-                <div class="name">
-                    <span class="artist">▽▲TRiNITY▲▽</span>
-                    <h5>XOXO</h5>
+                <div class="作品の名前">
+                    <h3>▽▲TRiNITY▲▽</h3>
+                    <h2>XOXO</h2>
                 </div>
-                <p class="tags">MV, Thumbnail, Title typography</p>
-                <img width="70%" src="typo/xoxo.png">
+                <span class="作品のタグ">MV, Thumbnail, Title typography</span>
             </div>
 
-            <div class="item">
-                <div class="youtube">
-                    <a class="im" href="https://www.youtube.com/watch?v=9xQKU2ardbQ" target="_blank"><img src="https://i.ytimg.com/vi/9xQKU2ardbQ/mqdefault.jpg"></a>
+            <div class="作品">
+                <div class="作品のサムネイル">
+                    <a href="https://www.youtube.com/watch?v=9xQKU2ardbQ" target="_blank"><img
+                            src="https://i.ytimg.com/vi/9xQKU2ardbQ/maxresdefault.jpg"></a>
                 </div>
-                <div class="name">
-                    <span class="artist">ナナヲアカリ</span>
-                    <h5>陽傘</h5>
+                <div class="作品の名前">
+                    <h3>ナナヲアカリ</h3>
+                    <h2>陽傘</h2>
                 </div>
-                <p class="tags">MV, Composite, Artwork</p>
+                <span class="作品のタグ">MV, Composite, Artwork</span>
             </div>
 
-            <div class="item">
-                <div class="youtube">
-                    <a class="im" href="https://www.youtube.com/watch?v=Z4fhDAoMu28" target="_blank"><img src="https://i.ytimg.com/vi/Z4fhDAoMu28/mqdefault.jpg"></a>
+            <div class="作品">
+                <div class="作品のサムネイル">
+                    <a href="https://www.youtube.com/watch?v=Z4fhDAoMu28" target="_blank"><img
+                            src="https://i.ytimg.com/vi/Z4fhDAoMu28/maxresdefault.jpg"></a>
                 </div>
-                <div class="name">
-                    <span class="artist">樋口楓</span>
-                    <h5>GODDESS</h5>
+                <div class="作品の名前">
+                    <h3>樋口楓</h3>
+                    <h2>GODDESS</h2>
                 </div>
-                <p class="tags">MV, Composite</p>
+                <span class="作品のタグ">MV, Composite</span>
             </div>
 
-            <div class="item">
-                <div class="youtube">
-                    <a class="im" href="https://www.youtube.com/watch?v=1KUZHKI-BDk" target="_blank"><img src="https://i.ytimg.com/vi/1KUZHKI-BDk/mqdefault.jpg"></a>
+            <div class="作品">
+                <div class="作品のサムネイル">
+                    <a href="https://www.youtube.com/watch?v=1KUZHKI-BDk" target="_blank"><img
+                            src="https://i.ytimg.com/vi/1KUZHKI-BDk/mqdefault.jpg"></a>
                 </div>
-                <div class="name">
-                    <span class="artist">星街すいせい</span>
-                    <h5>ロウワー<span class="cover">Cover</span></h5>
+                <div class="作品の名前">
+                    <h3>星街すいせい</h3>
+                    <h2>ロウワー<span class="cover">Cover</span></h2>
                 </div>
-                <p class="tags">MV</p>
+                <span class="作品のタグ">MV</span>
             </div>
 
-            <div class="item">
-                <div class="name">
-                    <span class="artist">ナナヲアカリ</span>
-                    <h5>ナナヲアカリ official website 背景GIF</h5>
+            <div class="作品">
+                <div class="作品の名前">
+                    <h3>ナナヲアカリ</h3>
+                    <h2>ナナヲアカリ official website 背景GIF</h2>
                 </div>
-                <p class="tags">Animation<br>
+                <span class="作品のタグ">Animation</span>
+                <span class="作品の説明">
                     <a href="https://www.nanawoakari.com/">nanawoakari.com</a>
-                </p>
+                </span>
             </div>
 
-            <div class="item">
-                <div class="youtube">
-                    <a class="im" href="https://www.youtube.com/watch?v=UKLQ4jPMGcU" target="_blank"><img src="https://i.ytimg.com/vi/UKLQ4jPMGcU/mqdefault.jpg"></a>
+            <div class="作品">
+                <div class="作品のサムネイル">
+                    <a href="https://www.youtube.com/watch?v=UKLQ4jPMGcU" target="_blank"><img
+                            src="https://i.ytimg.com/vi/UKLQ4jPMGcU/maxresdefault.jpg"></a>
                 </div>
-                <div class="name">
-                    <span class="artist">本間ひまわり×不破湊×森中花咲</span>
-                    <h5>Ready Steady<span class="cover">Cover</span></h5>
+                <div class="作品の名前">
+                    <h3>本間ひまわり×不破湊×森中花咲</h3>
+                    <h2>Ready Steady<span class="cover">Cover</span></h2>
                 </div>
-                <p class="tags">MV</p>
+                <span class="作品のタグ">MV</span>
             </div>
 
-            <div class="item">
-                <div class="youtube">
-                    <a class="im" href="https://www.youtube.com/watch?v=lsThiIWT2s0" target="_blank"><img src="https://i.ytimg.com/vi/lsThiIWT2s0/mqdefault.jpg"></a>
+            <div class="作品">
+                <div class="作品のサムネイル">
+                    <a href="https://www.youtube.com/watch?v=lsThiIWT2s0" target="_blank"><img
+                            src="https://i.ytimg.com/vi/lsThiIWT2s0/maxresdefault.jpg"></a>
                 </div>
-                <div class="name">
-                    <span class="artist">『CONNECTED OVER THE DIMENSION』展</span>
-                    <h5>コラボ楽曲 リリックMV</h5>
+                <div class="作品の名前">
+                    <h3>『CONNECTED OVER THE DIMENSION』展</h3>
+                    <h2>コラボ楽曲 リリックMV</h2>
                 </div>
-                <p class="tags">Lyric video, Exhibit<br>
+                <span class="作品のタグ">Lyric video, Exhibit</span>
+                <span class="作品の説明">
                     <a href="https://youtu.be/lsThiIWT2s0">3D - Three Dimension / KMNZ & 春猿火</a><br>
                     <a href="https://youtu.be/SIsd9ON3H4c">透明な呼吸 / somunia & ヰ世界情緒</a><br>
                     <a href="https://youtu.be/_U2-SRW-wiw">ファジータウン / KMNZ & ORESAMA</a>
-                </p>
+                </span>
             </div>
 
-            <div class="item">
-                <div class="thum">
-                    <img width="100%" src="thum/4_1.png">
-                    <img width="50%" src="thum/4_3.png"><img width="50%" src="thum/4_2.png">
+            <div class="作品">
+                <div class="作品の画像紹介">
+                    <img src="thum/4_1.png">
+                    <img src="thum/4_3.png"><img src="thum/4_2.png">
                 </div>
-                <div class="name">
-                    <span class="artist">ナナヲアカリ</span>
-                    <h5>ヒステリーショッパー</h5>
+                <div class="作品の名前">
+                    <h3>ナナヲアカリ</h3>
+                    <h2>ヒステリーショッパー</h2>
                 </div>
-                <p class="tags">Live</p>
+                <span class="作品のタグ">Live</span>
             </div>
 
-            <div class="item">
-                <div class="youtube">
-                    <a class="im" href="https://www.youtube.com/watch?v=lqTS5eaEhbI" target="_blank"><img src="https://i.ytimg.com/vi/lqTS5eaEhbI/mqdefault.jpg"></a>
+            <div class="作品">
+                <div class="作品のサムネイル">
+                    <a href="https://www.youtube.com/watch?v=lqTS5eaEhbI" target="_blank"><img
+                            src="https://i.ytimg.com/vi/lqTS5eaEhbI/maxresdefault.jpg"></a>
                 </div>
-                <div class="name">
-                    <span class="artist">ヰ世界情緒</span>
-                    <h5>ハイドレンジア</h5>
+                <div class="作品の名前">
+                    <h3>ヰ世界情緒</h3>
+                    <h2>ハイドレンジア</h2>
                 </div>
-                <p class="tags">MV, Live</p>
+                <span class="作品のタグ">MV, Live</span>
             </div>
 
 
@@ -621,23 +564,8 @@
             <!--作品たち、ここまで -->
 
         </div>
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                imagesLoaded('.works', { background: true }, function () {
-                    var masonry = new MiniMasonry({
-                        container: '.works',
-                        baseWidth: 250,
-                        gutterX: 32,
-                        gutterY: 15
-                    });
-                });
-            });
-        </script>
     </main>
+    <script src="JS.js"></script>
 </body>
 
 </html>
-
-
-
-

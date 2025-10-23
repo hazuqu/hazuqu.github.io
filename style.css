@@ -1,240 +1,45 @@
+/* 基本的な構成ですね */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@330&family=Zen+Kaku+Gothic+New&display=swap');
+
 @font-face {
     font-family: "unifont";
-    src: url("https://ideoaves.github.io/unifont-15.0.06.ttf") format("truetype");
+    src: url("unifont-15.0.06.ttf") format("truetype");
 }
 
-a {
-text-decoration: none;
-color: Black;
+
+* {
+    margin: 0px;
+    padding: 0px;
 }
 
-ul {
-padding: 0;
+html {
+    overflow-y: scroll;
+    background: #eaeaea;
 }
 
 body {
-font-family: "Unifont", monospace;
-color: #000000;
-background-color: #e0e0e0;
-height: 95%;
+    max-width: 1500px;
+    margin: 0 auto;
+    /* 基本的な文字の扱い */
+    line-height: 1.8;
+    font-family: "Zen Kaku Gothic New", "Noto Sans SC", sans-serif;
+    font-weight: 300;
+    font-size: 20px;
 }
 
-header {
-text-align: center;
-}
-
-main {
-margin: 0 auto;
-max-width: 1400px;
-}
-
-.works {
-position: relative;
-margin: 0 auto;
-}
-
-.item {
-background-color: #fff;
-position: absolute;
-padding: 10px;
-margin: 10px 0px;
-width: 450px;
-outline: 1px solid #070707;
-line-height: 2;
-}
-
-.page {
-display: flex;
-flex-wrap: wrap;
-justify-content: center;    
-}
-
-.box {
-background-color: #fff;
-margin: 30px;
-padding: 30px;
-width: 450px;
-outline: 1px solid #070707;
-}
-
-
-.artist {
-padding: 3px 0;
-font-size: 0.9em;
-}
-
-.name {
-margin-top: 10px;
-margin: 10px 10px 10px 0;
-padding-left: 10px;
-border-style: solid;
-border-width: 0 0 0 7px;
-border-color: #070707;
-line-height: 1.2;
-}
-
-.profCard {
-margin: 50px;
-}
-
-h1 {
-margin: 30px 0 10px 0;
-padding-left: 10px;
-border-style: solid;
-border-width: 0 0 0 3px;
-border-color: #070707;
-font-size: 1.4em;
-}
-
-h2 {
-margin: 10px 0;
-margin-left: 7px;
-padding-left: 10px;
-border-style: dashed;
-border-width: 0 0 0 2px;
-border-color: #070707;
-font-size: 1.1em;
-}
-
-h3 {
-margin: 30px 0 20px 0;
-padding-left: 10px;
-border-style: solid;
-border-width: 0 0 0 10px;
-border-color: #070707;
-font-size: 1.6em;
-}
-
-.texts {
-width: 650px;
-padding-left: 17px;
-letter-spacing: 1px;
-line-height: 2;
-}
-
-h5 {
-margin: 5px 0;
-font-size: 1.2em;
-letter-spacing: 2px;
-}
-
-.cover {
-padding-left: 5px;
-font-size: 0.6em;
-letter-spacing: 1px;
-color: #6e6e6e;
-}
-
-.tags {
-margin: 0 0 5px 0;
-color: #070707;
-font-size: 0.8em;
-}
-
-.item img {
-display: block;
-width: 100%;
-}
-
-.thum img {
-display: inline;
-margin: 0;
-}
-
-.youtube {
-width: 100%;
-position: relative;
-}
-
-table {
-    border-collapse: collapse;
+img {
     width: 100%;
-    margin-top: 10px;
-    font-size: 0.7em;
 }
 
-th,
-td {
-    border: 1px solid #ccc;
-    padding: 8px;
-    text-align: left;
+iframe {
+    width: 100%;
+    aspect-ratio: 16/9;
 }
 
-th {
-    background-color: #f0f0f0;
-    cursor: pointer;
-}
-
-.credit-tag {
-    display: inline-block;
-    border: 1px solid #333;
-    border-radius: 4px;
-    padding: 2px 6px;
-    margin: 2px 4px 2px 0;
-    background-color: #f9f9f9;
-    font-size: 0.9em;
-}
-
-#search {
-    padding: 6px;
-    width: 300px;
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-.history {
-font-size: 0.8em;
-}
-
-/* ボタン */
-
-.botan::before{
-content:"[";
-}
-.botan::after{
-content:"]";
-}
-.botan {
-font-family: "unifont";
-color: white;
-background-color: black;
-display: inline;
-padding: 2px 5px;
-margin: 0 ;
-}
-
-.botan:hover {
-background-color: gray;
-}
-
-.botan:active {
-background-color: gray;
-}
-
-.dead {
-color: gray;
-text-shadow: 1px 1px 0 #fff;
-background-color: #DFDFDF;
-}
-
-main a[href]:not(.botan):not(.im) {
-padding: 0 3px;
-}
-
-main a[href]:link:not(.botan):not(.im) {
-color: #FFFFFF;
-background-color: #070707;
-}
-
-main a[href]:visited:not(.botan):not(.im) {
-color: #FFFFFF;
-background-color: #070707;
-}
-
-main a[href]:hover:not(.botan):not(.im) {
-color: black;
-background-color: #fff;
-border: solid 1px #070707;
+::selection {
+    color: #FFF;
+    background: #000;
 }
 
 canvas {
@@ -246,25 +51,218 @@ canvas {
     z-index: -1;
 }
 
-/* スマホ用 */
-@media screen and (max-width:900px) {
-.works {
-display: block;
-}
-h5 {
-margin: 5px 0;
-font-size: 2em;
-letter-spacing: 2.6px;
-}
-.profCard {
-margin: 0px;
-}
-.item {
-width: 300px;
-margin: 0 10px 0 -10px;
-}
-.box {
-margin: 0px;
-}
+/* 全体に対する設定ですね */
+
+/* 段落の話 */
+
+.おおきな分類 {
+    padding-bottom: 50px;
 }
 
+.ちゅうくらいの分類 {
+    padding-bottom: 20px;
+}
+
+.小さな分類 {
+    padding: 10px 20px;
+}
+
+.横に狭い分類 {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* 文字の話 */
+
+a[href]:has(img) {
+    text-decoration: none;
+    background: transparent;
+    padding: 0;
+}
+
+a[href] {
+    background: radial-gradient(ellipse closest-side, #0000EE, transparent);
+    border-radius: 50%;
+    color: #FFF;
+    padding: 5px 20px;
+}
+
+a[href]:active {
+    background: radial-gradient(ellipse closest-side, #fe0000, transparent);
+}
+
+a[href]:visited {
+    background: radial-gradient(ellipse closest-side, #551b8c, transparent);
+}
+
+/* 文字装飾の話 */
+
+.コメント文字 {
+    text-align: center;
+    line-height: 1.5rem;
+    font-size: 0.7em;
+}
+
+.小さい文字 {
+    line-height: 1.5rem;
+    font-size: 0.7em;
+}
+
+.中央に揃う文字 {
+    text-align: center;
+}
+
+.太い文字 {
+    font-weight: bold;
+    letter-spacing: 4px;
+}
+
+/* ここからは直下のページそれぞれについてです */
+
+/* ヘッダーの話 */
+
+#ヘッダー {
+    margin: 40px auto;
+    margin-bottom: 0;
+}
+
+.ヘッダーのアイコン {
+    font-family: 'Unifont';
+    width: fit-content;
+    font-size: larger;
+    line-height: 1.0em;
+    letter-spacing: -0.1em;
+}
+
+.ヘッダーのアイコン a[href] {
+    background: transparent;
+    text-decoration: none;
+    color: #000;
+}
+
+.ヘッダーのリンクたち {
+    padding: 30px 0;
+    font-size: 1.5em;
+
+    a {
+        margin: 0 10px;
+    }
+}
+
+/* worksの話 */
+
+.作品の一覧 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.作品 {
+    margin: 50px 20px;
+}
+
+.作品の画像紹介 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.作品のサムネイル:has(a):hover img {
+    clip-path: polygon(20% 0, 80% 50%, 20% 100%);
+}
+
+.作品の名前 h3 {
+    line-height: 1.2em;
+    font-weight: normal;
+}
+
+.cover {
+    margin: 0 10px;
+    font-size: 0.7em;
+    background: radial-gradient(ellipse closest-side, #000, transparent);
+    border-radius: 50%;
+    background-clip: text;
+    color: transparent;
+}
+
+.作品のタグ {
+    line-height: 1.5rem;
+    font-size: 0.7em;
+    text-align: right;
+}
+
+.作品の説明 {
+    font-size: 0.8em;
+}
+
+/* aboutの話 */
+
+/* リストの編集についてです */
+
+table {
+    border-collapse: collapse;
+    width: 70%;
+    margin-top: 10px;
+}
+
+th,
+td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+td a[href] {
+    background: transparent;
+    padding: 0;
+    text-decoration: none;
+    color: #000;
+}
+
+th {
+    cursor: pointer;
+}
+
+.credit-tag {
+    display: inline-block;
+    border-radius: 10px;
+    padding: 2px 6px;
+    margin: 2px 4px 2px 0;
+    background: #f9f9f9;
+
+    font-size: 0.9em;
+}
+
+#search {
+    padding: 6px;
+    width: 300px;
+    border-radius: 10px;
+    background: #f9f9f9;
+    border: unset;
+
+    font-size: 16px;
+    font-family: inherit;
+    margin-bottom: 10px;
+}
+
+/* スマホ用 */
+
+@media screen and (max-width:900px) {
+    body {
+        width: 95%;
+        padding: 5px;
+        margin: 0 auto;
+        font-size: 0.8em;
+    }
+
+    .作品の一覧 {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .作品 {
+        margin: 20px 0;
+    }
+
+    table {
+        width: 100%;
+    }
+}

@@ -2,105 +2,49 @@
 <html lang="ja">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="UTF-8">
     <title>木葉はづく 🦉 HAZUQU</title>
     <meta name="description" content="映像をしています🎞">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" 　href="favicon.ico">
-    
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="木葉はづく" />
-    <meta name="twitter:description" content="映像をしています🎞" />
-    <meta name="twitter:image" content="https://hazuqu.github.io/icon.jpg" />
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/addons/p5.sound.min.js"></script>
-    <script src="sketch.js"></script>
-    <style>
-        main {
-            line-height: 2em;
-        }
 
-        .center {
-            text-align: center;
-        }
-    </style>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="木葉はづく Portfolio">
+    <meta name="twitter:description" content="映像をしています🎞">
+    <meta name="twitter:image" content="https://hazuqu.github.io/icon.jpg">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.js"></script>
 </head>
 
 <body>
     <header>
-        <div style="margin:40px 0;">
-            <div
-                style="font-family: 'Unifont'; width:fit-content; margin: 0 auto; text-align: left; line-height: 1.0em; letter-spacing:-0.1em">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'___'<br>
-                &nbsp;hazuqu&nbsp;&nbsp;&nbsp;(<p style="display:inline;" id="eye">୭v୭</p>)<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(;;&nbsp;;&nbsp;&nbsp;\<br>
-                .⸙&nbsp;.&nbsp;෴.,&nbsp;&nbsp;&nbsp;n m&nbsp;&nbsp;&nbsp;,&nbsp;෴.⚵..&nbsp;⸲.
-                <script>
-                    const message2 = document.getElementById('eye');
-                    let m = "୭v୭"
-                    const t2 = [
-                        m,
-                        m,
-                        m,
-                        m,
-                        m,
-                        m,
-                        m,
-                        m,
-                        m,
-                        '＿v＿',
-                        m,
-                        '＿v＿'
-                    ];
-                    let j = 0;
-
-                    function m1() {
-                        if (j == 12) {
-                            j = 0;
-                        }
-                        message2.textContent = t2[j];
-                        j++;
-                    }
-
-                    setInterval(m1, 200);
-                </script>
-
-            </div>
-            <ul>
-                <a href="works.html">
-                    <li class="botan bold">works</li>
-                </a>
-                <a href="request.html">
-                    <li class="botan">request</li>
-                </a>
-                <a href="about.html">
-                    <li class="botan">about</li>
-                </a>
-            </ul>
+        <div id="ヘッダー"></div>
     </header>
-    <main style="max-width: 500px;">
-        <div class="center">
+    <main>
+        <div class="おおきな分類 中央に揃う文字">
             ミュージック・ビデオをしています。<br>
-            ↻ ◁ || ▷ ↺<br>
+            ↻　◁　||　▷　↺<br>
             <br>
             <br>
-            ▀▄▀▄▀▄▀▄ links ▀▄▀▄▀▄▀▄<br>
+            <h3>ソーシャル</h3>
             <a class="botan" href="https://x.com/HAZUQU">Twitter</a><br>
             つぶやいています。<br>
             <a class="botan" href="https://www.youtube.com/@HAZUQU">Youtube</a><br>
             時々動画があがっています。<br>
             <br>
             <br>
-            ╔ ————— other ————— ╗<br>
+            ╔ ——————————————— ╗<br>
+            <h3>チーム</h3>
+            <br>
             <a class="botan" href="https://discord.com/invite/dQX3PfcCPf">💿️</a><br>
             CDs<br>
+            <a class="小さい文字">時々映像や音楽をしています</a><br>
+            <br>
             <a class="botan" href="https://ideoaves.github.io/">📡</a><br>
             ideoaves<br>
-            ╚  ———————~+~——————— ╝
+            <a class="小さい文字">みんなでディレクションから作品を考えます</a><br>
+            ╚ ————————————~+~ ╝
         </div>
     </main>
+    <script src="JS.js"></script>
 </body>
-
-</html>
