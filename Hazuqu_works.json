@@ -1,5 +1,28 @@
 [
   {
+    "date": "2025/10/5",
+    "user": "花鋏キョウ",
+    "title": "星綴り",
+    "Cover": "",
+    "link": "https://www.youtube.com/watch?v=-6P17fTp8FQ",
+    "status": "",
+    "credit": [
+      "ディレクション",
+      "動画"
+    ]
+  },
+  {
+    "date": "2025/10/4",
+    "user": "莉犬",
+    "title": "ヨンダラン！",
+    "Cover": "",
+    "link": "https://www.youtube.com/watch?v=1moa2h4eQ3M",
+    "status": "",
+    "credit": [
+      "動画"
+    ]
+  },
+  {
     "date": "2025/9/24",
     "user": "トゲナシトゲアリ LIVE in 日本武道館「奏檄の叫」",
     "title": "",
@@ -18,7 +41,7 @@
     "link": "https://www.youtube.com/watch?v=ynsLjv1AyEg",
     "status": "",
     "credit": [
-      "AA"
+      "デザイン"
     ]
   },
   {
@@ -38,7 +61,7 @@
     "user": "YouTube Music Weekend 10.0",
     "title": "CDs 2025",
     "Cover": "",
-    "link": "https://youtu.be/ci4NOQnobyc?si=6mlfIH_bPoWLODx_",
+    "link": "https://www.youtube.com/watch?v=ci4NOQnobyc",
     "status": "",
     "credit": [
       "コンポジット",
@@ -1078,7 +1101,6 @@
     "link": "https://www.youtube.com/watch?v=EqWLVy08zFY",
     "status": "",
     "credit": [
-      "自主制作",
       "動画"
     ]
   },
