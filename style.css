@@ -160,13 +160,18 @@ a[href]:visited {
     margin: 50px 20px;
 }
 
-.作品の画像紹介 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
-
 .作品のサムネイル:has(a):hover img {
     clip-path: polygon(20% 0, 80% 50%, 20% 100%);
+}
+
+/* ここだけp5の方のworksの話 */
+.作品のサムネイル.p5:has(a) img {
+    aspect-ratio: 1;
+    object-fit: cover;
+}
+
+.作品のサムネイル.p5:has(a):hover img {
+    clip-path: circle(50%);
 }
 
 .作品の名前 h3 {

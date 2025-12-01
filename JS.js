@@ -41,7 +41,7 @@ function windowResized() {
 
 /* ページの書式についてです */
 
-fetch("header.html")
+fetch("../header.html")
   .then(res => res.text())
   .then(html => {
     document.getElementById("ヘッダー").innerHTML = html;
