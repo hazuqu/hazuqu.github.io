@@ -1,5 +1,84 @@
 [
   {
+    "date": "2025/11/30",
+    "user": "CDs",
+    "title": "大勢",
+    "Cover": "",
+    "link": "https://www.youtube.com/live/25lb38QtXt0",
+    "status": "",
+    "credit": [
+      "動画",
+      "出演"
+    ]
+  },
+  {
+    "date": "2025/11/22",
+    "user": "鹿乃",
+    "title": "Fairy Winking",
+    "Cover": "",
+    "link": "https://www.youtube.com/watch?v=NcwH_Uxgm6E",
+    "status": "",
+    "credit": [
+      "リリックビデオ"
+    ]
+  },
+  {
+    "date": "2025/11/14",
+    "user": "なみぐる",
+    "title": "わたし、いいこ",
+    "Cover": "",
+    "link": "https://www.youtube.com/watch?v=3Vjw2ZhSXE0",
+    "status": "",
+    "credit": [
+      "ディレクション",
+      "動画"
+    ]
+  },
+  {
+    "date": "2025/11/13",
+    "user": "HOZUMI",
+    "title": "サイネージ動画",
+    "Cover": "",
+    "link": "https://x.com/hozumi_official/status/1984274821510000831",
+    "status": "",
+    "credit": [
+      "PV"
+    ]
+  },
+  {
+    "date": "2025/11/12",
+    "user": "岡本真夜",
+    "title": "雪に願いを〜cherish my love〜",
+    "Cover": "",
+    "link": "https://www.youtube.com/watch?v=dAUMWAbJP4w",
+    "status": "",
+    "credit": [
+      "リリックビデオ"
+    ]
+  },
+  {
+    "date": "2025/11/3",
+    "user": "春猿火×ヰ世界情緒 TWO-MAN LIVE「Singularity Live Vol.4」",
+    "title": "ハイドレンジア",
+    "Cover": "",
+    "link": "",
+    "status": "",
+    "credit": [
+      "ライブ用リリックビデオ"
+    ]
+  },
+  {
+    "date": "2025/10/17",
+    "user": "FIRST STAGE PRODUCTION EN",
+    "title": "Liron Lockheart PV",
+    "Cover": "",
+    "link": "https://www.youtube.com/watch?v=xVCbN2oGHY4",
+    "status": "",
+    "credit": [
+      "PV"
+    ]
+  },
+  {
     "date": "2025/10/5",
     "user": "花鋏キョウ",
     "title": "星綴り",
@@ -84,7 +163,7 @@
     "date": "2025/8/31",
     "user": "PVSF2025S",
     "title": "Mitchie Mメドレー合作",
-    "Cover": "",
+    "Cover": "Cover",
     "link": "https://www.youtube.com/watch?v=kFn5rs0zdsk",
     "status": "",
     "credit": [
