@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.8/lib/p5.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.8/lib/addons/p5.sound.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/opentype.js/0.7.3/opentype.min.js"></script>
+  <meta charset="utf-8" />
+  <style>
+    main {
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .in {
+      padding: 10px 0;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+  <main>
+    <div class="in">
+    <input type="text" id="texInput" value="F">
+    </div>
+    <script>   
+      let font;
+      let MOJI;
+      let len = 1;
+
+      function setup() {
+        MOJI = document.getElementById("texInput").value;
+        len = Math.min(MOJI.length, 5)
+        createCanvas(len * 400, len * 400);
+
+        let texInput = select('#texInput');
+        texInput.input(updateText);
+
+        frameRate(24);
+        noSmooth();
+        opentype.load(
+          "https://fonts.gstatic.com/ea/notosansjapanese/v6/NotoSansJP-Bold.otf",
+          function (err, f) {
+            if (!err) {
+              font = f;
+            }
+          }
+        );
+      }
+
+      function updateText() {
+        MOJI = this.value();
+        len = Math.min(MOJI.length, 5)
+        resizeCanvas(len * 400, len * 400);
+      }
+
+      function kaiten(x, y) {
+        //ここを書き換えて極座標にした文字のドットごとの座標をいじれます。
+        //最初はアルファベットがどの対称かで分岐した部分です。
+        let r = Math.sqrt(x * x + y * y);
+        if (/[AHIMTUVWXY]/.test(MOJI)) {
+          theta = atan2(y * atan(frameCount * 0.1), x * tan(frameCount * 0.1));
+          return {
+            x: r * cos(theta),
+            y: r * sin(theta),
+          };
+        } else if (/[BCDEK]/.test(MOJI)) {
+          theta = atan2(y * tan(frameCount * 0.1), x * atan(frameCount * 0.1));
+          return {
+            x: r * cos(theta),
+            y: r * sin(theta),
+          };
+        } else if (/[NOSZ]/.test(MOJI)) {
+          if (/[OS]/.test(MOJI)) {
+            rot = frameCount * 0.1 * 2;
+          } else {
+            rot = -frameCount * 0.1 * 2;
+          }
+          theta = atan2(y, x) * cos(frameCount * 0.05) + rot;
+          return {
+            x: r * cos(theta),
+            y: r * sin(theta),
+          };
+        } else {
+          theta =
+            atan2(y * sin(frameCount * 0.1), x * cos(frameCount * 0.1));
+          randomSeed(x * y);
+          return {
+            x: r * cos(theta) * (sin(frameCount * 0.05) + map(y, -400, 400, -1, 1)),
+            y: r * sin(theta) * (sin(frameCount * 0.05) + map(x, -400, 400, -1, 1)),
+          };
+        }
+      }
+
+      function draw() {
+        translate(width / 2, height / 2);
+        background(255);
+        stroke(0);
+        fill(128);
+
+        let path = font.getPath(MOJI, 0, 0, 250);
+        let bounding = path.getBoundingBox();
+        let tW = bounding.x1 + (bounding.x2 - bounding.x1) / 2;
+        let tY = bounding.y1 + (bounding.y2 - bounding.y1) / 2;
+
+        beginShape();
+        let first = true;
+
+        for (let cmd of path.commands) {
+          let x = cmd.x - tW;
+          let y = cmd.y - tY;
+
+          let p = kaiten(x, y);
+          push();
+          fill(220);
+          stroke(0, 0, 255);
+          rs = 6;
+          rect(p.x - rs / 2, p.y - rs / 2, rs, rs);
+          pop();
+
+          // 各点に対するプロット
+          if (cmd.type === "M") {
+            if (!first) beginContour();
+            vertex(p.x, p.y);
+          } else if (cmd.type === "L") {
+            vertex(p.x, p.y);
+          } else if (cmd.type === "C") {
+            let p1 = kaiten(cmd.x1 - tW, cmd.y1 - tY);
+            let p2 = kaiten(cmd.x2 - tW, cmd.y2 - tY);
+            bezierVertex(p1.x, p1.y, p2.x, p2.y, p.x, p.y);
+          } else if (cmd.type === "Q") {
+            let p1 = kaiten(cmd.x1 - tW, cmd.y1 - tY);
+            quadraticVertex(p1.x, p1.y, p.x, p.y);
+          } else if (cmd.type === "Z") {
+            if (!first) endContour();
+            first = false;
+          }
+        }
+        endShape(CLOSE);
+      }
+
+    </script>
+  </main>
+</body>
+
+</html>
