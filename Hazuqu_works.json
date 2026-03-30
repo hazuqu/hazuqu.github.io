@@ -1,5 +1,108 @@
 [
   {
+    "date": "2026-03-26T15:00:00.000Z",
+    "user": "ubique",
+    "title": "bAd Gravity",
+    "Cover": "",
+    "link": "https://www.youtube.com/watch?v=fOudYJHkL0w",
+    "status": "",
+    "credit": [
+      "動画"
+    ]
+  },
+  {
+    "date": "2026-03-06T15:00:00.000Z",
+    "user": "RumBlue",
+    "title": "Blue PoisoN",
+    "Cover": "",
+    "link": "https://www.youtube.com/watch?v=wndHqz3n2GQ",
+    "status": "",
+    "credit": [
+      "動画"
+    ]
+  },
+  {
+    "date": "2026-03-01T15:00:00.000Z",
+    "user": "姫崎 莉波",
+    "title": "歌声は君いろ",
+    "Cover": "",
+    "link": "",
+    "status": "",
+    "credit": [
+      "ディレクション",
+      "動画"
+    ]
+  },
+  {
+    "date": "2026/02/24",
+    "user": "にっけい",
+    "title": "psyche",
+    "Cover": "",
+    "link": "https://youtu.be/UHSyTR4EN9g?si=ME888dP-d6K8cV0O",
+    "status": "",
+    "credit": [
+      "ディレクション",
+      "動画"
+    ]
+  },
+  {
+    "date": "2026/02/13",
+    "user": "◯△□, zerobe",
+    "title": "創儀 - rejected in peace",
+    "Cover": "",
+    "link": "https://www.instagram.com/rejectedinpeace/",
+    "status": "",
+    "credit": [
+      "展示協力"
+    ]
+  },
+  {
+    "date": "2026/02/11",
+    "user": "Uscool",
+    "title": "ぽやしみブルーライト",
+    "Cover": "",
+    "link": "https://youtu.be/uViZVI1ycns?si=6_mxHal3LX09YEHw",
+    "status": "",
+    "credit": [
+      "ディレクション",
+      "動画"
+    ]
+  },
+  {
+    "date": "2026/02/06",
+    "user": "Puzzle Project",
+    "title": "公式HP",
+    "Cover": "",
+    "link": "https://puzzle-project.jp/",
+    "status": "",
+    "credit": [
+      "Webサイトデザイン"
+    ]
+  },
+  {
+    "date": "2026/01/31",
+    "user": "KAOMOZI",
+    "title": "「Shape of ( c(>_<。) )」特別展示 “boxLineRound Bracket”",
+    "Cover": "",
+    "link": "https://x.com/KaomoziRecords/status/2017516387863060555",
+    "status": "",
+    "credit": [
+      "ディレクション"
+    ]
+  },
+  {
+    "date": "2025/01/18",
+    "user": "椎乃味醂",
+    "title": "ハーモニー",
+    "Cover": "",
+    "link": "https://x.com/HAZUQU/status/2012923463032549593",
+    "status": "",
+    "credit": [
+      "ライブ用BG動画",
+      "VJ"
+    ]
+  },
+  {
     "date": "2025/12/27",
     "user": "あまねもも",
     "title": "天竺葵",
@@ -1388,7 +1491,7 @@
     "title": "‌とても素敵な六月でした",
     "Cover": "Cover",
     "link": "https://www.youtube.com/watch?v=LuldeXjqpww",
-    "status": "非公開",
+    "status": "",
     "credit": [
       "動画"
     ]
