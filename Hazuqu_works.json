@@ -1,6 +1,18 @@
 [
   {
-    "date": "2026-03-26T15:00:00.000Z",
+    "date": "2026/04/03",
+    "user": "式部めぐり",
+    "title": "秒速",
+    "Cover": "",
+    "link": "https://www.youtube.com/watch?v=fMw6qU-DCwQ",
+    "status": "",
+    "credit": [
+      "ディレクション",
+      "動画"
+    ]
+  },
+  {
+    "date": "2026/03/27",
     "user": "ubique",
     "title": "bAd Gravity",
     "Cover": "",
@@ -11,7 +23,7 @@
     ]
   },
   {
-    "date": "2026-03-06T15:00:00.000Z",
+    "date": "2026/03/07",
     "user": "RumBlue",
     "title": "Blue PoisoN",
     "Cover": "",
@@ -22,7 +34,7 @@
     ]
   },
   {
-    "date": "2026-03-01T15:00:00.000Z",
+    "date": "2026/03/02",
     "user": "姫崎 莉波",
     "title": "歌声は君いろ",
     "Cover": "",
