@@ -19,7 +19,7 @@ html {
 }
 
 body {
-    max-width: 1500px;
+    max-width: 800px;
     margin: 0 auto;
     /* 基本的な文字の扱い */
     line-height: 1.8;
@@ -172,6 +172,7 @@ a.装飾しないリンク {
 
 /* ここだけp5の方のworksの話 */
 .作品のサムネイル.p5:has(a) img {
+    width: 60%;
     aspect-ratio: 1;
     object-fit: cover;
 }
@@ -180,8 +181,8 @@ a.装飾しないリンク {
     clip-path: circle(50%);
 }
 
-.作品の名前 h3 {
-    line-height: 1.2em;
+.作品の名前 h2 {
+    line-height: 1.0em;
     font-weight: normal;
 }
 
@@ -195,7 +196,7 @@ a.装飾しないリンク {
 }
 
 .作品のタグ {
-    line-height: 1.5rem;
+    line-height: 1.2rem;
     font-size: 0.7em;
     text-align: right;
 }
@@ -210,7 +211,7 @@ a.装飾しないリンク {
 
 table {
     border-collapse: collapse;
-    width: 70%;
+    width: 100%;
     margin-top: 10px;
 }
 

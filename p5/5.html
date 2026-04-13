@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>手動四分木</title>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.8/lib/p5.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.8/lib/addons/p5.sound.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <style>
+    main {
+      width: 100%;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .in {
+      padding: 10px 0;
+    }
+
+    canvas {
+      max-width: 1440px;
+      max-height: 2160px;
+      margin: 0 auto;
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="in">
+      ダブルクリック:分割, Siftドラッグ:マージ, Ctrl:選択<br>
+      Ctrl+Z/Ctrl+Y: Undo/Redo<br>
+      セルごとの色: <input type="color" id="colorPicker" value="#000000">
+    </div>
+    <script>
+      let cells = [];
+      let selected = [];
+      let dragging = false;
+      let mergeMode = false;
+      let addMode = false;
+
+      const cellSize = 128;
+
+      // Undo/Redo system
+      let history = [];
+      let historyIndex = -1;
+      const maxHistory = 50;
+
+      class Cell {
+        constructor(x, y, w, h, color = "#ffffff") {
+          this.x = x;
+          this.y = y;
+          this.w = w;
+          this.h = h;
+          this.color = color;
+        }
+
+        draw() {
+          fill(this.color);
+          noStroke();
+          rect(this.x, this.y, this.w, this.h);
+        }
+
+        contains(px, py) {
+          return px >= this.x && px < this.x + this.w &&
+            py >= this.y && py < this.y + this.h;
+        }
+      }
+
+      function setup() {
+        createCanvas(1920, 1920 * 1.5);
+        noSmooth();
+        grid();
+        saveState();
+      }
+
+      function grid() {
+        cells = [];
+        let cols = floor(width / cellSize);
+        let rows = floor(height / cellSize);
+
+        for (let y = 0; y < rows; y++) {
+          for (let x = 0; x < cols; x++) {
+            cells.push(new Cell(x * cellSize, y * cellSize, cellSize, cellSize));
+          }
+        }
+      }
+
+      function draw() {
+        background(255);
+        for (let c of cells) {
+          c.draw();
+          defLine(c);
+        }
+        selLine();
+      }
+
+      function defLine(c) {
+        stroke(0);
+        strokeWeight(1);
+        noFill();
+        rect(c.x, c.y, c.w, c.h);
+      }
+
+      function mousePressed() {
+        dragging = true;
+        mergeMode = keyIsDown(SHIFT);
+        addMode = keyIsDown(CONTROL);
+
+        let c = getCell(mouseX, mouseY);
+        if (!c) return;
+
+        if (addMode) {
+          let idx = selected.indexOf(c);
+          if (idx >= 0) {
+            selected.splice(idx, 1);
+          } else {
+            selected.push(c);
+          }
+        } else {
+          selected = [c];
+        }
+      }
+
+      function mouseDragged() {
+        if (!dragging) return;
+
+        let c = getCell(mouseX, mouseY);
+        if (!c) return;
+
+        if (addMode) {
+          let idx = selected.indexOf(c);
+          if (idx >= 0) {
+            selected.splice(idx, 1);
+          } else {
+            selected.push(c);
+          }
+        } else if (!selected.includes(c)) {
+          selected.push(c);
+        }
+      }
+
+      function mouseReleased() {
+        dragging = false;
+
+        if (mergeMode && selected.length > 1) {
+          mergeCell(selected);
+        }
+      }
+
+      function doubleClicked() {
+        let c = getCell(mouseX, mouseY);
+        c && splitCell(c);
+      }
+
+      function getCell(x, y) {
+        return cells.find(c => c.contains(x, y));
+      }
+
+      document.getElementById("colorPicker").addEventListener("input", function () {
+        let col = this.value;
+        let changed = false;
+        for (let c of selected) {
+          if (c.color !== col) {
+            c.color = col;
+            changed = true;
+          }
+        }
+        if (changed) saveState();
+      });
+
+      function mergeCell(list) {
+        let minX = min(...list.map(c => c.x));
+        let minY = min(...list.map(c => c.y));
+        let maxX = max(...list.map(c => c.x + c.w));
+        let maxY = max(...list.map(c => c.y + c.h));
+
+        let newCell = new Cell(minX, minY, maxX - minX, maxY - minY, list[0].color);
+
+        cells = cells.filter(c => !list.includes(c));
+        cells.push(newCell);
+
+        selected = [newCell];
+        saveState();
+      }
+
+      function splitCell(c) {
+        let w = c.w / 2;
+        let h = c.h / 2;
+
+        cells = cells.filter(x => x !== c);
+
+        for (let dy = 0; dy < 2; dy++) {
+          for (let dx = 0; dx < 2; dx++) {
+            cells.push(new Cell(
+              c.x + dx * w,
+              c.y + dy * h,
+              w, h,
+              c.color
+            ));
+          }
+        }
+        saveState();
+      }
+
+      function selLine() {
+        if (!selected.length) return;
+        stroke(255, 0, 0);
+        strokeWeight(2);
+        for (let c of selected) {
+          rect(c.x, c.y, c.w, c.h);
+        }
+      }
+
+      //Undo/Redoを描いてもらいます。（こういう実装を丸投げして学習しないのが私のよくないところ）
+      function saveState() {
+        const state = JSON.stringify(cells.map(c => ({
+          x: c.x, y: c.y, w: c.w, h: c.h, color: c.color
+        })));
+
+        if (historyIndex < history.length - 1) {
+          history = history.slice(0, historyIndex + 1);
+        }
+        
+        history.push(state);
+        if (history.length > maxHistory) {
+          history.shift();
+        } else {
+          historyIndex++;
+        }
+      }
+
+      function undo() {
+        if (historyIndex > 0) {
+          historyIndex--;
+          restoreState(history[historyIndex]);
+        }
+      }
+
+      function redo() {
+        if (historyIndex < history.length - 1) {
+          historyIndex++;
+          restoreState(history[historyIndex]);
+        }
+      }
+
+      function restoreState(state) {
+        const data = JSON.parse(state);
+        cells = data.map(c => new Cell(c.x, c.y, c.w, c.h, c.color));
+        selected = [];
+      }
+
+      function keyPressed() {
+        if (keyIsDown(CONTROL) && key === 'z') {
+          undo();
+          return false;
+        }
+        if (keyIsDown(CONTROL) && key === 'y') {
+          redo();
+          return false;
+        }
+      }
+    </script>
+
+</body>
+
+</html>
