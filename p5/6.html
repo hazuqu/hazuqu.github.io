@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>円形鍵盤 🦉 HAZUQU</title>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.8/lib/p5.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.8/lib/addons/p5.sound.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <style>
+    main {
+      width: 100%;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .in {
+      padding: 10px 0;
+    }
+
+    canvas {
+      max-width: 1440px;
+      max-height: 2160px;
+      margin: 0 auto;
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="in">
+      <input type="text" id="texInput" value="12">
+    </div>
+    <script>
+      let c = 12;
+
+      function updateC(value) {
+        let num = Number(value) || 12;
+        c = num < 3 ? 3 : num;
+        if (num < 3) {
+          select('#texInput').value(c);
+        }
+      }
+
+      function setup() {
+        createCanvas(1000, 1000);
+        let texInput = select('#texInput');
+        texInput.input(updateText);
+        updateC(texInput.value());
+        noLoop();
+      }
+
+      function updateText() {
+        updateC(this.value());
+        redraw();
+      }
+
+      function draw() {
+        clear();
+        translate(width / 2, height / 2);
+
+        let oct = 7 * c;
+        let step = TWO_PI / oct;
+
+        let soto = min(width, height) / 2 - 10;
+        let keySize = soto * step * 3;
+        let uti = soto - keySize;
+
+        stroke(0);
+        strokeWeight(1);
+        fill(255);
+        for (let i = 0; i < oct; i++) {
+          let a1 = i * step;
+          let a2 = (i + 1) * step;
+
+          beginShape();
+          vertex(uti * cos(a1), uti * sin(a1));
+          vertex(soto * cos(a1), soto * sin(a1));
+          vertex(soto * cos(a2), soto * sin(a2));
+          vertex(uti * cos(a2), uti * sin(a2));
+          endShape(CLOSE);
+        }
+        push();
+        clip(() => {
+          beginShape();
+          for (let i = 0; i <= oct; i++) {
+            let a = i * step;
+            vertex(soto * cos(a), soto * sin(a));
+          }
+          endShape(CLOSE);
+        });
+
+        let Bkenban = [1, 2, 4, 5, 6];
+        let Bwidth = step * 0.6;
+
+        let Buti = soto - keySize * 0.55;
+        let Bsoto = soto + 5;
+
+        noStroke();
+        fill(0);
+
+        for (let o = 0; o < c; o++) {
+          for (let b of Bkenban) {
+            let idx = o * 7 + b;
+            let cen = idx * step;
+
+            let a1 = cen - Bwidth / 2;
+            let a2 = cen + Bwidth / 2;
+
+            beginShape();
+            vertex(Buti * cos(a1), Buti * sin(a1));
+            vertex(Bsoto * cos(a1), Bsoto * sin(a1));
+            vertex(Bsoto * cos(a2), Bsoto * sin(a2));
+            vertex(Buti * cos(a2), Buti * sin(a2));
+            endShape(CLOSE);
+          }
+        }
+        pop();
+      }
+
+    </script>
+
+</body>
+
+</html>
