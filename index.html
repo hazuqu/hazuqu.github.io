@@ -25,10 +25,13 @@
             木葉はづくです。<br>
             ミュージック・ビデオをしています。<br>
             <br>
+            <a id="動画の名前">VTuberの方</a>や<a id="動画の名前">ボカロ、インディーズの方のMV</a>などを作ってきました。<br>
+            <a id="行動">アイデアを出したり、プログラムやデザインをしたりします。</a><br>
             <br>
             <a href="https://x.com/HAZUQU">Twitter</a>で作品の告知や習作を投稿します。<br>
             依頼については<a href="request.html">ここ</a>にまとまっていて、<br>
-            <a class="装飾しないリンク" href="mailto:hazuqu@gmail.com">hazuqu✦gmail.com</a>や<a class="装飾しないリンク" href="https://x.com/HAZUQU">TwitterのDM</a>、<a class="装飾しないリンク" href="https://discordapp.com/users/272593472857440256">Discord</a>で連絡できます。
+            <a class="装飾しないリンク" href="mailto:hazuqu@gmail.com">hazuqu✦gmail.com</a>と<a class="装飾しないリンク"
+                href="https://discordapp.com/users/272593472857440256">Discord</a>で連絡できます。
             <br>
             <br>
             ╔ ——————————————— ╗<br>
@@ -45,5 +48,54 @@
             ╚ ————————————~+~ ╝
         </div>
     </main>
+    <script>
+        let dougaList = [];
+        const koudouList = [
+            "アイデアを出したり、プログラムやデザインをしたりします。",
+            "ネット美学ミームについて纏めたりします。",
+            "CDsとしてギターやDJを触ったりします。",
+            "映像以外にもジャケットやWebのデザインをしたりします。",
+            "p5.jsやpythonでのクリエイティブコーディングをウェルメイドで試しています。",
+            "ホロライブや学術Vをよく見ています。",
+            "Blenderを使ってキャラモデルを作っています。",
+            "エイプリルフールにVTuberをします。",
+            "コンセプト段階の話が好きです。",
+            "水槽越しにモニターを撮ったことがあります。",
+            "実写や3DCGのなかのモニターの映像を作るのが好きです。",
+            "昭和40年以降の建築史、美術史が好きです。"
+        ];
+
+        function updateRandomizers() {
+            const koudouElements = document.querySelectorAll("#行動");
+            const koudou = koudouList[Math.floor(Math.random() * koudouList.length)];
+            koudouElements.forEach(element => {
+                element.textContent = koudou;
+            });
+
+            const elements = document.querySelectorAll("#動画の名前");
+            elements.forEach(element => {
+                const douga = dougaList[Math.floor(Math.random() * dougaList.length)];
+                element.href = douga.link;
+                element.textContent = `${douga.user} - ${douga.title}`;
+            });
+        }
+
+        fetch("Hazuqu_works.json")
+            .then(response => response.json())
+            .then(json => {
+                const noStatus = json.filter(item => !item.status && item.credit.includes("ディレクション"));
+                noStatus.forEach(item => {
+                    if (item.credit && item.credit.includes("ディレクション")) {
+                        dougaList.push(item, item);
+                    } else {
+                        dougaList.push(item);
+                    }
+                });
+
+                updateRandomizers();
+                setInterval(updateRandomizers, 10000);
+            })
+
+    </script>
     <script src="JS.js"></script>
 </body>
