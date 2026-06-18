@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>絵文字ペン 🦉 HAZUQU</title>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.8/lib/p5.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.8/lib/addons/p5.sound.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <style>
+    main {
+      width: 100%;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .in {
+      padding: 10px 0;
+    }
+
+    canvas {
+      max-width: 1440px;
+      max-height: 2160px;
+      margin: 0 auto;
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="in">
+      <button onclick="setEmojiSet(haru)">春</button>
+      <button onclick="setEmojiSet(natsu)">夏</button>
+      <button onclick="setEmojiSet(aki)">秋</button>
+      <button onclick="setEmojiSet(fuyu)">冬</button>
+
+      <input id="emojiInput" type="text" placeholder="😂😎🥳🎉🍣🌸⭐🔥🎮🚀" oninput="updateCustomEmoji()">
+    </div>
+    <script>
+      let penX = 0;
+      let penY = 0;
+      let prevX = 0;
+      let prevY = 0;
+      let pressure = 0;
+      let drawing = false;
+
+      const haru = ["🌸", "🌹", "🌺", "🌻", "🌼", "🌷", "🌱", "🌲", "🍡"];
+      const natsu = ["🐬", "🌴", "🍍", "🍦", "🍧", "🍹", "🍺", "🌞", "🍉"];
+      const aki = ["🦉", "🦗", "🌾", "🍁", "🍂", "🍄", "🌰", "🍠", "🎃", "🎑"];
+      const fuyu = ["🌨", "❄️", "☃️", "🎁", "🎿", "🛷", "🧣", "🧤", "⛷️", "🏂", "🎅", "🎄"];
+
+      let emojis = JSON.parse(localStorage.getItem("emojiSet")) || [...fuyu];
+
+      function setEmojiSet(arr) {
+        emojis = [...arr];
+
+        document.getElementById("emojiInput").value = emojis.join("");
+
+        localStorage.setItem("emojiSet", JSON.stringify(emojis));
+      }
+
+      function updateCustomEmoji() {
+        const text = document.getElementById("emojiInput").value.trim();
+
+        if (!text) return;
+
+        emojis = Array.from(text);
+
+        localStorage.setItem("emojiSet", JSON.stringify(emojis));
+      }
+
+      function setup() {
+        createCanvas(windowWidth, windowHeight);
+
+        background(255);
+        frameRate(24);
+        textAlign(CENTER, CENTER);
+
+        document.getElementById("emojiInput").value = emojis.join("");
+
+        const c = document.querySelector("canvas");
+        c.style.touchAction = "none";
+
+        c.addEventListener("pointerdown", (e) => {
+          drawing = true;
+          updatePointer(e);
+          prevX = penX;
+          prevY = penY;
+        });
+
+        c.addEventListener("pointermove", updatePointer);
+
+        c.addEventListener("pointerup", () => {
+          drawing = false;
+        });
+
+        c.addEventListener("pointercancel", () => {
+          drawing = false;
+        });
+      }
+
+      function updatePointer(e) {
+        const rect = document.querySelector("canvas").getBoundingClientRect();
+
+        penX = e.clientX - rect.left;
+        penY = e.clientY - rect.top;
+        pressure = e.pressure;
+      }
+
+      function draw() {
+        if (!drawing) return;
+
+        const d = dist(prevX, prevY, penX, penY);
+
+        if (d < 1) return;
+
+        const p = pow(pressure, 7);
+        const penSize = map(p, 0, 1, 5, 120);
+        const step = max(penSize * 0.7, 3);
+
+        for (let i = 0; i <= d; i += step) {
+          const t = i / d;
+
+          textSize(penSize);
+          text(
+            random(emojis),
+            lerp(prevX, penX, t),
+            lerp(prevY, penY, t)
+          );
+        }
+
+        prevX = penX;
+        prevY = penY;
+      }
+    </script>
+
+</body>
+
+</html>
