@@ -163,11 +163,23 @@ a.装飾しないリンク {
 }
 
 .作品 {
-    margin: 50px 20px;
+    padding: 50px 20px;
+    background: radial-gradient(circle closest-side, #ebebeb, #ffffff 40%, transparent);
 }
 
 .作品のサムネイル:has(a):hover img {
     clip-path: polygon(20% 0, 80% 50%, 20% 100%);
+}
+
+/* 複数画像がある場合 */
+.作品の画像紹介:has(img):has(img) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+}
+
+.作品の画像紹介:has(img):has(img) img {
+    width: 100%;
 }
 
 /* ここだけp5の方のworksの話 */
@@ -189,10 +201,9 @@ a.装飾しないリンク {
 .cover {
     margin: 0 10px;
     font-size: 0.7em;
-    background: radial-gradient(ellipse closest-side, #000, transparent);
     border-radius: 50%;
     background-clip: text;
-    color: transparent;
+    color: #808080;
 }
 
 .作品のタグ {
