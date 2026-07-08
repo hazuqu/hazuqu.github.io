@@ -1,5 +1,41 @@
 [
   {
+    "date": "2026/07/03",
+    "user": "なみぐる",
+    "title": "ちゅ、お注射。 ",
+    "Cover": "",
+    "link": "https://www.youtube.com/watch?v=P1yqH9jwf14",
+    "status": "",
+    "credit": [
+      "ディレクション",
+      "動画"
+    ]
+  },
+  {
+    "date": "2026/07/02",
+    "user": "初星学園",
+    "title": "歌声は君いろ",
+    "Cover": "",
+    "link": "https://www.youtube.com/watch?v=7i27l7uvTd4",
+    "status": "",
+    "credit": [
+      "ディレクション",
+      "動画"
+    ]
+  },
+  {
+    "date": "2026/06/30",
+    "user": "Current",
+    "title": "Split ends",
+    "Cover": "",
+    "link": "https://www.youtube.com/watch?v=MH_Pqlfj4FU",
+    "status": "",
+    "credit": [
+      "自主制作",
+      "合作"
+    ]
+  },
+  {
     "date": "2026/06/06",
     "user": "hanare",
     "title": "吐々",
@@ -88,18 +124,6 @@
     "link": "https://www.youtube.com/watch?v=wndHqz3n2GQ",
     "status": "",
     "credit": [
-      "動画"
-    ]
-  },
-  {
-    "date": "2026/03/02",
-    "user": "姫崎 莉波",
-    "title": "歌声は君いろ",
-    "Cover": "",
-    "link": "",
-    "status": "",
-    "credit": [
-      "ディレクション",
       "動画"
     ]
   },
@@ -232,7 +256,7 @@
   {
     "date": "2025/11/13",
     "user": "HOZUMI",
-    "title": "わたし、いいこ",
+    "title": "サイネージ映像",
     "Cover": "",
     "link": "https://x.com/hozumi_official/status/1984274821510000831",
     "status": "",
@@ -432,8 +456,8 @@
     "link": "https://www.youtube.com/watch?v=y4-xMA5fihE",
     "status": "",
     "credit": [
-      "ディレクション",
-      "リリックビデオ"
+      "自主制作",
+      "合作"
     ]
   },
   {
@@ -1331,7 +1355,7 @@
     "title": "奈落",
     "Cover": "",
     "link": "https://www.youtube.com/watch?v=c3OWV7hxmtQ",
-    "status": "",
+    "status": "非公開",
     "credit": [
       "動画"
     ]
