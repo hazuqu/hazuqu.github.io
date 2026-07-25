@@ -75,12 +75,13 @@ canvas {
 /* 文字の話 */
 
 a[href]:has(img) {
-    text-decoration: none;
     background: transparent;
     padding: 0;
 }
 
 a[href] {
+    text-decoration: none;
+    font-weight: normal;
     background: radial-gradient(ellipse closest-side, #0000EE, transparent);
     border-radius: 50%;
     color: #FFF;
@@ -119,8 +120,21 @@ a.装飾しないリンク {
 }
 
 .太い文字 {
-    font-weight: bold;
+    font-weight: 800;
     letter-spacing: 4px;
+}
+
+h1 {
+    font-size: 1.6em;
+}
+
+h2 {
+    font-size: 1.4em;
+}
+
+h3 {
+    font-size: 0.9em;
+    font-weight: 100;
 }
 
 /* ここからは直下のページそれぞれについてです */
