@@ -74,12 +74,17 @@ canvas {
 
 /* 文字の話 */
 
+a {
+    text-decoration: none;
+    color: unset;
+}
+
 a[href]:has(img) {
     background: transparent;
     padding: 0;
 }
 
-a[href] {
+a[href]:not(:has(div)) {
     text-decoration: none;
     font-weight: normal;
     background: radial-gradient(ellipse closest-side, #0000EE, transparent);
@@ -196,17 +201,6 @@ h3 {
     width: 100%;
 }
 
-/* ここだけp5の方のworksの話 */
-.作品のサムネイル.p5:has(a) img {
-    width: 60%;
-    aspect-ratio: 1;
-    object-fit: cover;
-}
-
-.作品のサムネイル.p5:has(a):hover img {
-    clip-path: circle(50%);
-}
-
 .作品の名前 h2 {
     line-height: 1.0em;
     font-weight: normal;
@@ -228,6 +222,36 @@ h3 {
 
 .作品の説明 {
     font-size: 0.8em;
+}
+
+/* ここだけp5の方のworksの話 */
+.作品のサムネイル.p5:has(a) img {
+    width: 60%;
+    aspect-ratio: 1;
+    object-fit: cover;
+}
+
+.作品のサムネイル.p5:has(a):hover img {
+    clip-path: circle(50%);
+}
+
+/* ここだけmore_worksの話 */
+.制作 {
+    padding: 20px 20px;
+    display: grid;
+    grid-template-columns: 66% auto;
+    background: linear-gradient(to top, transparent, #ebebeb 70%, transparent);
+    gap: 20px;
+    position: relative;
+    isolation: isolate;
+}
+
+.制作:not(:has(.作品のサムネイル)) {
+    grid-template-columns: 100%;
+}
+
+.制作内容 .作品の説明 {
+    margin-top: 10px;
 }
 
 /* aboutの話 */
@@ -310,4 +334,5 @@ th {
     table {
         width: 100%;
     }
+
 }
