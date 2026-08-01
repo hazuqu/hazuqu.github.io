@@ -84,7 +84,7 @@ a[href]:has(img) {
     padding: 0;
 }
 
-a[href]:not(:has(div)) {
+a[href]:not(:has(div)):not(:has(img)) {
     text-decoration: none;
     font-weight: normal;
     background: radial-gradient(ellipse closest-side, #0000EE, transparent);
