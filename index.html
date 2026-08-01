@@ -21,34 +21,37 @@
         <div id="ヘッダー"></div>
     </header>
     <main>
-        <div class="おおきな分類 中央に揃う文字">
-            <a class="太い文字">{ こんばんは }</a><br>
-            木葉はづくです。<br>
-            ミュージック・ビデオをしています。<br>
-            <br>
-            <a id="動画の名前">VTuberの方</a>や<a id="動画の名前">ボカロ、インディーズの方のMV</a>などを作ってきました。<br>
-            <a id="行動">アイデアを出したり、プログラムやデザインをしたりします。</a><br>
-            おおまかな作品は<a href="works.html">作品一覧</a>に、そして<a href="works_other.html">映像以外の作品</a>もあります。<br>
-            <a href="https://x.com/HAZUQU">Twitter</a>で作品の告知や習作を投稿します。<br>
-            <br>
-            <a class="太い文字">{ 仕事を依頼したい方へ }</a><br>
-            依頼については<a href="request.html">ここ</a>にまとまっていて、<br>
-            <a class="装飾しないリンク" href="mailto:hazuqu@gmail.com">hazuqu✦gmail.com</a>と<a class="装飾しないリンク"
-                href="https://discordapp.com/users/272593472857440256">Discord</a>で連絡できます。
-            <br>
-            <br>
-            <a class="太い文字">{ 私のいるチーム }</a><br>
-            <a href="https://discord.com/invite/dQX3PfcCPf">💿️　CDs</a><br>
-            <a class="小さい文字">時々映像や音楽をしています</a><br>
-
-            <a href="https://ideoaves.github.io/">📡　ideoaves</a><br>
-            <a class="小さい文字">みんなでディレクションから作品を考えます。</a>
-            <br>
-        </div>
+        <div class="中央に揃う文字 ずれる文章">
+            <div class="おおきな分類">
+                <a class="太い文字">{ こんばんは }</a>
+                <p>木葉はづくです。</p>
+                <p>ミュージック・ビデオをしています。</p>
+            </div>
+            <div class="ちゅうくらいの分類">
+                <p><a id="動画の名前">VTuberの方</a>や<a id="動画の名前">ボカロ、インディーズの方のMV</a>などを作ってきました。</p>
+                <p><a id="行動">アイデアを出したり、プログラムやデザインをしたりします。</a></p>
+                <p>おおまかな作品は<a href="works.html">作品一覧</a>に、そして<a href="works_other.html">映像以外の作品</a>もあります。</p>
+                <p><a href="https://x.com/HAZUQU">Twitter</a>で作品の告知や習作を投稿します。</p>
+            </div>
+            <div class="おおきな分類">
+                <a class="太い文字">{ 仕事を依頼したい方へ }</a>
+                <p>ご依頼は<a href="request.html">こちら</a>からお願いします。</p>
+                <p><a class="装飾しないリンク" href="mailto:hazuqu@gmail.com">hazuqu✦gmail.com</a>と<a class="装飾しないリンク"
+                        href="https://discordapp.com/users/272593472857440256">Discord</a>で連絡できます。</p>
+            </div>
+            <div class="おおきな分類">
+                <a class="太い文字">{ 私のいるチーム }</a>
+                <p><a href="https://discord.com/invite/dQX3PfcCPf">💿️　CDs</a><br>
+                    <a class="小さい文字">時々映像や音楽をしています</a>
+                </p>
+                <p><a href="https://ideoaves.github.io/">📡　ideoaves</a><br>
+                    <a class="小さい文字">みんなでディレクションから作品を考えます。</a>
+                </p>
+            </div>
     </main>
     <script>
-        let dougaList = [];
-        const koudouList = [
+        let 動画の一覧 = [];
+        const 行動の一覧 = [
             "アイデアを出したり、プログラムやデザインをしたりします。",
             "ネット美学ミームについて纏めたりします。",
             "CDsとしてギターやDJを触ったりします。",
@@ -63,35 +66,50 @@
             "昭和40年以降の建築史、美術史が好きです。"
         ];
 
-        function updateRandomizers() {
-            const koudouElements = document.querySelectorAll("#行動");
-            const koudou = koudouList[Math.floor(Math.random() * koudouList.length)];
-            koudouElements.forEach(element => {
-                element.textContent = koudou;
+        /* 行動と動画の名前を、一覧からひとつ選んで差し替えます。 */
+        function 文章を選び直す() {
+            const 行動たち = document.querySelectorAll("#行動");
+            const 行動 = 行動の一覧[Math.floor(Math.random() * 行動の一覧.length)];
+            行動たち.forEach(要素 => {
+                要素.textContent = 行動;
             });
 
-            const elements = document.querySelectorAll("#動画の名前");
-            elements.forEach(element => {
-                const douga = dougaList[Math.floor(Math.random() * dougaList.length)];
-                element.href = douga.link;
-                element.textContent = `${douga.user} - ${douga.title}`;
+            const 動画の名前たち = document.querySelectorAll("#動画の名前");
+            動画の名前たち.forEach(要素 => {
+                const 動画 = 動画の一覧[Math.floor(Math.random() * 動画の一覧.length)];
+                要素.href = 動画.link;
+                要素.textContent = `${動画.user} - ${動画.title}`;
+            });
+
+            行をずらす();
+        }
+
+        const ずれの最大 = 150;
+
+        function 行をずらす() {
+            document.querySelectorAll(".ずれる文章 p").forEach(行 => {
+                if (行.dataset.ずれ === undefined) {
+                    行.dataset.ずれ = Math.random() * 2 - 1;
+                }
+                const 余白 = Math.max(0, (行.parentElement.clientWidth - 行.offsetWidth) / 2);
+                const 幅 = Math.min(ずれの最大, 余白);
+                行.style.transform = `translateX(${parseFloat(行.dataset.ずれ) * 幅}px)`;
             });
         }
 
-        fetch("Hazuqu_works.json")
-            .then(response => response.json())
-            .then(json => {
-                const noStatus = json.filter(item => !item.status && item.credit.includes("ディレクション"));
-                noStatus.forEach(item => {
-                    if (item.credit && item.credit.includes("ディレクション")) {
-                        dougaList.push(item, item);
-                    } else {
-                        dougaList.push(item);
-                    }
-                });
+        行をずらす();
+        window.addEventListener("resize", 行をずらす);
+        if (document.fonts) {
+            document.fonts.ready.then(行をずらす);
+        }
 
-                updateRandomizers();
-                setInterval(updateRandomizers, 10000);
+        fetch("Hazuqu_works.json")
+            .then(応答 => 応答.json())
+            .then(作品たち => {
+                動画の一覧 = 作品たち.filter(作品 => !作品.status && 作品.credit.includes("ディレクション"));
+
+                文章を選び直す();
+                setInterval(文章を選び直す, 10000);
             })
 
     </script>

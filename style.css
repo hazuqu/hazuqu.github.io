@@ -124,6 +124,14 @@ a.装飾しないリンク {
     text-align: center;
 }
 
+/* 開くたびに一行ずつ横へランダムにずれる文章です */
+.ずれる文章 p {
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto;
+    will-change: transform;
+}
+
 .太い文字 {
     font-weight: 800;
     letter-spacing: 4px;
