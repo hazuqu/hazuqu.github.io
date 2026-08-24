@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ノードポートフォリオ 🦉 HAZUQU</title>
+    <meta name="description" content="リファレンスや影響、関連性に重きを置いたポートフォリオです。">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="ノードポートフォリオ 🦉 HAZUQU">
+    <meta name="twitter:description" content="リファレンスや影響、関連性に重きを置いたポートフォリオです。">
+    <meta name="twitter:image" content="https://hazuqu.github.io/icon.jpg">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.js"></script>
+
+    <style>
+        main {
+            width: 100%;
+        }
+
+        .nodeField p {
+            margin: 0;
+        }
+
+        .nodeField {
+            position: relative;
+            overflow: hidden;
+            touch-action: none;
+            overscroll-behavior: none;
+            cursor: grab;
+            margin: 10px;
+            border: 1px solid #ffffff;
+            background-color: #e0e0e0;
+            height: calc(100vh - 100px);
+        }
+
+        .nodeField.掴み中 {
+            cursor: grabbing;
+            user-select: none;
+        }
+
+        .キャンバス {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform-origin: 0 0;
+            will-change: transform;
+        }
+
+        .nodeField.掴み中 .キャンバス {
+            pointer-events: none;
+        }
+
+        .ノード {
+            position: absolute;
+            width: 250px;
+            height: auto;
+            padding: 10px;
+            outline: 3px solid #e0e0e0;
+            background-color: #e0e0e0cc;
+            border-radius: 10px;
+            cursor: grab;
+            user-select: none;
+            overflow-wrap: anywhere;
+        }
+
+        .ノード.半透明,
+        .エッジ層 g.半透明 {
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .ノード.焦点 {
+            cursor: auto;
+            user-select: text;
+        }
+
+        .ノード.赤色 {
+            outline-color: #000;
+        }
+
+        video,
+        img {
+            width: 100%;
+            height: auto;
+        }
+
+        .動画 {
+            position: relative;
+            background-color: #000;
+            cursor: pointer;
+        }
+
+        .動画 img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .動画 iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .日付 {
+            text-align: right;
+            font-size: 0.6em;
+        }
+
+        .エッジ層 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+
+        .エッジ層 path {
+            fill: none;
+            stroke: #000;
+            stroke-width: 3px;
+        }
+
+        .エッジ層 marker path {
+            fill: #000;
+            stroke: none;
+        }
+
+        .エッジ層 .ラベル {
+            width: fit-content;
+            max-width: 200px;
+            margin: 0 auto;
+            padding: 0 4px;
+            background: #e0e0e0;
+            text-align: center;
+            pointer-events: auto;
+            user-select: none;
+        }
+    </style>
+</head>
+
+
+<body>
+    <header>
+        <div id="ヘッダー"></div>
+    </header>
+
+    <main>
+        <div class="ちゅうくらいの分類">
+            <h1>ノードポートフォリオ</h1>
+            <p>個人制作を軸にしたノードポートフォリオです。詳しくは<a href="https://ideoaves.github.io/blog/2026-08-24.html">こちら</a>。</p>
+            <div class="nodeField"></div>
+        </div>
+    </main>
+    <script src="nodes.js"></script>
+    <script src="../JS.js"></script>
+</body>
+
+</html>
