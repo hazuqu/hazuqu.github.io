@@ -65,9 +65,10 @@
         if (!id) {
             return `<p><a href="${safe}" target="_blank" rel="noopener">${safe}</a></p>`;
         }
-        return '<div class="動画">'
+        return `<div class="動画"><a href="${safe}" target="_blank" rel="noopener" `
+            + 'draggable="false">'
             + `<img src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="" `
-            + 'loading="lazy" draggable="false"></div>';
+            + 'loading="lazy" draggable="false"></a></div>';
     }
 
     // 画面の外に出た動画は止める。iPhoneはデコーダとメモリがすぐ足りなくなる。
@@ -77,25 +78,6 @@
             else target.pause();
         }
     }, { root: viewport, rootMargin: '100px' });
-
-    // サムネイルを押したら埋め込みに差し替える
-    function wireVideo(el) {
-        for (const video of el.querySelectorAll('video')) videoWatch.observe(video);
-
-        for (const player of el.querySelectorAll('.動画')) {
-            const thumb = player.querySelector('img');
-
-            player.addEventListener('click', () => {
-                if (dragged) return;
-                const id = thumb.src.match(/\/vi\/([\w-]+)\//)[1];
-                player.innerHTML =
-                    `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1" ` +
-                    'title="YouTube" allowfullscreen allow="autoplay; ' +
-                    'clipboard-write; encrypted-media; picture-in-picture">' +
-                    '</iframe>';
-            });
-        }
-    }
 
     // canvasのテキストをHTMLにする
     function textToHtml(text) {
@@ -194,7 +176,7 @@
         el.className = 'ノード' + (colorClass[n.color] ? ' ' + colorClass[n.color] : '');
         el.id = n.id;
         el.innerHTML = textToHtml(n.text || '');
-        wireVideo(el);
+        for (const video of el.querySelectorAll('video')) videoWatch.observe(video);
         return { el, x: n.x, y: n.y };
     });
 
@@ -417,9 +399,14 @@
         return [x - r.left, y - r.top];
     };
 
+    let panFrame = 0;
     const apply = () => {
-        canvas.style.transform =
-            `translate(${panX}px, ${panY}px) scale(${scale})`;
+        if (panFrame) return;
+        panFrame = requestAnimationFrame(() => {
+            panFrame = 0;
+            canvas.style.transform =
+                `translate(${panX}px, ${panY}px) scale(${scale})`;
+        });
     };
 
     // 縦横のうち狭い方に合わせて全体を画面に収める
