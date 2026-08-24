@@ -442,9 +442,23 @@
     let lastPinch = null;
     let dragged = false;
 
+    const held = [];
+    const holdVideos = (stop) => {
+        if (!stop) {
+            for (const video of held.splice(0)) video.play().catch(() => { });
+            return;
+        }
+        for (const video of canvas.querySelectorAll('video')) {
+            if (video.paused) continue;
+            video.pause();
+            held.push(video);
+        }
+    };
+
     const beginPan = (e) => {
         dragged = true;
         viewport.classList.add('掴み中');
+        holdVideos(true);
         try {
             viewport.setPointerCapture(e.pointerId);
         } catch (_) { }
@@ -501,7 +515,10 @@
     const release = (e) => {
         pointers.delete(e.pointerId);
         if (pointers.size < 2) lastPinch = null;
-        if (!pointers.size) viewport.classList.remove('掴み中');
+        if (!pointers.size) {
+            viewport.classList.remove('掴み中');
+            holdVideos(false);
+        }
     };
     window.addEventListener('pointerup', release);
     window.addEventListener('pointercancel', release);
