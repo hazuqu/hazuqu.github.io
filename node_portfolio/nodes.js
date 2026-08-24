@@ -47,7 +47,7 @@
     function embedTag(name) {
         const src = 'img/' + name.replace(/ /g, '%20');
         if (/\.(webm|mp4|mov|ogv|m4v)$/i.test(name)) {
-            return `<video src="${src}" autoplay loop muted playsinline></video>`;
+            return `<video src="${src}" loop muted playsinline preload="metadata"></video>`;
         }
         if (/\.(mp3|wav|ogg|m4a|flac)$/i.test(name)) {
             return `<audio src="${src}" controls></audio>`;
@@ -66,20 +66,24 @@
             return `<p><a href="${safe}" target="_blank" rel="noopener">${safe}</a></p>`;
         }
         return '<div class="動画">'
-            + `<img src="https://i.ytimg.com/vi/${id}/maxresdefault.jpg" alt="" `
+            + `<img src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="" `
             + 'loading="lazy" draggable="false"></div>';
     }
 
+    // 画面の外に出た動画は止める。iPhoneはデコーダとメモリがすぐ足りなくなる。
+    const videoWatch = new IntersectionObserver((entries) => {
+        for (const { target, isIntersecting } of entries) {
+            if (isIntersecting) target.play().catch(() => { });
+            else target.pause();
+        }
+    }, { root: viewport, rootMargin: '100px' });
+
     // サムネイルを押したら埋め込みに差し替える
     function wireVideo(el) {
+        for (const video of el.querySelectorAll('video')) videoWatch.observe(video);
+
         for (const player of el.querySelectorAll('.動画')) {
             const thumb = player.querySelector('img');
-
-            thumb.addEventListener('error', () => {
-                if (thumb.src.includes('maxresdefault')) {
-                    thumb.src = thumb.src.replace('maxresdefault', 'hqdefault');
-                }
-            });
 
             player.addEventListener('click', () => {
                 if (dragged) return;

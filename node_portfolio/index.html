@@ -46,7 +46,6 @@
             top: 0;
             left: 0;
             transform-origin: 0 0;
-            will-change: transform;
         }
 
         .nodeField.掴み中 .キャンバス {
@@ -97,6 +96,8 @@
             width: 100%;
             height: auto;
             display: block;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
         }
 
         .動画 iframe {
@@ -152,7 +153,10 @@
     <main>
         <div class="ちゅうくらいの分類">
             <h1>SNS上の習作<span class="cover">(ノードポートフォリオ)</span></h1>
-            <p>SNS上に掲載した個人制作を軸に作っています。</p>
+            <p>
+                SNS上に掲載した個人制作を軸に作っています。<br>
+                現在ノードポートフォリオという形式の実験をしています。バグやユーザビリティの悪さがあると思いますのでしばらくご了承ください。
+            </p>
             <div class="nodeField"></div>
         </div>
     </main>
