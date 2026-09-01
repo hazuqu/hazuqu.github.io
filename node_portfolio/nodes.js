@@ -7,7 +7,7 @@
     const scaleY = 1;
 
     const minScale = 0.08;
-    const maxScale = 3;
+    const maxScale = 2;
     const zoomSpeed = 0.0015;
 
     // 日付による縦方向の配置を有効にするかどうか。実装だけしたけど使わないな。
@@ -71,13 +71,16 @@
             + 'loading="lazy" draggable="false"></a></div>';
     }
 
-    // 画面の外に出た動画は止める。iPhoneはデコーダとメモリがすぐ足りなくなる。
-    const videoWatch = new IntersectionObserver((entries) => {
-        for (const { target, isIntersecting } of entries) {
-            if (isIntersecting) target.play().catch(() => { });
-            else target.pause();
+    const videos = [];
+
+    // 画面に入っている動画だけ動かす
+    function syncVideos() {
+        for (const { video, node } of videos) {
+            if (node.out === video.paused) continue;
+            if (node.out) video.pause();
+            else video.play().catch(() => { });
         }
-    }, { root: viewport, rootMargin: '100px' });
+    }
 
     // canvasのテキストをHTMLにする
     function textToHtml(text) {
@@ -176,9 +179,12 @@
         el.className = 'ノード' + (colorClass[n.color] ? ' ' + colorClass[n.color] : '');
         el.id = n.id;
         el.innerHTML = textToHtml(n.text || '');
-        for (const video of el.querySelectorAll('video')) videoWatch.observe(video);
-        return { el, x: n.x, y: n.y };
+        const node = { el, x: n.x, y: n.y };
+        for (const video of el.querySelectorAll('video')) videos.push({ video, node });
+        return node;
     });
+
+    const byId = new Map(nodes.map((node) => [node.el.id, node]));
 
     const ids = new Set(source.map((n) => n.id));
     const edges = canvasData.edges
@@ -221,40 +227,70 @@
         '<path d="M 0 0 L 10 5 L 0 10 z" /></marker></defs>';
     nodes.forEach(({ el }) => canvas.appendChild(el));
 
+    // 注視の外側をまとめて薄くする
+    const haze = document.createElement('div');
+    haze.className = '霞';
+
+    // 注視に関わるエッジだけを載せる
+    const front = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    front.setAttribute('class', 'エッジ層 手前');
+
     let totalWidth = 0;
     let totalHeight = 0;
 
-    // canvas座標に並べる。軽い衝突防止も。
+    // canvas座標に並べ、測った寸法を持たせる。軽い衝突防止も。
+    let viewW = 0;
+    let viewH = 0;
     function layout() {
+        ({ width: viewW, height: viewH } = viewport.getBoundingClientRect());
+        for (const { el } of nodes) el.classList.remove('圏外');
+
         const minX = Math.min(...nodes.map((n) => n.x));
         const minY = Math.min(...nodes.map((n) => n.y));
         const placed = [];
-        for (const { el, x, y } of nodes) {
+        for (const node of nodes) {
+            const { el, x, y } = node;
+            const w = el.offsetWidth;
             const left = (x - minX) * scaleX + margin;
             const top = placed.reduce(
-                (t, done) => (Math.abs(done.left - left) < el.offsetWidth
+                (t, done) => (Math.abs(done.left - left) < w
                     ? Math.max(t, done.bottom + gap) : t),
                 (y - minY) * scaleY + margin
             );
             el.style.left = left + 'px';
             el.style.top = top + 'px';
-            placed.push({ left, bottom: top + el.offsetHeight });
+            Object.assign(node, { left, top, w, h: el.offsetHeight });
+            placed.push({ left, bottom: top + node.h });
         }
 
-        totalWidth = margin
-            + Math.max(...nodes.map(({ el }) => el.offsetLeft + el.offsetWidth));
-        totalHeight = margin
-            + Math.max(...nodes.map(({ el }) => el.offsetTop + el.offsetHeight));
+        totalWidth = margin + Math.max(...nodes.map((n) => n.left + n.w));
+        totalHeight = margin + Math.max(...nodes.map((n) => n.top + n.h));
         canvas.style.width = totalWidth + 'px';
         canvas.style.height = totalHeight + 'px';
 
         draw();
         if (untouched) fitAll();
+        cull();
+    }
+
+    // 画面から外れたノードはかかない
+    const cullMargin = 200;
+    function cull() {
+        const pad = cullMargin / scale;
+        const left = -panX / scale - pad;
+        const top = -panY / scale - pad;
+        const right = (viewW - panX) / scale + pad;
+        const bottom = (viewH - panY) / scale + pad;
+        for (const node of nodes) {
+            node.out = node.left > right || node.left + node.w < left
+                || node.top > bottom || node.top + node.h < top;
+            node.el.classList.toggle('圏外', node.out);
+        }
+        syncVideos();
     }
 
     // 辺の四隅の付け根と、そこから外へ向かう単位ベクトルを返す
-    function anchor(el, side) {
-        const { offsetLeft: l, offsetTop: t, offsetWidth: w, offsetHeight: h } = el;
+    function anchor({ left: l, top: t, w, h }, side) {
         return {
             top: [l + w / 2, t, 0, -1],
             bottom: [l + w / 2, t + h, 0, 1],
@@ -329,16 +365,16 @@
     }
 
     // 辺を引き直し、ラベルを曲線の実測中点に置く
-    function draw() {
-        svg.querySelectorAll('g').forEach((g) => g.remove());
+    function drawEdges(list, layer) {
+        layer.querySelectorAll('g').forEach((g) => g.remove());
         const labels = [];
 
-        for (const e of edges) {
-            const g = create('g', { 'data-from': e.from, 'data-to': e.to }, svg);
+        for (const e of list) {
+            const g = create('g', { 'data-from': e.from, 'data-to': e.to }, layer);
             const line = create('path', {
                 d: clothoid(
-                    ...anchor(document.getElementById(e.from), e.fromSide),
-                    ...anchor(document.getElementById(e.to), e.toSide)
+                    ...anchor(byId.get(e.from), e.fromSide),
+                    ...anchor(byId.get(e.to), e.toSide)
                 ),
                 'marker-end': 'url(#矢)',
             }, g);
@@ -359,13 +395,16 @@
             box.setAttribute('x', mx - w / 2);
             box.setAttribute('y', my - h / 2);
         }
+    }
 
+    function draw() {
+        drawEdges(edges, svg);
         applyFocus();
     }
 
     let focused = null;
 
-    // クリックしたノードと、その隣だけを濃く残す
+    // クリックしたノードとその隣を霞より前に出し、残りは霞の下に沈める
     function applyFocus() {
         const related = new Set();
         if (focused) {
@@ -377,14 +416,49 @@
         }
 
         for (const { el } of nodes) {
-            el.classList.toggle('半透明', !!focused && !related.has(el.id));
+            el.classList.toggle('関連', related.has(el.id));
             el.classList.toggle('焦点', el.id === focused);
         }
-        for (const g of svg.querySelectorAll('g')) {
-            const touches = g.getAttribute('data-from') === focused
-                || g.getAttribute('data-to') === focused;
-            g.classList.toggle('半透明', !!focused && !touches);
+
+        if (!focused) {
+            haze.remove();
+            front.remove();
+            return;
         }
+        canvas.appendChild(haze);
+        fitHaze();
+        frontEdges(related);
+    }
+
+    // 霞は見えているぶんだけ覆う。全面に敷くと拡大した分だけ層が膨らむ
+    function fitHaze() {
+        if (!haze.parentNode) return;
+        Object.assign(haze.style, {
+            left: -panX / scale + 'px',
+            top: -panY / scale + 'px',
+            width: viewW / scale + 'px',
+            height: viewH / scale + 'px',
+        });
+    }
+
+    // 注視に関わる辺だけを、その広さの層に引いて霞の上に出す
+    const frontPad = 40;
+    function frontEdges(related) {
+        const list = edges.filter((e) => e.from === focused || e.to === focused);
+        if (!list.length) return front.remove();
+
+        const near = [...related].map((id) => byId.get(id));
+        const x = Math.min(...near.map((n) => n.left)) - frontPad;
+        const y = Math.min(...near.map((n) => n.top)) - frontPad;
+        const w = Math.max(...near.map((n) => n.left + n.w)) + frontPad - x;
+        const h = Math.max(...near.map((n) => n.top + n.h)) + frontPad - y;
+
+        Object.assign(front.style, {
+            left: x + 'px', top: y + 'px', width: w + 'px', height: h + 'px',
+        });
+        front.setAttribute('viewBox', `${x} ${y} ${w} ${h}`);
+        canvas.appendChild(front);
+        drawEdges(list, front);
     }
 
     // 無限キャンバスの操作系統
@@ -399,13 +473,19 @@
         return [x - r.left, y - r.top];
     };
 
+    // 動かしている間は変形だけ。数え直すのは手が止まってから
+    const settleWait = 120;
     let panFrame = 0;
+    let settleTimer = 0;
     const apply = () => {
         if (panFrame) return;
         panFrame = requestAnimationFrame(() => {
             panFrame = 0;
             canvas.style.transform =
                 `translate(${panX}px, ${panY}px) scale(${scale})`;
+            fitHaze();
+            clearTimeout(settleTimer);
+            settleTimer = setTimeout(cull, settleWait);
         });
     };
 
@@ -442,23 +522,9 @@
     let lastPinch = null;
     let dragged = false;
 
-    const held = [];
-    const holdVideos = (stop) => {
-        if (!stop) {
-            for (const video of held.splice(0)) video.play().catch(() => { });
-            return;
-        }
-        for (const video of canvas.querySelectorAll('video')) {
-            if (video.paused) continue;
-            video.pause();
-            held.push(video);
-        }
-    };
-
     const beginPan = (e) => {
         dragged = true;
         viewport.classList.add('掴み中');
-        holdVideos(true);
         try {
             viewport.setPointerCapture(e.pointerId);
         } catch (_) { }
@@ -472,7 +538,8 @@
         const node = e.target.closest('.ノード');
         const pannable = e.pointerType !== 'mouse' || !node || node.id !== focused
             || !!e.target.closest('img, video, .動画');
-        if (pannable) e.preventDefault();
+        // 指のときは止めない。Safariが後のclickまで一緒に潰してしまう
+        if (pannable && e.pointerType === 'mouse') e.preventDefault();
         pointers.set(e.pointerId, {
             x: e.clientX, y: e.clientY,
             sx: e.clientX, sy: e.clientY,
@@ -517,7 +584,6 @@
         if (pointers.size < 2) lastPinch = null;
         if (!pointers.size) {
             viewport.classList.remove('掴み中');
-            holdVideos(false);
         }
     };
     window.addEventListener('pointerup', release);
@@ -554,14 +620,18 @@
 
     layout();
 
-    // 画像やフォントが遅れて効いてもノードの寸法を取り直す
-    let rafId = 0;
+    // 画像やフォントが遅れて効いてもノードの寸法を取り直す。
+    let layoutTimer = 0;
     const relayout = () => {
-        cancelAnimationFrame(rafId);
-        rafId = requestAnimationFrame(layout);
+        clearTimeout(layoutTimer);
+        layoutTimer = setTimeout(layout, 100);
     };
     window.addEventListener('resize', relayout);
-    const sizeCheck = new ResizeObserver(relayout);
-    nodes.forEach(({ el }) => sizeCheck.observe(el));
+    for (const img of canvas.querySelectorAll('img')) {
+        img.addEventListener('load', relayout, { once: true });
+    }
+    for (const { video } of videos) {
+        video.addEventListener('loadedmetadata', relayout, { once: true });
+    }
     document.fonts?.ready.then(relayout);
 })();

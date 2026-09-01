@@ -50,7 +50,10 @@
 
         .nodeField.掴み中 .キャンバス {
             pointer-events: none;
-            will-change: transform;
+        }
+
+        .ノード.圏外 {
+            display: none;
         }
 
         .ノード {
@@ -61,15 +64,19 @@
             outline: 3px solid #e0e0e0;
             background-color: #e0e0e0cc;
             border-radius: 10px;
-            cursor: grab;
+            cursor: pointer;
             user-select: none;
             overflow-wrap: anywhere;
         }
 
-        .ノード.半透明,
-        .エッジ層 g.半透明 {
-            opacity: 0.3;
-            z-index: -1;
+        .霞 {
+            position: absolute;
+            background-color: #e0e0e0b3;
+            pointer-events: none;
+        }
+
+        .ノード.関連 {
+            z-index: 1;
         }
 
         .ノード.焦点 {
@@ -133,7 +140,6 @@
             padding: 0 4px;
             background: #e0e0e0;
             text-align: center;
-            pointer-events: auto;
             user-select: none;
         }
     </style>
