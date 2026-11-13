@@ -42,7 +42,6 @@
 		{"id":"0e2a96ab3edbec5e","type":"text","text":"https://youtu.be/fSI3jy6SH0Y?si=r8TTlbSU6lVbPD7S\n## 二度音ウト - ユメユメ\nLiminal spaceをモチーフの中心に、ネット美学ミームの総集をし、お散歩MV等の国内シーンとつなげる。\n$$\n2026/07/17\n$$","x":-1300,"y":-412,"width":250,"height":279,"color":"1"},
 		{"id":"04cece3789120953","type":"text","text":"## お散歩MV\nボカロシーンにおける、スマホやビデオカメラなどで実際の風景などの素材を撮影し、それらをつなぎ合わせた実写MV\n$$\n2025/02\n$$","x":-1040,"y":112,"width":250,"height":199},
 		{"id":"e13c5d019dbfb50d","type":"text","text":"https://www.youtube.com/watch?v=wtrIPf4ex88\n## Sou - Panorama\n非常に細いセンサーのカメラを模す。\n$$\n2026/08/22\n$$","x":-780,"y":-976,"width":250,"height":360,"color":"1"},
-		{"id":"3595e8c52389d396","type":"text","text":"## ノードポートフォリオ\nリファレンスと作品からできたノードグラフ、狭義はこのページかJSON canvasファイル。\n$$\n2026/8/-\n$$","x":-1560,"y":-1069,"width":250,"height":186,"color":"1"},
 		{"id":"99ec9e1679e15f26","type":"text","text":"## idoaves ブログ\n自作build.pyを使った非常に手探りなパーサー\n$$\n2026/8/19\n$$","x":-1820,"y":356,"width":250,"height":186,"color":"1"},
 		{"id":"6f97d41f895f663d","type":"text","text":"![[soukanzu.webp]]\n## 相関図エディタ\n創作向けに制作中、汎用ノードメモに変化した。\n$$\n2026/7/6\n$$","x":-1820,"y":-304,"width":250,"height":322,"color":"1"},
 		{"id":"b58db29d2fe4a650","type":"text","text":"## html energy\nhttps://html.energy/\n","x":-2080,"y":658,"width":250,"height":76},
@@ -60,7 +59,12 @@
 		{"id":"08b9b363fb056571","type":"text","text":"https://www.youtube.com/watch?v=qEg_uMXWzMs\n## 夜丹れにや - lie somnia\n時間体積のあるアニメーション作品。\n[アニメを作ってみたよ［夜丹れにや - lie somnia MVメイキング］｜ideoaves\t](https://note.com/ideoaves2/n/n56beb5eebba4)\n$$\n2024/10/16\n$$","x":-520,"y":1766,"width":250,"height":345,"color":"1"},
 		{"id":"5a5abf23dcae51b3","type":"text","text":"![[cam2minesweeper.webp]]\n## [cam 2 minesweeper](https://x.com/HAZUQU/status/1946059882584818135)\np5.jsスケッチ\n$$\n2025/07/18\n$$","x":-2080,"y":1303,"width":250,"height":320,"color":"1"},
 		{"id":"c0af6e5831670c81","type":"text","text":"## JAGDA","x":260,"y":2061,"width":250,"height":50},
-		{"id":"139021d860ab0761","type":"text","text":"## Slitscan\n[Slit-scan - lookdev](https://scrapbox.io/lookdev/Slit-scan)","x":-260,"y":2511,"width":250,"height":120}
+		{"id":"139021d860ab0761","type":"text","text":"## Slitscan\n[Slit-scan - lookdev](https://scrapbox.io/lookdev/Slit-scan)","x":-260,"y":2511,"width":250,"height":120},
+		{"id":"c31f3acdabb69e38","type":"text","text":"XLN Audio","x":-405,"y":-384,"width":250,"height":60},
+		{"id":"0701f500a7dc2bef","type":"text","text":"## [XLN Audio XO](https://www.xlnaudio.com/products/xo?srsltid=AYCX9vLOZiCJeGL6Z2QO_PynRnR_GSIvvR2mQZiX6KeHMe9XKy0WL3p9)\n音楽制作においてサンプルを類似度に応じてプロットするツール。\n","x":-1300,"y":-616,"width":250,"height":130},
+		{"id":"39b5b60802131942","type":"text","text":"## Copera\nTaku氏による写真観測アプリ。\nhttps://x.com/Taku_san_32/status/2114160577920881134\n$$\n2026/10/25\n$$\n","x":-1040,"y":-787,"width":250,"height":236},
+		{"id":"5ce430676dfd2370","type":"text","text":"## [Font Map](https://ideoaves.github.io/Font_Map/)\nフォントをグリフの類似度でプロットするサイト、ツール。\n$$\n2026/10/28\n$$","x":-1300,"y":-1320,"width":250,"height":186,"color":"1"},
+		{"id":"3595e8c52389d396","type":"text","text":"## ノードポートフォリオ\nリファレンスと作品からできたノードグラフ、狭義はこのページかJSON canvasファイル。\n$$\n2026/8/-\n$$","x":-1560,"y":-927,"width":250,"height":186,"color":"1"}
 	],
 	"edges":[
 		{"id":"1a9f54ca8b3537f5","fromNode":"14f64bf7ceafc4cc","fromSide":"top","toNode":"a68144cb08b35b55","toSide":"bottom"},
@@ -129,6 +133,9 @@
 		{"id":"7c11962cd8eddccc","fromNode":"ae787ec66383bea7","fromSide":"top","toNode":"9857eec02b57a6bc","toSide":"bottom","label":"派生"},
 		{"id":"354d29ba3bf42911","fromNode":"ae787ec66383bea7","fromSide":"top","toNode":"4d116ecd6ed9f9c5","toSide":"bottom","label":"技術"},
 		{"id":"a0d71b680eff5f19","fromNode":"9857eec02b57a6bc","fromSide":"top","toNode":"d726c7799e0673fc","toSide":"bottom","label":"技術"},
-		{"id":"1c43b918a08ed89f","fromNode":"d54227447fb0d3c2","fromSide":"top","toNode":"d726c7799e0673fc","toSide":"bottom","label":"参照"}
+		{"id":"1c43b918a08ed89f","fromNode":"d54227447fb0d3c2","fromSide":"top","toNode":"d726c7799e0673fc","toSide":"bottom","label":"参照"},
+		{"id":"f85441f8afd90dfc","fromNode":"0701f500a7dc2bef","fromSide":"top","toNode":"5ce430676dfd2370","toSide":"bottom","label":"発想"},
+		{"id":"ad8f91bf8cd68130","fromNode":"39b5b60802131942","fromSide":"top","toNode":"5ce430676dfd2370","toSide":"bottom","label":"発想"},
+		{"id":"9b579760b864fdf1","fromNode":"6f97d41f895f663d","fromSide":"top","toNode":"5ce430676dfd2370","toSide":"bottom","label":"方法"}
 	]
 }
