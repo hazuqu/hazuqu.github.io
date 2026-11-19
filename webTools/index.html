@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Webツールたち 🦉 HAZUQU</title>
+    <meta name="description" content="映像をしています🎞">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="木葉はづく Portfolio">
+    <meta name="twitter:description" content="映像をしています🎞">
+    <meta name="twitter:image" content="https://hazuqu.github.io/icon.jpg">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.js"></script>
+
+    <style>
+        .ツール一覧 {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(200px, calc(50% - 6px)), 1fr));
+            gap: 2px;
+        }
+
+        .ツール {
+            display: grid;
+            place-items: center;
+        }
+
+        .ツール > * {
+            grid-area: 1 / 1;
+        }
+
+        .ツール img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            filter: grayscale(1);
+        }
+
+        .ツール:hover img {
+            filter: none;
+        }
+
+        .ツール名 {
+            text-align: center;
+            font-size: 1.2em;
+        }
+
+        a {
+            z-index: 1;
+            line-height: 1.2;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div id="ヘッダー"></div>
+    </header>
+    <main>
+        <div class="横に狭い分類">
+            <h1>Webツール集</h1>
+            出力したものは自由に使ってください。クレジットもいらないです。<br>
+        <div class="ツール一覧">
+            <div class="ツール"><a href="patternGene.html"><img alt="" src="https://pbs.twimg.com/ext_tw_video_thumb/1810238200788692992/pu/img/Hb733TaamRBk6v1q?format=jpg&name=360x360"></a><a class="ツール名" href="patternGene.html">alphabet 2 pattern</a></div>
+            <div class="ツール"><a href="windowsBrush.html"><img alt="" src="https://pbs.twimg.com/media/GW8hoZWbsAAR9Gt?format=jpg&name=small"></a><a class="ツール名" href="windowsBrush.html">Windows brush</a></div>
+            <div class="ツール"><a href="minesweeper.html"><img alt="" src="https://pbs.twimg.com/amplify_video_thumb/1946059408313626624/img/HRolExsJb9lYT_nd?format=jpg&name=small"></a><a class="ツール名" href="minesweeper.html">cam (or video) 2 Minesweeper</a></div>
+            <div class="ツール"><a href="mojiWarp.html"><img alt="" src="https://pbs.twimg.com/amplify_video_thumb/2007041649118253056/img/MR7gFv2tAHL37s_Z.jpg"></a><a class="ツール名" href="mojiWarp.html">曲座標変換文字</a></div>
+            <div class="ツール"><a href="circlePiano.html"><img alt="" src="thum/6.png"></a><a class="ツール名" href="circlePiano.html">円形鍵盤</a></div>
+            <div class="ツール"><a href="emojiPen.html"><img alt="" src="https://pbs.twimg.com/media/HLGmlPLbEAAcYrh?format=jpg&name=small"></a><a class="ツール名" href="emojiPen.html">絵文字ペン</a></div>
+            <!--<div class="ツール"><a href="tegakiMoji.html"><img alt="" src="thum/8.png"></a><a class="ツール名" href="tegakiMoji.html">手書き文字</a></div>-->
+            <div class="ツール"><a href="glitchTex.html"><img alt="" src="thum/glitch.jpg"></a><a class="ツール名" href="glitchTex.html">グリッチテクスチャ生成</a></div>
+        </div>
+        </div>
+    </main>
+    <script src="../JS.js"></script>
+</body>
+
+</html>

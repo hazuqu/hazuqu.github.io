@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>グリッチテクスチャ生成</title>
+<style>
+:root{--背景:#0e0e0e;--面:#181818;--線:#2e2e2e;--文字:#ddd;--淡:#888;--強調:#fff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--背景);color:var(--文字);font:12px/1.4 system-ui,sans-serif;display:flex;height:100vh;overflow:hidden}
+.画面{flex:1;display:flex;align-items:center;justify-content:center;padding:20px;min-width:0}
+.画面 canvas{max-width:100%;max-height:100%;width:auto;height:auto;box-shadow:0 0 0 1px var(--線)}
+.操作盤{width:330px;overflow-y:auto;background:var(--面);border-left:1px solid var(--線)}
+.上段{position:sticky;top:0;z-index:1;background:var(--面);padding:10px 12px;border-bottom:1px solid var(--線);display:grid;gap:6px}
+.行{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.行 label{display:flex;gap:4px;align-items:center}
+input[type=number]{width:90px}
+input,select,button,.ボタン風{background:#222;color:var(--文字);border:1px solid var(--線);border-radius:3px;padding:3px 6px;font:inherit}
+button,.ボタン風{cursor:pointer}
+button:hover,.ボタン風:hover{border-color:var(--淡)}
+.主{background:#ddd;color:#111;font-weight:bold}
+.段{padding:8px 12px 10px;border-bottom:1px solid var(--線)}
+.段見出し{display:flex;gap:6px;align-items:center;font-weight:bold;letter-spacing:.1em;margin-bottom:6px;color:var(--強調)}
+.段見出し label{display:flex;gap:6px;align-items:center;flex:1}
+.移動{display:flex;gap:2px}
+.移動 button{padding:0 6px;font-size:10px;line-height:18px}
+.段.無効 .項目{opacity:.35}
+.項目{display:grid;grid-template-columns:96px 1fr 44px;gap:6px;align-items:center;margin:2px 0}
+.項目 input[type=range]{width:100%;padding:0}
+.項目 output{text-align:right;color:var(--淡);font-variant-numeric:tabular-nums}
+.項目.切替{grid-template-columns:auto 1fr}
+.項目.色{grid-template-columns:96px 1fr}
+.項目 input[type=color]{padding:0;height:22px;width:100%}
+</style>
+</head>
+<body>
+<div class="画面"><canvas id="表示"></canvas></div>
+<aside class="操作盤">
+  <div class="上段">
+    <div class="行"><label>シード <input type="number" id="シード" value="1"></label><button id="シード乱数">シードガチャ</button><button id="全部乱数">全部ガチャ</button><button id="初期化">初期値</button></div>
+    <div class="行">
+      <label>サイズ <select id="サイズ">
+        <option value="1920x1080">1920×1080</option>
+        <option value="3840x2160">3840×2160</option>
+      </select></label>
+      <label>プレビュー <select id="縮小"><option value="0.5">1/2</option><option value="0.25">1/4</option><option value="1">等倍</option></select></label>
+    </div>
+    <div class="行"><label class="ボタン風">画像素材<input type="file" id="画像" accept="image/*" hidden></label><button id="画像解除">画像を外す</button></div>
+    <div class="行"><button id="保存" class="主">保存</button></div>
+  </div>
+  <div id="段一覧"></div>
+</aside>
+<script>
+const STAGES = [
+  {id: 'base', name: '素材', always: true, params: [
+    ['scale', 'ノイズの細かさ', 0.5, 20, 0.1, 3],
+    ['stretch', '横伸び', 0.1, 10, 0.1, 3],
+    ['octaves', '重ね数', 1, 8, 1, 5],
+    ['stripes', '縞の混ぜ具合', 0, 1, 0.01, 0.5],
+    ['stripeFreq', '縞の本数', 1, 5, 0.01, 3],
+    ['stripeWarp', '縞のうねり', 0, 12, 0.1, 4],
+    ['contrast', 'コントラスト', 0.5, 6, 0.1, 2],
+  ]},
+  {id: 'curl', name: 'カールノイズ', on: true, movable: true, params: [
+    ['strength', '流す距離', 0, 0.4, 0.001, 0.08],
+    ['scale', '渦の細かさ', 0.3, 12, 0.1, 2.5],
+    ['stretch', '横伸び', 0.2, 8, 0.1, 2],
+    ['steps', 'ステップ数', 2, 60, 1, 20],
+    ['smear', 'にじみ', 0, 1, 0.01, 0.6],
+  ]},
+  {id: 'wave', name: '波', on: true, movable: true, params: [
+    ['amp', '振幅', 0, 0.2, 0.001, 0.03],
+    ['freq', '周波数', 0.2, 40, 0.1, 5],
+    ['mod', '位相の揺らぎ', 0, 3, 0.01, 0.6],
+    ['modScale', '揺らぎの細かさ', 0.2, 10, 0.1, 2],
+    ['vertical', '縦方向に揺らす', 0, 1, 1, 0],
+  ]},
+  {id: 'fm', name: 'モジュレーション（FM走査線）', on: false, movable: true, params: [
+    ['omega', '搬送波', 0.01, 0.5, 0.001, 0.12],
+    ['distortion', '変調の深さ', 0, 1, 0.005, 0.25],
+    ['phase', '位相', 0, 1, 0.01, 0],
+    ['lowpass', 'ローパス', 0, 0.99, 0.01, 0.6],
+    ['passes', 'ローパス段数', 0, 4, 1, 1],
+    ['thin', '線の細さ', 1, 12, 0.1, 3],
+    ['keep', '元の明るさを掛ける', 0, 1, 0.01, 0.3],
+    ['horizontal', '横線にする', 0, 1, 1, 1],
+    ['reverse', '走査を逆向きに', 0, 1, 1, 0],
+  ]},
+  {id: 'disp', name: 'ディスプレイスメント', on: true, movable: true, params: [
+    ['amount', 'ずれ量', 0, 0.3, 0.001, 0.03],
+    ['blur', 'マップのぼかし', 0, 50, 0.5, 8],
+    ['jitter', '走査線ジッタ', 0, 0.1, 0.001, 0.008],
+    ['segment', 'ジッタの区切り', 1, 300, 1, 40],
+    ['vertical', '縦方向にずらす', 0, 1, 1, 0],
+  ]},
+  {id: 'block', name: 'ブロックノイズ', on: false, movable: true, params: [
+    ['count', '数', 0, 300, 1, 40],
+    ['size', '大きさ', 0.01, 0.5, 0.005, 0.1],
+    ['shift', 'ずらし量', 0, 0.3, 0.005, 0.05],
+    ['mosaic', 'モザイク率', 0, 1, 0.01, 0.3],
+    ['cell', 'モザイクの粗さ', 2, 120, 1, 20],
+  ]},
+  {id: 'sort', name: 'ピクセルソート', on: false, params: [
+    ['lo', '明るさ下限', 0, 1, 0.01, 0.3],
+    ['hi', '明るさ上限', 0, 1, 0.01, 0.85],
+    ['maxLen', '最大長', 0.01, 1, 0.01, 0.25],
+    ['vertical', '縦方向', 0, 1, 1, 0],
+    ['reverse', '逆順', 0, 1, 1, 0],
+  ]},
+  {id: 'finish', name: '仕上げ', always: true, params: [
+    ['gamma', 'ガンマ', 0.3, 3, 0.01, 1],
+    ['contrast', 'コントラスト', 0.5, 3, 0.01, 1.2],
+    ['halftone', '網点', 0, 1, 0.01, 0],
+    ['dot', '網点サイズ', 2, 24, 0.5, 2],
+    ['grain', '粒子', 0, 0.5, 0.01, 0.5],
+    ['scan', '走査線', 0, 1, 0.01, 0.1],
+    ['invert', '反転', 0, 1, 1, 0],
+  ], colors: [['dark', '暗部の色', '#000000'], ['light', '明部の色', '#ffffff']]},
+];
+const STORAGE_KEY = 'glitchTexture';
+const PREVIEW_DELAY = 80;
+const RANDOM_ON_RATE = 0.55;
+const RANDOM_SPREAD = 0.5;
+const RANDOM_FINISH_FIXED = {invert: 0, grain: 0.5, dot: 2};
+
+const $ = id => document.getElementById(id);
+let state = loadState();
+let sourceImage = null, lumCache = null, timer = 0;
+
+function loadState() {
+  const s = {};
+  STAGES.forEach(st => {
+    s[st.id] = {on: st.always || st.on};
+    st.params.forEach(p => s[st.id][p[0]] = p[5]);
+    (st.colors || []).forEach(c => s[st.id][c[0]] = c[2]);
+  });
+  s.order = STAGES.filter(st => st.movable).map(st => st.id);
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (saved) {
+      STAGES.forEach(st => {
+        Object.assign(s[st.id], saved.state?.[st.id]);
+        st.params.forEach(([k, , min, max]) => s[st.id][k] = Math.min(max, Math.max(min, s[st.id][k])));
+      });
+      if ([...saved.state?.order || []].sort().join() === [...s.order].sort().join()) s.order = saved.state.order;
+      $('シード').value = saved.seed ?? 1;
+    }
+  } catch (e) {}
+  return s;
+}
+
+function bil(a, w, h, x, y) {
+  const fold = (v, m) => { v = Math.abs(v) % (2 * m); return v > m ? 2 * m - v : v; };
+  x = fold(x, w - 1); y = fold(y, h - 1);
+  const x0 = x | 0, y0 = y | 0, x1 = Math.min(x0 + 1, w - 1), y1 = Math.min(y0 + 1, h - 1), fx = x - x0, fy = y - y0;
+  const r0 = y0 * w, r1 = y1 * w;
+  return (a[r0 + x0] * (1 - fx) + a[r0 + x1] * fx) * (1 - fy) + (a[r1 + x0] * (1 - fx) + a[r1 + x1] * fx) * fy;
+}
+
+const clamp01 = v => v < 0 ? 0 : v > 1 ? 1 : v;
+
+const PROC = {
+  base(src, W, H, p, rng, fbm) {
+    if (sourceImage && (lumCache?.W !== W || lumCache?.H !== H)) {
+      const c = document.createElement('canvas'), ctx = c.getContext('2d'), sw = sourceImage.width, sh = sourceImage.height, k = Math.max(W / sw, H / sh);
+      c.width = W; c.height = H;
+      ctx.drawImage(sourceImage, (W - sw * k) / 2, (H - sh * k) / 2, sw * k, sh * k);
+      const d = ctx.getImageData(0, 0, W, H).data, data = new Float32Array(W * H);
+      for (let i = 0; i < W * H; i++) data[i] = (d[i * 4] * 0.299 + d[i * 4 + 1] * 0.587 + d[i * 4 + 2] * 0.114) / 255;
+      lumCache = {W, H, data};
+    }
+    const dst = new Float32Array(W * H), lum = sourceImage && lumCache.data, s = p.scale / W, f = 2 * Math.PI * p.stripeFreq / H;
+    for (let y = 0, i = 0; y < H; y++) for (let x = 0; x < W; x++, i++) {
+      const n = lum ? lum[i] * 2 - 1 : fbm(x * s / p.stretch, y * s, p.octaves);
+      const st = Math.sin(y * f + fbm(x * s / p.stretch * 0.5 + 50, y * s * 0.5, 2) * p.stripeWarp);
+      dst[i] = clamp01(0.5 + 0.5 * (n * (1 - p.stripes) + st * p.stripes) * p.contrast);
+    }
+    return dst;
+  },
+  curl(src, W, H, p, rng, fbm) {
+    const G = 4, gw = Math.ceil(W / G) + 1, gh = Math.ceil(H / G) + 1, psi = new Float32Array(gw * gh), s = p.scale / W;
+    for (let gy = 0; gy < gh; gy++) for (let gx = 0; gx < gw; gx++) psi[gy * gw + gx] = fbm(gx * G * s / p.stretch, gy * G * s, 3);
+    const vx = new Float32Array(gw * gh), vy = new Float32Array(gw * gh);
+    let sum = 1e-6;
+    for (let gy = 0; gy < gh; gy++) for (let gx = 0; gx < gw; gx++) {
+      const i = gy * gw + gx;
+      vx[i] = psi[Math.min(gy + 1, gh - 1) * gw + gx] - psi[Math.max(gy - 1, 0) * gw + gx];
+      vy[i] = psi[gy * gw + Math.max(gx - 1, 0)] - psi[gy * gw + Math.min(gx + 1, gw - 1)];
+      sum += Math.hypot(vx[i], vy[i]);
+    }
+    const step = p.strength * W / p.steps / (sum / (gw * gh)), dst = new Float32Array(W * H);
+    for (let y = 0, i = 0; y < H; y++) for (let x = 0; x < W; x++, i++) {
+      let px = x, py = y, acc = 0, last = 0;
+      for (let k = 0; k < p.steps; k++) {
+        const fx = px / G, fy = py / G;
+        px += bil(vx, gw, gh, fx, fy) * step;
+        py += bil(vy, gw, gh, fx, fy) * step;
+        last = bil(src, W, H, px, py);
+        acc += last;
+      }
+      dst[i] = last + (acc / p.steps - last) * p.smear;
+    }
+    return dst;
+  },
+  wave(src, W, H, p, rng, fbm) {
+    const dst = new Float32Array(W * H), A = p.amp * W, ms = p.modScale / W, f = 2 * Math.PI * p.freq / W, ph = rng() * 6.283;
+    for (let y = 0, i = 0; y < H; y++) for (let x = 0; x < W; x++, i++) {
+      const m = p.mod * 6.283 * fbm(x * ms, y * ms, 3);
+      dst[i] = p.vertical ? bil(src, W, H, x, y + A * Math.sin(x * f + m + ph)) : bil(src, W, H, x + A * Math.sin(y * f + m + ph), y);
+    }
+    return dst;
+  },
+  fm(src, W, H, p) {
+    const dst = new Float32Array(W * H), u = W / 1000, len = p.horizontal ? H : W, lines = p.horizontal ? W : H;
+    const sig = new Float32Array(len), k = 1 - p.lowpass;
+    const idx = (l, i) => { const t = p.reverse ? len - 1 - i : i; return p.horizontal ? t * W + l : l * W + t; };
+    for (let l = 0; l < lines; l++) {
+      for (let i = 0; i < len; i++) sig[i] = src[idx(l, i)];
+      for (let n = 0; n < p.passes; n++) for (let i = 0, y = sig[0]; i < len; i++) sig[i] = y += (sig[i] - y) * k;
+      let ph = p.phase * 6.283;
+      for (let i = 0; i < len; i++) {
+        ph += 6.283 * (p.omega + p.distortion * (sig[i] - 0.5)) / u;
+        const j = idx(l, i);
+        dst[j] = Math.pow(0.5 + 0.5 * Math.cos(ph), p.thin) * (1 - p.keep + p.keep * src[j]);
+      }
+    }
+    return dst;
+  },
+  disp(src, W, H, p, rng, fbm, seed) {
+    const r = Math.round(p.blur * W / 1000), seg = Math.max(1, p.segment * W / 1000), hs = Math.imul(seed, 2246822519);
+    const pass = (a, len, lines, idx) => {
+      const out = new Float32Array(W * H), at = (l, i) => a[idx(l, i < 0 ? 0 : i >= len ? len - 1 : i)];
+      for (let l = 0; l < lines; l++) {
+        let s = 0;
+        for (let i = -r; i <= r; i++) s += at(l, i);
+        for (let i = 0; i < len; i++) { out[idx(l, i)] = s / (2 * r + 1); s += at(l, i + r + 1) - at(l, i - r); }
+      }
+      return out;
+    };
+    const map = r < 1 ? src : pass(pass(src, W, H, (l, i) => l * W + i), H, W, (l, i) => i * W + l), dst = new Float32Array(W * H);
+    for (let y = 0, i = 0; y < H; y++) for (let x = 0; x < W; x++, i++) {
+      const along = p.vertical ? y : x, line = p.vertical ? x : y, d = (map[i] - 0.5) * 2;
+      let h = Math.imul(line, 374761393) + Math.imul(along / seg | 0, 668265263) + hs | 0;
+      h = Math.imul(h ^ h >>> 13, 1274126177);
+      const off = W * (p.amount * d + p.jitter * (((h ^ h >>> 16) >>> 0) / 4294967296 - 0.5) * 2 * (0.3 + Math.abs(d) * 1.4));
+      dst[i] = p.vertical ? bil(src, W, H, x, y + off) : bil(src, W, H, x + off, y);
+    }
+    return dst;
+  },
+  block(src, W, H, p, rng) {
+    const dst = src.slice(), cell = Math.max(2, p.cell * W / 1000 | 0);
+    for (let k = 0; k < p.count; k++) {
+      const bw = Math.min(W, Math.max(2, p.size * W * (0.3 + rng() * 1.4) | 0));
+      const bh = Math.min(H, Math.max(2, bw * (0.06 + rng() * 0.6) | 0));
+      const bx = rng() * (W - bw) | 0, by = rng() * (H - bh) | 0;
+      if (rng() < p.mosaic) {
+        for (let y = by; y < by + bh; y++) for (let x = bx; x < bx + bw; x++) {
+          const cx = Math.min(bx + bw - 1, bx + ((x - bx) / cell | 0) * cell + (cell >> 1)), cy = Math.min(by + bh - 1, by + ((y - by) / cell | 0) * cell + (cell >> 1));
+          dst[y * W + x] = src[cy * W + cx];
+        }
+      } else {
+        const off = (rng() - 0.5) * 2 * p.shift * W | 0;
+        for (let y = by; y < by + bh; y++) for (let x = bx; x < bx + bw; x++) dst[y * W + x] = src[y * W + ((x + off) % W + W) % W];
+      }
+    }
+    return dst;
+  },
+  sort(src, W, H, p, rng) {
+    const dst = src.slice(), len = p.vertical ? H : W, lines = p.vertical ? W : H, line = new Float32Array(len);
+    const idx = (l, i) => p.vertical ? i * W + l : l * W + i;
+    const inside = v => v >= p.lo && v <= p.hi;
+    const spanEnd = (i, j, max) => j < len && j - i < max && inside(line[j]) ? spanEnd(i, j + 1, max) : j;
+    for (let l = 0; l < lines; l++) {
+      for (let i = 0; i < len; i++) line[i] = dst[idx(l, i)];
+      for (let i = 0; i < len; i++) {
+        if (!inside(line[i])) continue;
+        const j = spanEnd(i, i, Math.max(2, p.maxLen * len * (0.3 + rng() * 0.7) | 0)), span = line.subarray(i, j).sort();
+        if (p.reverse) span.reverse();
+        i = j - 1;
+      }
+      for (let i = 0; i < len; i++) dst[idx(l, i)] = line[i];
+    }
+    return dst;
+  },
+  finish(src, W, H, p, rng) {
+    const dst = new Float32Array(W * H), u = W / 1000, k = 6.283 / (p.dot * u), sl = Math.max(1, u * 2);
+    for (let y = 0, i = 0; y < H; y++) for (let x = 0; x < W; x++, i++) {
+      let v = (Math.pow(clamp01(src[i]), 1 / p.gamma) - 0.5) * p.contrast + 0.5;
+      if (p.halftone) {
+        const t = 0.5 + 0.25 * (Math.cos((x + y) * 0.7071 * k) + Math.cos((x - y) * 0.7071 * k));
+        v += (clamp01((v - t) * 4 + 0.5) - v) * p.halftone;
+      }
+      v += (rng() - 0.5) * p.grain;
+      if ((y / sl | 0) % 2) v *= 1 - p.scan;
+      v = clamp01(v);
+      dst[i] = p.invert ? 1 - v : v;
+    }
+    return dst;
+  },
+};
+
+function render(W, H) {
+  const seed = +$('シード').value | 0;
+  return ['base', ...state.order, 'sort', 'finish'].reduce((buf, id) => {
+    if (!state[id].on) return buf;
+    const n = STAGES.findIndex(st => st.id === id);
+    let s = seed * 7919 + n * 1013;
+    const rng = () => {
+      s = s + 0x6D2B79F5 | 0;
+      let t = Math.imul(s ^ s >>> 15, 1 | s);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+    const perm = new Uint8Array(512), a = Array.from({length: 256}, (_, i) => i);
+    for (let i = 255; i > 0; i--) { const j = rng() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; }
+    for (let i = 0; i < 512; i++) perm[i] = a[i & 255];
+    const GX = [1, -1, 1, -1, 1.414, -1.414, 0, 0], GY = [1, 1, -1, -1, 0, 0, 1.414, -1.414];
+    const g = (h, x, y) => GX[h & 7] * x + GY[h & 7] * y;
+    const noise = (x, y) => {
+      const X = Math.floor(x), Y = Math.floor(y), xf = x - X, yf = y - Y, xi = X & 255, yi = Y & 255;
+      const u = xf * xf * xf * (xf * (xf * 6 - 15) + 10), v = yf * yf * yf * (yf * (yf * 6 - 15) + 10);
+      const aa = g(perm[perm[xi] + yi], xf, yf), ba = g(perm[perm[xi + 1] + yi], xf - 1, yf);
+      const ab = g(perm[perm[xi] + yi + 1], xf, yf - 1), bb = g(perm[perm[xi + 1] + yi + 1], xf - 1, yf - 1);
+      const top = aa + (ba - aa) * u;
+      return top + (ab + (bb - ab) * u - top) * v;
+    };
+    const fbm = (x, y, oct) => {
+      let sum = 0, amp = 1, f = 1, norm = 0;
+      for (let i = 0; i < oct; i++) { sum += noise(x * f + i * 17.3, y * f + i * 31.7) * amp; norm += amp; amp *= 0.5; f *= 2; }
+      return sum / norm * 1.4;
+    };
+    return PROC[id](buf, W, H, state[id], rng, fbm, seed * 31 + n);
+  }, new Float32Array(W * H));
+}
+
+function draw(canvas, buf, W, H) {
+  const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+  const [r0, g0, b0] = hex(state.finish.dark), [r1, g1, b1] = hex(state.finish.light);
+  canvas.width = W; canvas.height = H;
+  const ctx = canvas.getContext('2d'), img = ctx.createImageData(W, H), d = img.data;
+  for (let i = 0; i < W * H; i++) {
+    d[i * 4] = r0 + (r1 - r0) * buf[i]; d[i * 4 + 1] = g0 + (g1 - g0) * buf[i]; d[i * 4 + 2] = b0 + (b1 - b0) * buf[i]; d[i * 4 + 3] = 255;
+  }
+  ctx.putImageData(img, 0, 0);
+}
+
+const schedule = () => {
+  clearTimeout(timer);
+  timer = setTimeout(() => {
+    const [W, H] = $('サイズ').value.split('x').map(Number), s = +$('縮小').value, w = Math.round(W * s), h = Math.round(H * s);
+    draw($('表示'), render(w, h), w, h);
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify({state, seed: +$('シード').value})); } catch (e) {}
+  }, PREVIEW_DELAY);
+};
+
+function buildUI() {
+  const decimals = step => (String(step).split('.')[1] || '').length;
+  $('段一覧').innerHTML = ['base', ...state.order, 'sort', 'finish'].map(id => {
+    const st = STAGES.find(st => st.id === id), v = state[id];
+    const params = st.params.map(([k, label, min, max, step]) => min === 0 && max === 1 && step === 1
+      ? `<label class="項目 切替"><input type="checkbox" data-段="${id}" data-値="${k}" ${v[k] ? 'checked' : ''}>${label}</label>`
+      : `<label class="項目"><span>${label}</span><input type="range" min="${min}" max="${max}" step="${step}" value="${v[k]}" data-段="${id}" data-値="${k}" data-桁="${decimals(step)}"><output>${(+v[k]).toFixed(decimals(step))}</output></label>`).join('');
+    const colors = (st.colors || []).map(([k, label]) => `<label class="項目 色"><span>${label}</span><input type="color" value="${v[k]}" data-段="${id}" data-値="${k}"></label>`).join('');
+    const toggle = st.always ? '' : `<input type="checkbox" data-段="${id}" ${v.on ? 'checked' : ''}>`;
+    const move = st.movable ? `<span class="移動"><button data-移動="-1" data-段="${id}">▲</button><button data-移動="1" data-段="${id}">▼</button></span>` : '';
+    return `<section class="段${v.on ? '' : ' 無効'}"><div class="段見出し"><label>${toggle}${st.name}</label>${move}</div>${params}${colors}</section>`;
+  }).join('');
+}
+
+$('段一覧').addEventListener('input', e => {
+  const t = e.target, id = t.dataset.段, key = t.dataset.値;
+  if (!id) return;
+  if (!key) {
+    state[id].on = t.checked;
+    t.closest('.段').classList.toggle('無効', !t.checked);
+  } else if (t.type === 'checkbox') state[id][key] = +t.checked;
+  else if (t.type === 'color') state[id][key] = t.value;
+  else {
+    state[id][key] = +t.value;
+    t.nextElementSibling.textContent = (+t.value).toFixed(+t.dataset.桁);
+  }
+  schedule();
+});
+
+$('段一覧').addEventListener('click', e => {
+  const t = e.target.closest('[data-移動]');
+  if (!t) return;
+  const o = state.order, i = o.indexOf(t.dataset.段), j = i + +t.dataset.移動;
+  if (j < 0 || j >= o.length) return;
+  [o[i], o[j]] = [o[j], o[i]];
+  buildUI(); schedule();
+});
+
+$('シード').addEventListener('input', schedule);
+$('サイズ').addEventListener('change', schedule);
+$('縮小').addEventListener('change', schedule);
+
+$('シード乱数').onclick = () => { $('シード').value = Math.random() * 1e6 | 0; schedule(); };
+
+$('全部乱数').onclick = () => {
+  STAGES.forEach(st => {
+    if (!st.always) state[st.id].on = Math.random() < RANDOM_ON_RATE;
+    st.params.forEach(([k, , min, max, step, def]) => {
+      const r = min === 0 && max === 1 && step === 1 ? Math.round(Math.random()) : def + (Math.random() - 0.5) * (max - min) * RANDOM_SPREAD;
+      state[st.id][k] = Math.min(max, Math.max(min, Math.round(r / step) * step));
+    });
+  });
+  Object.assign(state.finish, RANDOM_FINISH_FIXED);
+  const o = state.order;
+  for (let i = o.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [o[i], o[j]] = [o[j], o[i]]; }
+  $('シード').value = Math.random() * 1e6 | 0;
+  buildUI(); schedule();
+};
+
+$('初期化').onclick = () => {
+  try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+  state = loadState(); buildUI(); schedule();
+};
+
+$('画像').onchange = e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const img = new Image();
+  img.onload = () => { sourceImage = img; lumCache = null; schedule(); };
+  img.src = URL.createObjectURL(file);
+};
+$('画像解除').onclick = () => { sourceImage = null; lumCache = null; $('画像').value = ''; schedule(); };
+
+$('保存').onclick = () => {
+  const [W, H] = $('サイズ').value.split('x').map(Number), c = document.createElement('canvas'), a = document.createElement('a');
+  draw(c, render(W, H), W, H);
+  a.download = `glitch_${$('シード').value}_${W}x${H}.png`;
+  a.href = c.toDataURL('image/png');
+  a.click();
+};
+
+buildUI();
+schedule();
+</script>
+</body>
+</html>
